@@ -1,0 +1,223 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f3f4f6;
+}
+
+.sidebar-active {
+    background: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    border-left: 4px solid #60a5fa;
+    backdrop-filter: blur(10px);
+}
+
+.navbar-bg {
+    background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
+}
+
+.sidebar-bg {
+    background: linear-gradient(180deg, #2563eb 0%, #1e40af 100%);
+}
+
+.card-hover {
+    transition: all 0.3s ease;
+}
+
+.card-hover:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.sidebar-link {
+    transition: all 0.3s ease;
+    border-left: 4px solid transparent;
+    color: #e0e7ff;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1.5rem;
+}
+
+.sidebar-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+}
+
+.user-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    object-fit: cover;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 15rem;
+    z-index: 1050;
+    overflow-y: auto;
+    transition: width 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+#navbar-container {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 1040;
+    left: 0;
+    transition: left 0.3s ease-in-out;
+}
+
+#main-container {
+    margin-left: 15rem;
+    transition: margin-left 0.3s ease-in-out;
+}
+
+.main-content {
+    min-height: 100vh;
+    padding-top: 52px;
+}
+
+/* Desktop collapsed state */
+@media (min-width: 992px) {
+    #navbar-container {
+        left: 15rem !important;
+    }
+
+    #sidebar.sidebar-collapsed {
+        width: 4rem !important;
+    }
+
+    #sidebar.sidebar-collapsed .sidebar-text {
+        display: none;
+    }
+
+    #sidebar.sidebar-collapsed .user-info {
+        display: none;
+    }
+
+    #sidebar.sidebar-collapsed .user-avatar {
+        width: 2.5rem;
+        height: 2.5rem;
+        margin-bottom: 0;
+    }
+
+    #sidebar.sidebar-collapsed .sidebar-link {
+        justify-content: center;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    #sidebar.sidebar-collapsed .user-section {
+        padding: 1rem 0.5rem;
+    }
+
+    #main-container.sidebar-collapsed {
+        margin-left: 4rem !important;
+    }
+
+    #navbar-container.sidebar-collapsed {
+        left: 4rem !important;
+    }
+}
+
+/* Mobile */
+@media (max-width: 991.98px) {
+    #sidebar {
+        transform: translateX(-100%);
+    }
+
+    #sidebar.show {
+        transform: translateX(0);
+    }
+
+    #main-container {
+        margin-left: 0 !important;
+    }
+
+    #navbar-container {
+        left: 0 !important;
+    }
+}
+
+.sidebar-text {
+    transition: opacity 0.2s ease-in-out;
+}
+
+.user-info {
+    transition: opacity 0.2s ease-in-out;
+}
+
+.user-dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 0.5rem;
+    background: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    min-width: 200px;
+    overflow: hidden;
+    z-index: 50;
+}
+
+.user-dropdown.show {
+    display: block;
+    animation: slideDown 0.2s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.dropdown-item-custom {
+    padding: 0.75rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: #374151;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.dropdown-item-custom:last-child {
+    border-bottom: none;
+}
+
+.dropdown-item-custom:hover {
+    background-color: #f9fafb;
+}
+
+.dropdown-item-custom.logout {
+    color: #ef4444;
+}
+
+.dropdown-item-custom.logout:hover {
+    background-color: #fee2e2;
+}
+
+.sidebar-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1040;
+    display: none;
+}
+
+.sidebar-overlay.show {
+    display: block;
+}

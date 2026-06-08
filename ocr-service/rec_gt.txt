@@ -1,0 +1,107 @@
+crop_img/bukti_tf_st002_crop_0.jpg	NoRekening:078001013410533
+crop_img/bukti_tf_st002_crop_1.jpg	Nama : MOHAMAD JALIL UTAMA
+crop_img/bukti_tf_st002_crop_2.jpg	TOTAL Rp.430.000
+crop_img/bukti_tf_st002_crop_3.jpg	12 AUG,2020
+crop_img/bukti_tf_st002_crop_4.jpg	REF #：00003140128
+crop_img/bukti_tf_st002_crop_5.jpg	14:15
+crop_img/bukti_tf_st010_crop_0.jpg	NAMA:WILLIAM GIOVANNI
+crop_img/bukti_tf_st010_crop_1.jpg	JML TAGIHAN:RP 4.000.00
+crop_img/bukti_tf_st010_crop_2.jpg	BIAYA ADMIN：RP 2.500.00
+crop_img/bukti_tf_st010_crop_3.jpg	JML BAYAR：RP 6.500.00
+crop_img/bukti_tf_st010_crop_4.jpg	02/05/17
+crop_img/bukti_tf_st010_crop_5.jpg	15:00:14
+crop_img/bukti_tf_st011_crop_0.jpg	KE BANK :013-PERMATA
+crop_img/bukti_tf_st011_crop_1.jpg	KE REK.:8623068200316890
+crop_img/bukti_tf_st011_crop_2.jpg	NAMA:TOP UP AKU-+628218
+crop_img/bukti_tf_st011_crop_3.jpg	JUMLAH:RP3,000,000.00
+crop_img/bukti_tf_st011_crop_4.jpg	22/05/21
+crop_img/bukti_tf_st011_crop_5.jpg	14:26:30
+crop_img/bukti_tf_st012_crop_0.jpg	12/05/20
+crop_img/bukti_tf_st012_crop_1.jpg	05:33:46
+crop_img/bukti_tf_st012_crop_2.jpg	KE REK:089529716557
+crop_img/bukti_tf_st012_crop_3.jpg	TRANSFER
+crop_img/bukti_tf_st012_crop_4.jpg	NAMA: CHRISTIANO RONALDO
+crop_img/bukti_tf_st012_crop_5.jpg	JUMLAH:Rp 102,965,000.00
+crop_img/bukti_tf_st016_crop_0.jpg	05/03/20
+crop_img/bukti_tf_st016_crop_1.jpg	21:07:53
+crop_img/bukti_tf_st016_crop_2.jpg	TRANSFER
+crop_img/bukti_tf_st016_crop_3.jpg	KE REK. : 345212228
+crop_img/bukti_tf_st016_crop_4.jpg	Nama : DESY ANIS SETIAWAT
+crop_img/bukti_tf_st016_crop_5.jpg	JUMLAH : RP 180.000.00
+crop_img/bukti_tf_st021_crop_0.jpg	29-10-2022
+crop_img/bukti_tf_st021_crop_1.jpg	22:19:36
+crop_img/bukti_tf_st021_crop_2.jpg	No Ref:501819713777
+crop_img/bukti_tf_st021_crop_3.jpg	No Rekening:48460102100.
+crop_img/bukti_tf_st021_crop_4.jpg	Nama : LE LE
+crop_img/bukti_tf_st021_crop_5.jpg	Jumlah Setor:Rp 4.662.000
+crop_img/bukti_tf_st021_crop_6.jpg	Admin Bank :Rp 3.000
+crop_img/bukti_tf_st021_crop_7.jpg	Total:Rp 4.665.000
+crop_img/bukti_tf_st023_crop_0.jpg	7 DEC, 2019
+crop_img/bukti_tf_st023_crop_1.jpg	07:26
+crop_img/bukti_tf_st023_crop_2.jpg	Ref #：00007105861
+crop_img/bukti_tf_st023_crop_3.jpg	Rekening:054201002385533
+crop_img/bukti_tf_st023_crop_4.jpg	Nama ：EDI BAHTIAR
+crop_img/bukti_tf_st023_crop_5.jpg	TOTAL Rp.1.000.000
+crop_img/bukti_tf_st023_crop_6.jpg	TRANSFER SESAMA BRI
+crop_img/bukti_tf_st024_crop_0.jpg	6SEP,2020
+crop_img/bukti_tf_st024_crop_1.jpg	10:31
+crop_img/bukti_tf_st024_crop_2.jpg	REF#：00002902188
+crop_img/bukti_tf_st024_crop_3.jpg	Nama:SOHAEBAH
+crop_img/bukti_tf_st024_crop_4.jpg	Noninal Transaksi:Rp200.000,
+crop_img/bukti_tf_st026_crop_0.jpg	20/07/18
+crop_img/bukti_tf_st026_crop_1.jpg	08:30
+crop_img/bukti_tf_st026_crop_2.jpg	NAMA PENGIRIM: SDR MUHAMADARIEF HARTAWA
+crop_img/bukti_tf_st026_crop_3.jpg	REK.TUJUAN:0495286835
+crop_img/bukti_tf_st026_crop_4.jpg	NAMA PENERIMA: SDR I KOMANG GEDE YULIANA
+crop_img/bukti_tf_st026_crop_5.jpg	JUMLAH : RP 1.000.000
+crop_img/bukti_tf_st046_crop_0.jpg	24/05/2014
+crop_img/bukti_tf_st046_crop_1.jpg	15:17:21
+crop_img/bukti_tf_st046_crop_2.jpg	PENGIRIM:YUDA DWI BAKTI
+crop_img/bukti_tf_st046_crop_3.jpg	BANK ASAL: BRI
+crop_img/bukti_tf_st046_crop_4.jpg	BANK TUJ.:BANK BCA
+crop_img/bukti_tf_st046_crop_5.jpg	NO. REK.:8635006567
+crop_img/bukti_tf_st046_crop_6.jpg	NAMA:ROZI
+crop_img/bukti_tf_st046_crop_7.jpg	NO. REF. :
+crop_img/bukti_tf_st046_crop_8.jpg	JUMLAH : RP. 1,400.000
+crop_img/bukti_tf_st056_crop_0.jpg	07/25/18
+crop_img/bukti_tf_st056_crop_1.jpg	17:11
+crop_img/bukti_tf_st056_crop_2.jpg	TRANSFER DARI
+crop_img/bukti_tf_st056_crop_3.jpg	BANK: MANDIRI
+crop_img/bukti_tf_st056_crop_4.jpg	NAMA：
+crop_img/bukti_tf_st056_crop_5.jpg	NO.REK:15600122XXXXX
+crop_img/bukti_tf_st056_crop_6.jpg	KE
+crop_img/bukti_tf_st056_crop_7.jpg	BANK:BANK BRI
+crop_img/bukti_tf_st056_crop_8.jpg	NAMA:DWI SILVAWATI
+crop_img/bukti_tf_st056_crop_9.jpg	NO.REK:129801000040503
+crop_img/bukti_tf_st056_crop_10.jpg	NO. REF:
+crop_img/bukti_tf_st056_crop_11.jpg	JUMLAH：RP200,000.00
+crop_img/bukti_tf_st059_crop_0.jpg	05/26/19
+crop_img/bukti_tf_st059_crop_1.jpg	13:01
+crop_img/bukti_tf_st059_crop_2.jpg	TRANSFER DARI
+crop_img/bukti_tf_st059_crop_3.jpg	BANK: MANDIRI
+crop_img/bukti_tf_st059_crop_4.jpg	NAMA:
+crop_img/bukti_tf_st059_crop_5.jpg	NO.REK：
+crop_img/bukti_tf_st059_crop_6.jpg	KE
+crop_img/bukti_tf_st059_crop_7.jpg	BANK:BANK BRI
+crop_img/bukti_tf_st059_crop_8.jpg	NAMA:
+crop_img/bukti_tf_st059_crop_9.jpg	NO.REK：
+crop_img/bukti_tf_st059_crop_10.jpg	NO.REF:
+crop_img/bukti_tf_st059_crop_11.jpg	JUMLAH：RP.285,000.00
+crop_img/bukti_tf_st060_crop_0.jpg	81/21/01
+crop_img/bukti_tf_st060_crop_1.jpg	22:43
+crop_img/bukti_tf_st060_crop_2.jpg	TRANSFER DARI
+crop_img/bukti_tf_st060_crop_3.jpg	BANK:MANDIRI
+crop_img/bukti_tf_st060_crop_4.jpg	Nama :
+crop_img/bukti_tf_st060_crop_5.jpg	NO.REK:90000372XXXXX
+crop_img/bukti_tf_st060_crop_6.jpg	KE
+crop_img/bukti_tf_st060_crop_7.jpg	BANK: BANK BRI
+crop_img/bukti_tf_st060_crop_8.jpg	NAMA:DWI SILVAWATI
+crop_img/bukti_tf_st060_crop_9.jpg	NO. REK:129801000040503
+crop_img/bukti_tf_st060_crop_10.jpg	NO. REF:
+crop_img/bukti_tf_st060_crop_11.jpg	JUMLAH:RP.109,000.00
+crop_img/bukti_tf_st061_crop_0.jpg	06 AUG 2020
+crop_img/bukti_tf_st061_crop_1.jpg	14:52:20
+crop_img/bukti_tf_st061_crop_2.jpg	TRANSFER SESAMA BRI
+crop_img/bukti_tf_st061_crop_3.jpg	NoRek：67856182883537
+crop_img/bukti_tf_st061_crop_4.jpg	Nama : ABDI SALAM ASSA'IDI
+crop_img/bukti_tf_st061_crop_5.jpg	TOTAL:Rp.169.000.00

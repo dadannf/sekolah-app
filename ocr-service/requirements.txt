@@ -1,0 +1,41 @@
+# OCR Payment Service - Production Dependencies
+# Pinned versions for reproducible builds
+
+# FastAPI & Web Server
+fastapi==0.109.0
+uvicorn[standard]==0.27.0
+python-multipart==0.0.6
+
+# PaddleOCR & Deep Learning
+paddleocr==3.1.0
+paddlepaddle==3.1.1
+paddlex==3.1.0
+
+# Image Processing (CV2 for preprocessing pipeline)
+Pillow==10.2.0
+opencv-python==4.10.0.84
+opencv-contrib-python==4.10.0.84
+numpy==1.26.4
+
+# Database
+pymysql==1.1.0
+SQLAlchemy==2.0.25
+
+# Utilities
+python-dateutil==2.8.2
+python-dotenv==1.0.0
+pydantic==2.10.4
+pydantic-settings==2.7.0
+
+# Regex & Text Processing
+regex==2023.12.25
+
+# HTTP Client
+requests==2.32.5
+
+# Optional: Development & Testing (uncomment if needed)
+# pytest==7.4.4
+# pytest-cov==4.1.0
+# black==23.12.1
+# flake8==7.0.0
+# mypy==1.8.0

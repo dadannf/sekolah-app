@@ -541,12 +541,10 @@ class PaymentController extends Controller
                                     $strictValidation = $mapper->validateStrict($ocrData['mapped_fields'], $expectedDate, $expectedAmount);
                                     $ocrData['strict_validation'] = $strictValidation;
                                     
-                                    if (!$strictValidation['is_valid']) {
-                                        // Buang upload & reject jika validasi gagal
-                                        throw \Illuminate\Validation\ValidationException::withMessages([
-                                            'proof_path' => array_merge(['Bukti transfer ditolak OCR:'], $strictValidation['errors'])
-                                        ]);
-                                    }
+                                    $isOcrValid = $strictValidation['is_valid'];
+                                    
+                                    // We no longer throw an exception here because we WANT to save the OCR data
+                                    // even if it's invalid, so the admin can review the failed OCR results.
 
                                     // Persiapkan data hasil OCR untuk disimpan
                                     $parsedDate = null;
@@ -567,7 +565,7 @@ class PaymentController extends Controller
                                         'sender_name' => $ocrData['mapped_fields']['nama_pengirim'] ?? null,
                                         'reference_no' => $ocrData['mapped_fields']['nomor_referensi'] ?? null,
                                         'ocr_raw_text' => $ocrData['full_text'],
-                                        'ocr_confidence' => $ocrData['validation']['confidence'] ?? 1.0,
+                                        'ocr_confidence' => $ocrData['confidence'] ?? 1.0,
                                         'status' => 'pending',
                                         'notes' => json_encode([
                                             'mapped_fields' => $ocrData['mapped_fields'],
@@ -581,8 +579,8 @@ class PaymentController extends Controller
                                 }
                             }
                             
-                            $isValid = true; // Karena lolos strict validation
-                            $ocrStatus = 'success';
+                            $isValid = $isOcrValid ?? false;
+                            $ocrStatus = $isValid ? 'success' : 'failed';
                         }
                     }
                 } catch (\Throwable $e) {
@@ -814,11 +812,15 @@ class PaymentController extends Controller
 
                 DB::commit();
 
-                // Insert OCR receipt for the first uniform payment if available
                 if (isset($ocrReceiptData) && count($createdPaymentIds) > 0) {
                     $ocrReceiptData['payment_id'] = $createdPaymentIds[0];
                     $ocrReceiptData['file_path'] = $sharedProofPath;
-                    \App\Models\OcrPaymentReceipt::create($ocrReceiptData);
+                    \App\Models\OcrPaymentReceipt::updateOrCreate(
+                        ['payment_id' => $createdPaymentIds[0]],
+                        $ocrReceiptData
+                    );
+                } elseif ($isUpdate && count($createdPaymentIds) > 0 && $request->hasFile('proof_path')) {
+                    \App\Models\OcrPaymentReceipt::where('payment_id', $createdPaymentIds[0])->delete();
                 }
 
                 // Delete old proof files after commit
@@ -1118,11 +1120,17 @@ class PaymentController extends Controller
 
             DB::commit();
 
-            // Simpan OCR Receipt info jika ada
             if (isset($ocrReceiptData) && $paymentId) {
                 $ocrReceiptData['payment_id'] = $paymentId;
                 $ocrReceiptData['file_path'] = $paymentData['proof_path'] ?? null;
-                \App\Models\OcrPaymentReceipt::create($ocrReceiptData);
+                \App\Models\OcrPaymentReceipt::updateOrCreate(
+                    ['payment_id' => $paymentId],
+                    $ocrReceiptData
+                );
+            } elseif ($isUpdate && $paymentId && $request->hasFile('proof_path')) {
+                // If this is an update with a new file, but OCR failed/skipped, delete the old OCR data
+                // so we don't accidentally display old OCR data for the new image.
+                \App\Models\OcrPaymentReceipt::where('payment_id', $paymentId)->delete();
             }
 
             // Delete old proof after commit (only when updated and file changed)

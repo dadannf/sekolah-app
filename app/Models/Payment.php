@@ -65,7 +65,7 @@ class Payment extends Model
      */
     public function ocrReceipt()
     {
-        return $this->hasOne(OcrPaymentReceipt::class, 'payment_id');
+        return $this->hasOne(OcrPaymentReceipt::class, 'payment_id')->latestOfMany();
     }
 
     /**

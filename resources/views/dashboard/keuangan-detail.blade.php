@@ -1342,9 +1342,25 @@
             <div class="modal-body p-0">
                 <div class="row g-0">
                     <!-- Left: Image Preview -->
-                    <div class="col-md-7 p-3 bg-light d-flex align-items-center justify-content-center" style="min-height: 50vh;">
-                        <div id="proofImageContainer" class="text-center w-100" style="display: none;">
-                            <img id="proofImagePreview" src="" alt="Bukti Transfer" class="img-fluid rounded shadow-sm" style="max-height: 70vh; object-fit: contain;">
+                    <div class="col-md-7 p-3 bg-light position-relative d-flex align-items-center justify-content-center" style="min-height: 50vh;">
+                        
+                        <!-- Zoom Controls -->
+                        <div id="imageZoomControls" class="position-absolute top-0 end-0 mt-3 me-3" style="z-index: 10; display: none;">
+                            <div class="btn-group shadow-sm bg-white rounded">
+                                <button type="button" class="btn btn-sm btn-light border-0" onclick="zoomProofImage(0.25)" title="Zoom In">
+                                    <i class="fas fa-search-plus text-primary"></i>
+                                </button>
+                                <button type="button" class="btn btn-sm btn-light border-0 border-start border-end" onclick="zoomProofImage(-0.25)" title="Zoom Out">
+                                    <i class="fas fa-search-minus text-primary"></i>
+                                </button>
+                                <button type="button" class="btn btn-sm btn-light border-0" onclick="resetZoomProofImage()" title="Reset Zoom">
+                                    <i class="fas fa-compress text-secondary"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div id="proofImageContainer" class="text-center w-100 overflow-auto" style="display: none; height: 70vh; position: relative; scroll-behavior: smooth;">
+                            <img id="proofImagePreview" src="" alt="Bukti Transfer" class="img-fluid rounded shadow-sm" style="max-height: 70vh; object-fit: contain; transition: width 0.2s ease;">
                         </div>
                         <div id="proofFrameContainer" class="w-100" style="display: none; height: 70vh;">
                             <iframe id="proofFramePreview" src="" style="width: 100%; height: 100%; border: none;" class="rounded shadow-sm"></iframe>
@@ -1892,7 +1908,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Check validation status
                 if (data.validation && data.validation.is_valid === false) {
                     document.getElementById('retryUploadSection').style.display = 'block';
-                    if (submitBtn) submitBtn.style.display = 'inline-block';
+                    
+                    // Cek jika ada error duplikasi
+                    let hasDuplication = false;
+                    if (data.validation.errors) {
+                        hasDuplication = data.validation.errors.some(e => e.toLowerCase().includes('duplikasi'));
+                    }
+                    
+                    if (submitBtn) {
+                        submitBtn.style.display = hasDuplication ? 'none' : 'inline-block';
+                    }
                 } else {
                     if (submitBtn) submitBtn.style.display = 'inline-block';
                     document.getElementById('retryUploadSection').style.display = 'none';
@@ -2058,6 +2083,10 @@ document.addEventListener('DOMContentLoaded', function() {
         
         const isImage = /\.(jpe?g|png|gif|bmp|webp)$/i.test(url);
         proofImageContainer.style.display = isImage ? 'block' : 'none';
+        
+        const zoomControls = document.getElementById('imageZoomControls');
+        if (zoomControls) zoomControls.style.display = isImage ? 'block' : 'none';
+        
         proofFrameContainer.style.display = isImage ? 'none' : 'block';
         if (isImage) {
             proofImagePreview.src = url;
@@ -2090,7 +2119,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         ocrContent.style.display = 'block';
                         
                         // Populate confidence
-                        const confScore = Math.round(res.data.ocr_confidence * 100);
+                        const confScore = parseFloat(res.data.ocr_confidence).toFixed(1);
                         const confBadge = document.getElementById('ocrConfidence');
                         confBadge.textContent = confScore + '%';
                         confBadge.className = confScore > 80 ? 'badge bg-success' : (confScore > 50 ? 'badge bg-warning text-dark' : 'badge bg-danger');
@@ -2560,6 +2589,49 @@ document.addEventListener('DOMContentLoaded', function() {
         };
         
         return badges[status] || badges['unpaid'];
+    }
+    // Image Zoom functionality
+    let currentZoom = 100;
+    
+    window.zoomProofImage = function(amount) {
+        const img = document.getElementById('proofImagePreview');
+        if (!img) return;
+        
+        currentZoom += amount * 100;
+        if (currentZoom < 50) currentZoom = 50;
+        if (currentZoom > 400) currentZoom = 400;
+        
+        img.classList.remove('img-fluid');
+        img.style.maxHeight = 'none';
+        img.style.width = currentZoom + '%';
+        img.style.height = 'auto';
+        img.style.objectFit = 'contain';
+    };
+    
+    window.resetZoomProofImage = function() {
+        const img = document.getElementById('proofImagePreview');
+        if (!img) return;
+        
+        currentZoom = 100;
+        img.classList.add('img-fluid');
+        img.style.width = '';
+        img.style.height = '';
+        img.style.maxHeight = '70vh';
+        img.style.objectFit = 'contain';
+    };
+
+    const proofImageContainerEl = document.getElementById('proofImageContainer');
+    if (proofImageContainerEl) {
+        proofImageContainerEl.addEventListener('wheel', function(e) {
+            if (e.ctrlKey) {
+                e.preventDefault();
+                if (e.deltaY < 0) {
+                    window.zoomProofImage(0.15);
+                } else {
+                    window.zoomProofImage(-0.15);
+                }
+            }
+        }, { passive: false });
     }
 });
 </script>

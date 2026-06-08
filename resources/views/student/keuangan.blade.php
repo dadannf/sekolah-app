@@ -1569,7 +1569,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (data.validation && data.validation.is_valid === false) {
                     const retrySection = document.getElementById('retryUploadSection');
                     if (retrySection) retrySection.style.display = 'block';
-                    if (submitBtn) submitBtn.style.display = 'inline-block';
+                    
+                    // Cek jika ada error duplikasi
+                    let hasDuplication = false;
+                    if (data.validation.errors) {
+                        hasDuplication = data.validation.errors.some(e => e.toLowerCase().includes('duplikasi'));
+                    }
+                    
+                    if (submitBtn) {
+                        submitBtn.style.display = hasDuplication ? 'none' : 'inline-block';
+                    }
                 } else {
                     if (submitBtn) submitBtn.style.display = 'inline-block';
                     const retrySection = document.getElementById('retryUploadSection');

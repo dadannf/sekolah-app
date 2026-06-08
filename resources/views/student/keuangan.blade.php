@@ -1533,7 +1533,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Let the browser paint the loading UI before starting the request.
         requestAnimationFrame(() => {
             // Call OCR API
-            fetch(@json(route('payment.ocr.process')), {
+            fetch(@json(route('student.payment.ocr.process')), {
                 method: 'POST',
                 headers: {
                     'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '',
@@ -1566,34 +1566,70 @@ document.addEventListener('DOMContentLoaded', function() {
                 displayOCRResults(data);
                 
                 // Check validation status
-                if (data.status === 'pending' && data.validation && !data.validation.is_valid) {
-                    // OCR Fallback: Validation failed but user can still submit for manual review
+                if (data.validation && data.validation.is_valid === false) {
+                    const retrySection = document.getElementById('retryUploadSection');
+                    if (retrySection) retrySection.style.display = 'block';
                     if (submitBtn) submitBtn.style.display = 'inline-block';
-                    document.getElementById('retryUploadSection').style.display = 'none';
-                    
-                } else if (data.status === 'completed') {
-                    // Validation passed - show submit button
+                } else {
                     if (submitBtn) submitBtn.style.display = 'inline-block';
-                    document.getElementById('retryUploadSection').style.display = 'none';
+                    const retrySection = document.getElementById('retryUploadSection');
+                    if (retrySection) retrySection.style.display = 'none';
                 }
             } else {
-                // OCR extraction failed - still allow manual submission
+                // OCR extraction failed completely, but the payment can still be submitted for manual review.
                 if (submitBtn) submitBtn.style.display = 'inline-block';
-                document.getElementById('retryUploadSection').style.display = 'none';
+                const retrySection = document.getElementById('retryUploadSection');
+                if (retrySection) retrySection.style.display = 'none';
+                
+                // Tampilkan alert kuning jika gagal ekstrak
+                const ocrFailedAlert = document.getElementById('ocrFailedAlert');
+                if (ocrFailedAlert) {
+                    ocrFailedAlert.style.display = 'block';
+                    setTimeout(() => ocrFailedAlert.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 100);
+                }
             }
         })
         .catch(error => {
             console.error('OCR Error:', error);
-            document.getElementById('ocrProcessing').style.display = 'none';
+            const ocrProcessing = document.getElementById('ocrProcessing');
+            if (ocrProcessing) ocrProcessing.style.display = 'none';
             setOcrUiBusy(false);
             
             // OCR Fallback: Sistem OCR tidak tersedia tapi pembayaran tetap bisa disimpan
             console.log('OCR service tidak tersedia - Pembayaran akan disimpan untuk validasi manual oleh admin');
 
             // Tampilkan alert kuning (warning, bukan error)
-            const ocrFailedAlert = document.getElementById('ocrFailedAlert');
+            let ocrFailedAlert = document.getElementById('ocrFailedAlert');
+            if (!ocrFailedAlert) {
+                console.warn("ocrFailedAlert element not found in DOM! Creating dynamically...");
+                const alertHtml = `
+                    <div id="ocrFailedAlert" class="alert alert-warning mb-0 mt-3" style="display: block; font-size: 0.85rem;">
+                        <div class="d-flex align-items-start">
+                            <i class="fas fa-exclamation-triangle me-2 mt-1" style="font-size: 1rem;"></i>
+                            <div>
+                                <strong>Sistem OCR Tidak Terhubung</strong>
+                                <p class="mb-0 mt-1" style="font-size: 0.8rem;">
+                                    Pembayaran Anda akan tetap disimpan dan <strong>validasi akan dilakukan oleh admin</strong>. 
+                                    Pastikan bukti transfer yang diupload sudah sesuai dengan data pembayaran.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                const form = document.getElementById('paymentForm');
+                if (form) {
+                    form.insertAdjacentHTML('beforeend', alertHtml);
+                    ocrFailedAlert = document.getElementById('ocrFailedAlert');
+                }
+            }
+
             if (ocrFailedAlert) {
-                ocrFailedAlert.style.display = 'block';
+                ocrFailedAlert.classList.remove('d-none');
+                ocrFailedAlert.style.setProperty('display', 'block', 'important');
+                ocrFailedAlert.style.opacity = '1';
+                ocrFailedAlert.style.visibility = 'visible';
+                ocrFailedAlert.style.height = 'auto';
+                setTimeout(() => ocrFailedAlert.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 100);
             }
 
             // TETAP TAMPILKAN submit button agar siswa bisa submit
@@ -1601,7 +1637,8 @@ document.addEventListener('DOMContentLoaded', function() {
             const submitBtn = document.getElementById('submitPaymentBtn');
             if (submitBtn) submitBtn.style.display = 'inline-block';
             // Sembunyikan retry section karena OCR tidak tersedia
-            document.getElementById('retryUploadSection').style.display = 'none';
+            const retrySection = document.getElementById('retryUploadSection');
+            if (retrySection) retrySection.style.display = 'none';
         });
         });
     }

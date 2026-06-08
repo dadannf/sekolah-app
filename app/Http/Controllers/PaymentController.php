@@ -67,7 +67,8 @@ class PaymentController extends Controller
 
         $ocrUrl = config('services.ocr.process_url');
 
-        $fileHash = md5_file($sourcePath);
+        // Gunakan parameter file + user sebagai key cache agar lebih reliable antar request
+        $fileHash = md5(\Illuminate\Support\Facades\Auth::id() . '_' . $file->getClientOriginalName() . '_' . $file->getSize());
         $cacheKey = 'ocr_raw_' . $fileHash;
 
         try {
@@ -456,7 +457,8 @@ class PaymentController extends Controller
                         ]);
                             $ocrStatus = 'unavailable';
                     } else {
-                            $fileHash = md5_file($sourcePath);
+                            // Gunakan parameter file + user sebagai key cache agar lebih reliable antar request
+                            $fileHash = md5(\Illuminate\Support\Facades\Auth::id() . '_' . $file->getClientOriginalName() . '_' . $file->getSize());
                             $cacheKey = 'ocr_raw_' . $fileHash;
                             $ocrData = null;
                             $multipart = null;

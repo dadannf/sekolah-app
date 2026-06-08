@@ -134,6 +134,7 @@
     <!-- Toast Notifications for Real-time Events -->
     <x-notification-toast :user-id="Auth::id()" :user-role="Auth::user()?->role" />
     
+    @stack('scripts')
     @yield('scripts')
 </body>
 </html>

@@ -6,7 +6,7 @@
 
 # Ubah USERNAME dengan username cPanel kamu
 # Ubah sekolah-app dengan nama folder project Laravel kamu di hosting
-PROJECT_DIR="/home/USERNAME/sekolah-app"
+PROJECT_DIR="/home/bitbinau/sekolah-app"
 PHP_BIN="php" # Terkadang di cPanel perlu diubah ke spesifik versi misal: ea-php82 atau /usr/local/bin/php
 
 echo "======================================"

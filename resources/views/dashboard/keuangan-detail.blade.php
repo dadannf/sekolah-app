@@ -143,6 +143,11 @@
                                     <span class="badge px-3 py-2" style="background: linear-gradient(135deg, #198754 0%, #157347 100%); color: white; font-weight: 600;">
                                         <i class="fas fa-check-circle me-1"></i>Verified
                                     </span>
+                                    @if(!empty($monthly['paid_at']))
+                                        <div class="small text-muted mt-1" style="font-size: 0.75rem;">
+                                            {{ \Carbon\Carbon::parse($monthly['paid_at'])->format('d M Y') }}
+                                        </div>
+                                    @endif
                                 @elseif($status === 'pending')
                                     <span class="badge px-3 py-2 bg-warning text-dark fw-semibold">
                                         <i class="fas fa-hourglass-half me-1"></i>Pending
@@ -246,6 +251,11 @@
                                     <span class="badge px-2 py-1" style="background: linear-gradient(135deg, #198754 0%, #157347 100%); color: white; font-size: 0.75rem;">
                                         <i class="fas fa-check-circle me-1"></i>Verified
                                     </span>
+                                    @if(!empty($monthly['paid_at']))
+                                        <div class="small text-muted mt-1" style="font-size: 0.7rem;">
+                                            {{ \Carbon\Carbon::parse($monthly['paid_at'])->format('d M Y') }}
+                                        </div>
+                                    @endif
                                 @elseif($status === 'pending')
                                     <span class="badge px-2 py-1 bg-warning text-dark" style="font-size: 0.75rem;">
                                         <i class="fas fa-hourglass-half me-1"></i>Pending
@@ -399,6 +409,11 @@
                                     <span class="badge px-3 py-2" style="background: linear-gradient(135deg, #198754 0%, #157347 100%); color: white; font-weight: 600;">
                                         <i class="fas fa-check-circle me-1"></i>Verified
                                     </span>
+                                    @if($payment && !empty($payment->paid_at))
+                                        <div class="small text-muted mt-1" style="font-size: 0.75rem;">
+                                            {{ \Carbon\Carbon::parse($payment->paid_at)->format('d M Y') }}
+                                        </div>
+                                    @endif
                                 @elseif($status === 'pending')
                                     <span class="badge px-3 py-2 bg-warning text-dark fw-semibold">
                                         <i class="fas fa-hourglass-half me-1"></i>Pending
@@ -507,6 +522,11 @@
                                     <span class="badge px-2 py-1" style="background: linear-gradient(135deg, #198754 0%, #157347 100%); color: white; font-size: 0.75rem;">
                                         <i class="fas fa-check-circle me-1"></i>Verified
                                     </span>
+                                    @if($payment && !empty($payment->paid_at))
+                                        <div class="small text-muted mt-1" style="font-size: 0.7rem;">
+                                            {{ \Carbon\Carbon::parse($payment->paid_at)->format('d M Y') }}
+                                        </div>
+                                    @endif
                                 @elseif($status === 'pending')
                                     <span class="badge px-2 py-1 bg-warning text-dark" style="font-size: 0.75rem;">
                                         <i class="fas fa-hourglass-half me-1"></i>Pending
@@ -666,6 +686,11 @@
                                     <span class="badge px-3 py-2" style="background: linear-gradient(135deg, #198754 0%, #157347 100%); color: white; font-weight: 600;">
                                         <i class="fas fa-check-circle me-1"></i>Verified
                                     </span>
+                                    @if($ptsPayment && !empty($ptsPayment->paid_at))
+                                        <div class="small text-muted mt-1" style="font-size: 0.75rem;">
+                                            {{ \Carbon\Carbon::parse($ptsPayment->paid_at)->format('d M Y') }}
+                                        </div>
+                                    @endif
                                 @elseif($ptsStatus === 'pending')
                                     <span class="badge px-3 py-2 bg-warning text-dark fw-semibold">
                                         <i class="fas fa-hourglass-half me-1"></i>Pending
@@ -877,6 +902,11 @@
                                     <span class="badge px-3 py-2" style="background: linear-gradient(135deg, #198754 0%, #157347 100%); color: white; font-weight: 600;">
                                         <i class="fas fa-check-circle me-1"></i>Verified
                                     </span>
+                                    @if($pasPayment && !empty($pasPayment->paid_at))
+                                        <div class="small text-muted mt-1" style="font-size: 0.75rem;">
+                                            {{ \Carbon\Carbon::parse($pasPayment->paid_at)->format('d M Y') }}
+                                        </div>
+                                    @endif
                                 @elseif($pasStatus === 'pending')
                                     <span class="badge px-3 py-2 bg-warning text-dark fw-semibold">
                                         <i class="fas fa-hourglass-half me-1"></i>Pending

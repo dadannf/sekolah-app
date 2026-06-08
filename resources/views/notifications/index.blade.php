@@ -64,9 +64,8 @@
                                 </div>
                                 <div class="text-muted small mt-1">{!! nl2br(e($notification->message)) !!}</div>
                                 <div class="text-muted small mt-2">
-                                    {{ $notification->created_at?->format('d/m/Y H:i') }}
                                     @if ($notification->performed_by_name)
-                                        • Oleh: {{ $notification->performed_by_name }}
+                                        Oleh: {{ $notification->performed_by_name }}
                                     @endif
                                 </div>
                             </div>

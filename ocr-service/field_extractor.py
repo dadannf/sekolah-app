@@ -278,7 +278,9 @@ class FieldExtractor:
                 s = s.replace('.', '')
 
             if s.isdigit():
-                return int(s)
+                # Max 9 digits (999M) to avoid confusing ref numbers as amount
+                if len(s) <= 9:
+                    return int(s)
 
             return None
 
@@ -296,7 +298,7 @@ class FieldExtractor:
                 return None
 
             amount = float(normalized)
-            if 10000 <= amount <= 10000000:
+            if 10000 <= amount <= 999999999: # Up to 999M
                 return amount
             return None
 
@@ -307,20 +309,21 @@ class FieldExtractor:
             ['amount'],
             ['total'],
         ]
+        amounts = []
         for labels in priority_labels:
             for i, ln in enumerate(raw_lines):
                 low = ln.lower()
                 if any(lbl in low for lbl in labels):
                     inline = parse_amount_from_line(ln)
                     if inline is not None:
-                        logger.info(f"Extracted amount (labeled): Rp {inline:,.0f}")
-                        return inline
+                        logger.debug(f"Found amount (labeled): Rp {inline:,.0f}")
+                        amounts.append(inline)
                     # Try next line for separated value
                     for j in range(i + 1, min(i + 3, len(raw_lines))):
                         cand = parse_amount_from_line(raw_lines[j])
                         if cand is not None:
-                            logger.info(f"Extracted amount (next line): Rp {cand:,.0f}")
-                            return cand
+                            logger.debug(f"Found amount (next line): Rp {cand:,.0f}")
+                            amounts.append(cand)
 
         # Remove newlines for better matching
         text = text.replace('\n', ' ')
@@ -349,7 +352,6 @@ class FieldExtractor:
             r'\b(\d{3}[.,]\d{3}(?:[.,]\d{3})?)\b',
         ]
         
-        amounts = []
         for pattern in patterns:
             matches = re.finditer(pattern, text, re.IGNORECASE)
             for match in matches:
@@ -358,7 +360,7 @@ class FieldExtractor:
                 if normalized is None:
                     continue
                 amount = float(normalized)
-                if 10000 <= amount <= 10000000:
+                if 10000 <= amount <= 999999999: # Up to 999M
                     amounts.append(amount)
                     logger.debug(f"Found potential amount: Rp {amount:,.0f}")
         
@@ -709,25 +711,34 @@ class FieldExtractor:
     
     def extract_sender_name(self, text: str) -> Optional[str]:
         """
-        Extract sender name (pengirim)
+        Extract sender name (pengirim) with multi-line support
         Usually the person who sends money (student/parent)
         """
-        text = text.replace('\n', ' ')
+        raw_lines = [ln.strip() for ln in text.splitlines() if ln.strip()]
         
+        # 1. Inline extraction (Single line)
         patterns = [
-            r'(?:dari|pengirim|sender|dari rekening)[:\s]+([A-Z][A-Z\s]+)',
-            r'(?:atas nama)[:\s]+([A-Z][A-Z\s]+)',
+            r'(?:dari|pengirim|sender|dari rekening|atas nama)[:\s]+([A-Za-z][A-Za-z\s]+)',
         ]
-        
-        for pattern in patterns:
-            match = re.search(pattern, text, re.IGNORECASE)
-            if match:
-                name = match.group(1).strip()
-                # Clean up the name (remove extra spaces, limit length)
-                name = re.sub(r'\s+', ' ', name)
-                if 3 <= len(name) <= 100:
-                    return name.title()
-        
+        for ln in raw_lines:
+            for pattern in patterns:
+                match = re.search(pattern, ln, re.IGNORECASE)
+                if match:
+                    name = match.group(1).strip()
+                    name = re.sub(r'\s+', ' ', name)
+                    # Exclude if it captured a bank name or contains too many digits
+                    if 3 <= len(name) <= 100 and not re.search(r'\d{3,}', name) and not re.search(r'(?i)(bank|ovo|dana|gopay|shopeepay|linkaja)', name):
+                        return name.title()
+
+        # 2. Multi-line extraction (Next line)
+        for i, ln in enumerate(raw_lines):
+            if re.search(r'^(?:dari|pengirim|sender|atas nama)[:\s]*$', ln, re.IGNORECASE):
+                # Look at the next 1-2 lines
+                for j in range(i+1, min(i+3, len(raw_lines))):
+                    candidate = raw_lines[j].strip()
+                    if candidate and not re.search(r'\d{4,}', candidate) and not re.search(r'(?i)(bank|ovo|dana|gopay|shopeepay|linkaja)', candidate):
+                        return candidate.title()
+                        
         return None
     
     def extract_recipient_name(self, text: str, detections: List[Dict] = None) -> Optional[str]:
@@ -874,6 +885,29 @@ class FieldExtractor:
         # prepare keyword regex ordered by length (prefer multi-word keywords like 'atas nama')
         sorted_keywords = sorted(self.recipient_name_keywords, key=lambda s: -len(s))
         keyword_pattern_ordered = '|'.join(re.escape(k) for k in sorted_keywords)
+
+        # Fast path for "Ke [Nomor Rekening]" format (m-BCA style)
+        for i, ln in enumerate(norm_lines):
+            # Cek jika OCR menggabungkannya jadi satu baris: "Ke 3491587171 FAKRIZAL"
+            inline_mbca = re.search(r'^(?:ke|kepada|tujuan|penerima|ke rekening)[:\s]*[\d\s-]+\s+([A-Za-z][A-Za-z\s]+)$', ln, re.IGNORECASE)
+            if inline_mbca:
+                cand = inline_mbca.group(1).strip()
+                if not re.search(r'\d{3,}', cand):
+                    words = cand.upper().split()
+                    if not any(w in blacklist for w in words):
+                        logger.debug(f"Recipient name found (m-BCA inline): {cand}")
+                        return cand.title()
+                        
+            # Cek jika formatnya beda baris: "Ke 3491587171" \n "FAKRIZAL"
+            if re.search(r'^(?:ke|kepada|tujuan|penerima|ke rekening)[:\s]*[\d\s-]*$', ln, re.IGNORECASE):
+                # Look at the next 1-2 lines for the name
+                for j in range(i+1, min(i+3, len(norm_lines))):
+                    cand = norm_lines[j].strip()
+                    if cand and not re.search(r'\d{3,}', cand):
+                        words = cand.upper().split()
+                        if not any(w in blacklist for w in words):
+                            logger.debug(f"Recipient name found (m-BCA style): {cand}")
+                            return cand.title()
 
         skip_until = -1
         for i, ln in enumerate(norm_lines):
@@ -1043,15 +1077,17 @@ class FieldExtractor:
         
         patterns = [
             # E-wallet transaction IDs - ID Transaksi has highest priority
-            r'ID\s+Transaksi[:\s]+[•\s]*(\d+)',  # "ID Transaksi •••3019" or "ID Transaksi 3019"
-            r'(?:Transaction\s+ID)[:\s]+[•\s]*(\w+)',  # "Transaction ID 123"
-            r'(?:DANA\s+ID|OVO\s+ID|GoPay\s+ID)[:\s]+([\d•]+)',  # "DANA ID 0896••••5260" (lower priority)
-            r'(?:Referensi|Reference)[:\s]+([A-Z0-9•]+)',
+            r'ID\s+Transaksi[:\s]+[•\s]*([A-Za-z0-9\-]+)',  # "ID Transaksi 3019" or hex
+            r'(?:Transaction\s+ID)[:\s]+[•\s]*([A-Za-z0-9\-]+)',
+            r'(?:DANA\s+ID|OVO\s+ID|GoPay\s+ID)[:\s]+([A-Za-z0-9\-•]+)',
+            r'(?:Referensi|Reference)[:\s]+([A-Za-z0-9\-•]+)',
             
             # Bank patterns
-            r'(?:no\.?\s*ref|referensi|reference|no\.?\s*transaksi|transaction)[:\s]+([A-Z0-9]+)',
+            r'(?:no\.?\s*ref|referensi|reference|no\.?\s*transaksi|transaction)[:\s]+([A-Za-z0-9\-]+)',
+            r'\b(TRF-[A-Za-z0-9]{10,})\b',  # OVO modern format
             r'\b(TRF\d{10,})\b',
             r'\b([A-Z]{3}\d{8,})\b',
+            r'\b(\d{12,20})\b', # Pure long digits as fallback for ref
         ]
         
         for pattern in patterns:

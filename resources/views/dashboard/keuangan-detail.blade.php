@@ -1173,17 +1173,14 @@
                                 </select>
                             </div>
 
-                            <!-- Diterima Oleh -->
+                            <!-- Diterima Oleh (Otomatis) -->
                             <div class="mb-2">
                                 <label for="received_by_user_id" class="form-label fw-semibold text-dark mb-1" style="font-size: 0.8rem;">
                                     Diterima Oleh <span class="text-danger">*</span>
                                 </label>
-                                <select class="form-select form-select-sm rounded-2 border-2" id="received_by_user_id" name="received_by_user_id" style="font-size: 0.8rem;">
-                                    <option value="">-- Pilih Petugas --</option>
-                                    @foreach(\App\Models\User::whereIn('role', ['admin', 'kepala_sekolah'])->get() as $admin)
-                                        <option value="{{ $admin->id }}">{{ $admin->name }}</option>
-                                    @endforeach
-                                </select>
+                                <input type="hidden" name="received_by_user_id" value="{{ auth()->user()->id }}">
+                                <input type="text" class="form-control form-control-sm rounded-2 border-2 bg-light" 
+                                       value="{{ auth()->user()->name }}" readonly style="font-size: 0.8rem;">
                             </div>
 
                             <!-- Catatan -->
@@ -1503,7 +1500,6 @@ document.addEventListener('DOMContentLoaded', function() {
             transferFields.style.display = 'none';
             // Required for cash
             document.getElementById('place_paid').required = true;
-            document.getElementById('received_by_user_id').required = true;
             // Remove required for transfer
             document.getElementById('bank_name').required = false;
         } else {
@@ -1511,7 +1507,6 @@ document.addEventListener('DOMContentLoaded', function() {
             transferFields.style.display = 'block';
             // Remove required for cash
             document.getElementById('place_paid').required = false;
-            document.getElementById('received_by_user_id').required = false;
             // Required for transfer
             document.getElementById('bank_name').required = true;
         }

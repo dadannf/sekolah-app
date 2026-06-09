@@ -1170,30 +1170,91 @@
     </div>
 </div>
 
-<!-- Modal Ambil Foto (Kamera) -->
+<!-- Modal Ambil Foto (Kamera) - Premium Version -->
 <div class="modal fade" id="cameraModal" tabindex="-1" aria-labelledby="cameraModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content border-0 shadow-lg">
-            <div class="modal-header border-0">
-                <h5 class="modal-title fw-bold text-dark" id="cameraModalLabel">Ambil Foto Bukti Transfer</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="modal-content border-0 shadow-lg" style="border-radius: 1rem; overflow: hidden;">
+            <!-- Header -->
+            <div class="modal-header border-0 px-4 pt-3 pb-2" style="background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);">
+                <div class="d-flex align-items-center gap-2">
+                    <div class="d-flex align-items-center justify-content-center rounded-circle" style="width:32px;height:32px;background:rgba(99,179,237,0.15);">
+                        <i class="fas fa-camera" style="color:#63b3ed;font-size:0.8rem;"></i>
+                    </div>
+                    <h5 class="modal-title fw-bold mb-0" id="cameraModalLabel" style="color:#f1f5f9;font-size:0.95rem;">Ambil Foto Bukti Transfer</h5>
+                </div>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-                <div class="alert alert-secondary py-2 px-3" style="font-size: 0.8rem;" id="cameraHint">
-                    Arahkan kamera ke struk/bukti transfer, lalu klik <strong>Ambil</strong>.
+
+            <!-- Camera Body -->
+            <div class="modal-body p-0" style="background:#0f172a;">
+
+                <!-- Hint bar -->
+                <div class="px-3 py-2 d-flex align-items-center gap-2" style="background:#1e293b;">
+                    <i class="fas fa-lightbulb" style="color:#fbbf24;font-size:0.75rem;"></i>
+                    <span style="color:#94a3b8;font-size:0.75rem;" id="cameraHint">Arahkan kamera ke struk/bukti transfer agar muat di dalam bingkai, lalu klik <strong style="color:#63b3ed;">Ambil</strong>.</span>
                 </div>
 
-                <div class="ratio ratio-4x3 bg-dark rounded overflow-hidden">
-                    <video id="cameraVideo" autoplay playsinline style="width: 100%; height: 100%; object-fit: contain;"></video>
-                    <img id="cameraCaptured" alt="Hasil Foto" style="display:none; width: 100%; height: 100%; object-fit: contain;" />
+                <!-- Video + overlay container -->
+                <div class="position-relative" style="aspect-ratio:4/3;background:#000;">
+                    <video id="cameraVideo" autoplay playsinline style="width:100%;height:100%;object-fit:contain;"></video>
+                    <img id="cameraCaptured" alt="Hasil Foto" style="display:none;width:100%;height:100%;object-fit:contain;" />
+
+                    <!-- Document alignment guide overlay -->
+                    <div id="cameraGuideOverlay" style="position:absolute;inset:0;pointer-events:none;display:flex;align-items:center;justify-content:center;">
+                        <div style="
+                            width: 88%;
+                            height: 82%;
+                            border: 2.5px solid rgba(99,179,237,0.75);
+                            border-radius: 12px;
+                            box-shadow: 0 0 0 9999px rgba(0,0,0,0.35);
+                            position: relative;
+                        ">
+                            <!-- Corner markers -->
+                            <span style="position:absolute;top:-3px;left:-3px;width:18px;height:18px;border-top:3px solid #63b3ed;border-left:3px solid #63b3ed;border-radius:4px 0 0 0;"></span>
+                            <span style="position:absolute;top:-3px;right:-3px;width:18px;height:18px;border-top:3px solid #63b3ed;border-right:3px solid #63b3ed;border-radius:0 4px 0 0;"></span>
+                            <span style="position:absolute;bottom:-3px;left:-3px;width:18px;height:18px;border-bottom:3px solid #63b3ed;border-left:3px solid #63b3ed;border-radius:0 0 0 4px;"></span>
+                            <span style="position:absolute;bottom:-3px;right:-3px;width:18px;height:18px;border-bottom:3px solid #63b3ed;border-right:3px solid #63b3ed;border-radius:0 0 4px 0;"></span>
+                        </div>
+                    </div>
+
+                    <!-- Zoom Pill (visible only while live camera) -->
+                    <div id="zoomPill" style="position:absolute;bottom:12px;left:50%;transform:translateX(-50%);display:flex;gap:6px;background:rgba(15,23,42,0.75);backdrop-filter:blur(6px);border-radius:999px;padding:4px 6px;">
+                        <button type="button" class="btn btn-sm camera-zoom-btn" data-zoom="0.5" style="min-width:44px;height:30px;border-radius:999px;font-size:0.72rem;font-weight:700;border:1.5px solid rgba(148,163,184,0.35);color:#94a3b8;background:transparent;transition:all .2s;">0.5×</button>
+                        <button type="button" class="btn btn-sm camera-zoom-btn active-zoom" data-zoom="1" style="min-width:44px;height:30px;border-radius:999px;font-size:0.72rem;font-weight:700;border:1.5px solid #63b3ed;color:#fff;background:#2563eb;transition:all .2s;">1×</button>
+                        <button type="button" class="btn btn-sm camera-zoom-btn" data-zoom="2" style="min-width:44px;height:30px;border-radius:999px;font-size:0.72rem;font-weight:700;border:1.5px solid rgba(148,163,184,0.35);color:#94a3b8;background:transparent;transition:all .2s;">2×</button>
+                    </div>
                 </div>
             </div>
-            <div class="modal-footer border-0">
-                <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal">Batal</button>
-                <button type="button" class="btn btn-sm btn-outline-primary" id="cameraSwitchBtn">Balik Kamera</button>
-                <button type="button" class="btn btn-sm btn-outline-info" id="cameraRetakeBtn" style="display:none;">Ulangi</button>
-                <button type="button" class="btn btn-sm btn-primary" id="cameraCaptureBtn">Ambil</button>
-                <button type="button" class="btn btn-sm btn-success" id="cameraUseBtn" style="display:none;">Gunakan Foto</button>
+
+            <!-- Footer Controls -->
+            <div class="modal-footer border-0 px-4 py-3 justify-content-between align-items-center" style="background:#1e293b;">
+                <!-- Left: Batal -->
+                <button type="button" class="btn btn-sm" data-bs-dismiss="modal" style="color:#94a3b8;border:1.5px solid rgba(148,163,184,0.3);border-radius:999px;padding:0.35rem 1.1rem;font-size:0.78rem;">Batal</button>
+
+                <!-- Center: Main capture / use / retake -->
+                <div class="d-flex flex-column align-items-center gap-1">
+                    <!-- Capture button (big circle) -->
+                    <button type="button" id="cameraCaptureBtn"
+                        style="width:60px;height:60px;border-radius:50%;border:3px solid #fff;background:#2563eb;box-shadow:0 0 0 4px rgba(37,99,235,0.35);display:flex;align-items:center;justify-content:center;transition:all .2s;">
+                        <i class="fas fa-camera" style="color:#fff;font-size:1.1rem;"></i>
+                    </button>
+                    <!-- Retake + Use buttons (hidden until capture) -->
+                    <div id="captureActionsRow" style="display:none;gap:8px;" class="d-flex">
+                        <button type="button" id="cameraRetakeBtn" class="btn btn-sm" style="border-radius:999px;border:1.5px solid #f59e0b;color:#f59e0b;background:transparent;font-size:0.75rem;padding:0.3rem 1rem;">
+                            <i class="fas fa-redo me-1"></i>Ulangi
+                        </button>
+                        <button type="button" id="cameraUseBtn" class="btn btn-sm" style="border-radius:999px;background:#10b981;border:none;color:#fff;font-size:0.75rem;padding:0.3rem 1rem;">
+                            <i class="fas fa-check me-1"></i>Gunakan
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Right: Switch camera -->
+                <button type="button" id="cameraSwitchBtn"
+                    style="width:42px;height:42px;border-radius:50%;border:1.5px solid rgba(148,163,184,0.3);background:rgba(148,163,184,0.1);color:#94a3b8;display:flex;align-items:center;justify-content:center;transition:all .2s;"
+                    title="Ganti Kamera">
+                    <i class="fas fa-sync-alt" style="font-size:0.85rem;"></i>
+                </button>
             </div>
         </div>
     </div>
@@ -1259,19 +1320,59 @@ document.addEventListener('DOMContentLoaded', function() {
     let cameraStream = null;
     let capturedBlob = null;
     let isPreviewMirrored = false;
-    let currentFacingMode = 'environment';
+    let currentFacingMode = 'environment'; // default kamera belakang
+    let currentZoomLevel = 1;
+    let nativeZoomSupported = false;
 
     function setCameraPreviewMirroring(shouldMirror) {
         isPreviewMirrored = !!shouldMirror;
         if (cameraVideo) {
             cameraVideo.style.transform = isPreviewMirrored ? 'scaleX(-1)' : 'none';
         }
-        // Keep captured preview always "real" (not mirrored)
         if (cameraCaptured) {
             cameraCaptured.style.transform = 'none';
         }
     }
-    
+
+    // ─── Zoom helpers ────────────────────────────────────────────────────────
+    function applyZoom(level) {
+        currentZoomLevel = level;
+
+        // Update pill button styles
+        document.querySelectorAll('.camera-zoom-btn').forEach(btn => {
+            const isActive = parseFloat(btn.dataset.zoom) === level;
+            btn.style.background = isActive ? '#2563eb' : 'transparent';
+            btn.style.borderColor = isActive ? '#63b3ed' : 'rgba(148,163,184,0.35)';
+            btn.style.color = isActive ? '#fff' : '#94a3b8';
+            btn.classList.toggle('active-zoom', isActive);
+        });
+
+        if (!cameraStream) return;
+        const track = cameraStream.getVideoTracks()[0];
+        if (!track) return;
+
+        const caps = typeof track.getCapabilities === 'function' ? track.getCapabilities() : {};
+
+        if (caps.zoom && level >= (caps.zoom.min ?? 1) && level <= (caps.zoom.max ?? 1)) {
+            // Native zoom (Android Chrome, etc.)
+            track.applyConstraints({ advanced: [{ zoom: level }] }).catch(() => {});
+            nativeZoomSupported = true;
+            // Reset any CSS zoom
+            if (cameraVideo) cameraVideo.style.transform = isPreviewMirrored ? 'scaleX(-1)' : 'none';
+        } else {
+            // CSS-scale fallback for iOS / other browsers
+            nativeZoomSupported = false;
+            const mirrorX = isPreviewMirrored ? -1 : 1;
+            if (cameraVideo) cameraVideo.style.transform = `scaleX(${mirrorX}) scale(${level})`;
+        }
+    }
+
+    // Bind zoom buttons
+    document.querySelectorAll('.camera-zoom-btn').forEach(btn => {
+        btn.addEventListener('click', () => applyZoom(parseFloat(btn.dataset.zoom)));
+    });
+    // ─────────────────────────────────────────────────────────────────────────
+
     async function openCameraModalIfSupported() {
         if (!cameraModal || !cameraVideo || !cameraCaptured) return false;
         if (!proofPath) return false;
@@ -1286,9 +1387,11 @@ document.addEventListener('DOMContentLoaded', function() {
         capturedBlob = null;
         cameraCaptured.style.display = 'none';
         cameraVideo.style.display = 'block';
+        const captureActionsRow = document.getElementById('captureActionsRow');
+        if (captureActionsRow) captureActionsRow.style.display = 'none';
         if (cameraUseBtn) cameraUseBtn.style.display = 'none';
         if (cameraRetakeBtn) cameraRetakeBtn.style.display = 'none';
-        if (cameraCaptureBtn) cameraCaptureBtn.style.display = 'inline-block';
+        if (cameraCaptureBtn) cameraCaptureBtn.style.display = 'flex';
 
         cameraModal.show();
         return true;
@@ -1299,7 +1402,6 @@ document.addEventListener('DOMContentLoaded', function() {
         proofCamera.value = '';
         proofCamera.setAttribute('capture', 'environment');
 
-        // Use native picker API when available for better mobile camera support.
         if (typeof proofCamera.showPicker === 'function') {
             proofCamera.showPicker();
             return;
@@ -1320,27 +1422,43 @@ document.addEventListener('DOMContentLoaded', function() {
     async function startCameraStream() {
         if (!cameraVideo) return;
         stopCameraStream();
+        currentZoomLevel = 1;
+        applyZoom(1); // reset zoom pill to 1x
         try {
             const tryGet = async (videoConstraints) => {
                 return navigator.mediaDevices.getUserMedia({ video: videoConstraints, audio: false });
             };
 
-            // Prefer the selected facing mode, fallback gracefully.
             try {
-                cameraStream = await tryGet({ facingMode: { ideal: currentFacingMode } });
+                cameraStream = await tryGet({
+                    facingMode: { ideal: currentFacingMode },
+                    width: { ideal: 1920 },
+                    height: { ideal: 1080 }
+                });
             } catch (err) {
-                // Some devices/browsers are picky; retry without facingMode.
-                cameraStream = await tryGet(true);
+                try {
+                    cameraStream = await tryGet({ facingMode: { ideal: currentFacingMode } });
+                } catch (err2) {
+                    cameraStream = await tryGet(true);
+                }
             }
 
             cameraVideo.srcObject = cameraStream;
             await cameraVideo.play();
 
-            // Mirror preview only when the selected camera is user-facing.
             const track = cameraStream.getVideoTracks?.()[0];
-            const settings = track && typeof track.getSettings === 'function' ? track.getSettings() : {};
-            const detectedFacing = settings && settings.facingMode ? settings.facingMode : currentFacingMode;
+            const trackSettings = track && typeof track.getSettings === 'function' ? track.getSettings() : {};
+            const detectedFacing = trackSettings && trackSettings.facingMode ? trackSettings.facingMode : currentFacingMode;
             setCameraPreviewMirroring(detectedFacing === 'user');
+
+            // Check if 0.5x zoom is possible via native API; otherwise leave as CSS fallback
+            const caps = typeof track?.getCapabilities === 'function' ? track.getCapabilities() : {};
+            const zoomBtns = document.querySelectorAll('.camera-zoom-btn');
+            // Hide 0.5x if camera native zoom min > 0.5 and CSS trick not meaningful
+            if (zoomBtns.length) {
+                // All zoom levels kept; CSS fallback always available
+            }
+
         } catch (e) {
             if (e && (e.name === 'NotAllowedError' || e.name === 'SecurityError')) {
                 alert('Akses kamera ditolak/diblokir. Silakan izinkan kamera di setting situs (Site settings) lalu coba lagi.');
@@ -1355,25 +1473,31 @@ document.addEventListener('DOMContentLoaded', function() {
     function stopCameraStream() {
         try {
             cameraStream?.getTracks()?.forEach(t => t.stop());
-        } catch (e) {
-            // ignore
-        }
+        } catch (e) {}
         cameraStream = null;
         if (cameraVideo) cameraVideo.srcObject = null;
         setCameraPreviewMirroring(false);
+        if (cameraVideo) cameraVideo.style.transform = 'none';
     }
 
     function resetCaptureUi() {
         capturedBlob = null;
+        const guideOverlay = document.getElementById('cameraGuideOverlay');
+        const zoomPill = document.getElementById('zoomPill');
+        const captureActionsRow = document.getElementById('captureActionsRow');
+
         if (cameraCaptured) {
             try { URL.revokeObjectURL(cameraCaptured.src); } catch (e) {}
             cameraCaptured.src = '';
             cameraCaptured.style.display = 'none';
         }
         if (cameraVideo) cameraVideo.style.display = 'block';
+        if (guideOverlay) guideOverlay.style.display = 'flex';
+        if (zoomPill) zoomPill.style.display = 'flex';
+        if (captureActionsRow) captureActionsRow.style.display = 'none';
         if (cameraUseBtn) cameraUseBtn.style.display = 'none';
         if (cameraRetakeBtn) cameraRetakeBtn.style.display = 'none';
-        if (cameraCaptureBtn) cameraCaptureBtn.style.display = 'inline-block';
+        if (cameraCaptureBtn) cameraCaptureBtn.style.display = 'flex';
     }
 
     async function captureFromVideo() {
@@ -1385,18 +1509,30 @@ document.addEventListener('DOMContentLoaded', function() {
         canvas.height = height;
         const ctx = canvas.getContext('2d');
         if (!ctx) return;
-        if (isPreviewMirrored) {
-            ctx.translate(width, 0);
-            ctx.scale(-1, 1);
+
+        // If CSS zoom was applied (non-native), crop the center region accordingly
+        if (!nativeZoomSupported && currentZoomLevel !== 1) {
+            const cropW = width / currentZoomLevel;
+            const cropH = height / currentZoomLevel;
+            const cropX = (width - cropW) / 2;
+            const cropY = (height - cropH) / 2;
+            if (isPreviewMirrored) {
+                ctx.translate(width, 0); ctx.scale(-1, 1);
+            }
+            ctx.drawImage(cameraVideo, cropX, cropY, cropW, cropH, 0, 0, width, height);
+        } else {
+            if (isPreviewMirrored) {
+                ctx.translate(width, 0); ctx.scale(-1, 1);
+            }
+            ctx.drawImage(cameraVideo, 0, 0, width, height);
         }
-        ctx.drawImage(cameraVideo, 0, 0, width, height);
 
         const toJpeg = (c, q) => new Promise(resolve => c.toBlob(resolve, 'image/jpeg', q));
-        let blob = await toJpeg(canvas, 0.85);
+        let blob = await toJpeg(canvas, 0.9);
         if (!blob) return;
 
         if (blob.size > 5 * 1024 * 1024) {
-            const maxWidth = 1600;
+            const maxWidth = 1920;
             let workingCanvas = canvas;
             if (width > maxWidth) {
                 const scale = maxWidth / width;
@@ -1404,29 +1540,31 @@ document.addEventListener('DOMContentLoaded', function() {
                 scaledCanvas.width = Math.round(width * scale);
                 scaledCanvas.height = Math.round(height * scale);
                 const sctx = scaledCanvas.getContext('2d');
-                if (sctx) {
-                    sctx.drawImage(canvas, 0, 0, scaledCanvas.width, scaledCanvas.height);
-                    workingCanvas = scaledCanvas;
-                }
+                if (sctx) { sctx.drawImage(canvas, 0, 0, scaledCanvas.width, scaledCanvas.height); workingCanvas = scaledCanvas; }
             }
-            for (const q of [0.75, 0.65, 0.55]) {
+            for (const q of [0.85, 0.75, 0.65]) {
                 const candidate = await toJpeg(workingCanvas, q);
                 if (candidate) blob = candidate;
                 if (blob.size <= 5 * 1024 * 1024) break;
             }
-            if (blob.size > 5 * 1024 * 1024) {
-                alert('Ukuran file terlalu besar! Maksimal 5MB');
-                return;
-            }
+            if (blob.size > 5 * 1024 * 1024) { alert('Ukuran file terlalu besar! Maksimal 5MB'); return; }
         }
 
         capturedBlob = blob;
         cameraCaptured.src = URL.createObjectURL(blob);
         cameraCaptured.style.display = 'block';
         cameraVideo.style.display = 'none';
+
+        const guideOverlay = document.getElementById('cameraGuideOverlay');
+        const zoomPill = document.getElementById('zoomPill');
+        const captureActionsRow = document.getElementById('captureActionsRow');
+
+        if (guideOverlay) guideOverlay.style.display = 'none';
+        if (zoomPill) zoomPill.style.display = 'none';
+        if (captureActionsRow) captureActionsRow.style.display = 'flex';
+        if (cameraCaptureBtn) cameraCaptureBtn.style.display = 'none';
         if (cameraUseBtn) cameraUseBtn.style.display = 'inline-block';
         if (cameraRetakeBtn) cameraRetakeBtn.style.display = 'inline-block';
-        if (cameraCaptureBtn) cameraCaptureBtn.style.display = 'none';
     }
 
     function useCapturedPhoto() {
@@ -1457,13 +1595,12 @@ document.addEventListener('DOMContentLoaded', function() {
     if (cameraRetakeBtn) cameraRetakeBtn.addEventListener('click', retakePhoto);
     if (cameraSwitchBtn) {
         cameraSwitchBtn.addEventListener('click', async function() {
-            // Toggle facing mode and restart stream.
             currentFacingMode = currentFacingMode === 'user' ? 'environment' : 'user';
             resetCaptureUi();
             await startCameraStream();
         });
     }
-    
+
     function handleFileSelect(file) {
         if (file) {
             // Validate file size (5MB)

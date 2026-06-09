@@ -317,7 +317,7 @@
         <div class="report-header">
             <div class="header-top">
                 <div class="school-logo">
-                    <img src="{{ asset('css/logo.png') }}" alt="Logo Sekolah">
+                    <img src="{{ asset('logo.png') }}" alt="Logo Sekolah">
                 </div>
                 <div class="header-info">
                     <h2>SMK BIT BINA AULIA</h2>

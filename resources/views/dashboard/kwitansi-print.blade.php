@@ -267,7 +267,7 @@
         <!-- Header -->
         <div class="receipt-header">
             <div class="school-logo">
-                  <img src="{{ asset('css/logo.png') }}" alt="Logo Sekolah">
+                  <img src="{{ asset('logo.png') }}" alt="Logo Sekolah">
             </div>
             <div class="school-info">
                 <h1>SMK BIT BINA AULIA</h1>

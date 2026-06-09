@@ -1195,7 +1195,7 @@
                 </div>
 
                 <!-- Video + overlay container -->
-                <div class="position-relative" style="aspect-ratio:4/3;background:#000;">
+                <div class="position-relative overflow-hidden" style="aspect-ratio:4/3;background:#000;">
                     <video id="cameraVideo" autoplay playsinline style="width:100%;height:100%;object-fit:contain;"></video>
                     <img id="cameraCaptured" alt="Hasil Foto" style="display:none;width:100%;height:100%;object-fit:contain;" />
 
@@ -1228,8 +1228,16 @@
 
             <!-- Footer Controls -->
             <div class="modal-footer border-0 px-4 py-3 justify-content-between align-items-center" style="background:#1e293b;">
-                <!-- Left: Batal -->
-                <button type="button" class="btn btn-sm" data-bs-dismiss="modal" style="color:#94a3b8;border:1.5px solid rgba(148,163,184,0.3);border-radius:999px;padding:0.35rem 1.1rem;font-size:0.78rem;">Batal</button>
+                <!-- Left: Batal + Flash -->
+                <div class="d-flex align-items-center gap-2">
+                    <button type="button" class="btn btn-sm" data-bs-dismiss="modal" style="color:#94a3b8;border:1.5px solid rgba(148,163,184,0.3);border-radius:999px;padding:0.35rem 1.1rem;font-size:0.78rem;">Batal</button>
+                    <!-- Flash/Torch toggle (shown only if device supports torch) -->
+                    <button type="button" id="cameraFlashBtn"
+                        style="display:none;width:42px;height:42px;border-radius:50%;border:1.5px solid rgba(148,163,184,0.3);background:rgba(148,163,184,0.1);color:#94a3b8;align-items:center;justify-content:center;transition:all .2s;"
+                        title="Flash / Torch">
+                        <i class="fas fa-bolt" style="font-size:0.85rem;"></i>
+                    </button>
+                </div>
 
                 <!-- Center: Main capture / use / retake -->
                 <div class="d-flex flex-column align-items-center gap-1">
@@ -1316,6 +1324,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const cameraUseBtn = document.getElementById('cameraUseBtn');
     const cameraRetakeBtn = document.getElementById('cameraRetakeBtn');
     const cameraSwitchBtn = document.getElementById('cameraSwitchBtn');
+    const cameraFlashBtn = document.getElementById('cameraFlashBtn');
 
     let cameraStream = null;
     let capturedBlob = null;
@@ -1323,6 +1332,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let currentFacingMode = 'environment'; // default kamera belakang
     let currentZoomLevel = 1;
     let nativeZoomSupported = false;
+    let isTorchOn = false;
 
     function setCameraPreviewMirroring(shouldMirror) {
         isPreviewMirrored = !!shouldMirror;
@@ -1451,12 +1461,18 @@ document.addEventListener('DOMContentLoaded', function() {
             const detectedFacing = trackSettings && trackSettings.facingMode ? trackSettings.facingMode : currentFacingMode;
             setCameraPreviewMirroring(detectedFacing === 'user');
 
-            // Check if 0.5x zoom is possible via native API; otherwise leave as CSS fallback
+            // Check torch/flash support
+            isTorchOn = false;
             const caps = typeof track?.getCapabilities === 'function' ? track.getCapabilities() : {};
-            const zoomBtns = document.querySelectorAll('.camera-zoom-btn');
-            // Hide 0.5x if camera native zoom min > 0.5 and CSS trick not meaningful
-            if (zoomBtns.length) {
-                // All zoom levels kept; CSS fallback always available
+            if (cameraFlashBtn) {
+                if (caps.torch) {
+                    cameraFlashBtn.style.display = 'flex';
+                    cameraFlashBtn.style.background = 'rgba(148,163,184,0.1)';
+                    cameraFlashBtn.style.borderColor = 'rgba(148,163,184,0.3)';
+                    cameraFlashBtn.style.color = '#94a3b8';
+                } else {
+                    cameraFlashBtn.style.display = 'none';
+                }
             }
 
         } catch (e) {
@@ -1471,6 +1487,15 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function stopCameraStream() {
+        // Turn off torch before stopping
+        if (cameraStream && isTorchOn) {
+            try {
+                const track = cameraStream.getVideoTracks()[0];
+                if (track) track.applyConstraints({ advanced: [{ torch: false }] }).catch(() => {});
+            } catch (e) {}
+            isTorchOn = false;
+        }
+        if (cameraFlashBtn) cameraFlashBtn.style.display = 'none';
         try {
             cameraStream?.getTracks()?.forEach(t => t.stop());
         } catch (e) {}
@@ -1479,6 +1504,30 @@ document.addEventListener('DOMContentLoaded', function() {
         setCameraPreviewMirroring(false);
         if (cameraVideo) cameraVideo.style.transform = 'none';
     }
+
+    // ─── Flash / Torch toggle ─────────────────────────────────────────────────
+    function toggleTorch() {
+        if (!cameraStream) return;
+        const track = cameraStream.getVideoTracks()[0];
+        if (!track) return;
+        isTorchOn = !isTorchOn;
+        track.applyConstraints({ advanced: [{ torch: isTorchOn }] }).catch(() => {
+            isTorchOn = !isTorchOn; // revert on failure
+        });
+        if (cameraFlashBtn) {
+            if (isTorchOn) {
+                cameraFlashBtn.style.background = '#fbbf24';
+                cameraFlashBtn.style.borderColor = '#fbbf24';
+                cameraFlashBtn.style.color = '#1e293b';
+            } else {
+                cameraFlashBtn.style.background = 'rgba(148,163,184,0.1)';
+                cameraFlashBtn.style.borderColor = 'rgba(148,163,184,0.3)';
+                cameraFlashBtn.style.color = '#94a3b8';
+            }
+        }
+    }
+    if (cameraFlashBtn) cameraFlashBtn.addEventListener('click', toggleTorch);
+    // ─────────────────────────────────────────────────────────────────────────
 
     function resetCaptureUi() {
         capturedBlob = null;

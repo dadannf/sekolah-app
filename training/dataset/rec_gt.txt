@@ -1,0 +1,1560 @@
+crop_img/bukti_tf_ss001_crop_0.jpg	Nominal
+crop_img/bukti_tf_ss001_crop_1.jpg	Rp100.000
+crop_img/bukti_tf_ss001_crop_2.jpg	Ke
+crop_img/bukti_tf_ss001_crop_3.jpg	COSA ARANDA
+crop_img/bukti_tf_ss001_crop_4.jpg	Nama Bank
+crop_img/bukti_tf_ss001_crop_5.jpg	BANK BCA
+crop_img/bukti_tf_ss001_crop_6.jpg	Nomor Rekening
+crop_img/bukti_tf_ss001_crop_7.jpg	51202
+crop_img/bukti_tf_ss002_crop_0.jpg	3 Jan 2020
+crop_img/bukti_tf_ss002_crop_1.jpg	06.50
+crop_img/bukti_tf_ss002_crop_2.jpg	Rp89.000
+crop_img/bukti_tf_ss002_crop_3.jpg	Dari
+crop_img/bukti_tf_ss002_crop_4.jpg	NYI PENENGAH DEWANTI
+crop_img/bukti_tf_ss002_crop_5.jpg	OVO
+crop_img/bukti_tf_ss002_crop_6.jpg	089699988669
+crop_img/bukti_tf_ss002_crop_7.jpg	Penerima
+crop_img/bukti_tf_ss002_crop_8.jpg	LENDY KURNIARENY
+crop_img/bukti_tf_ss002_crop_9.jpg	BANK SYARIAH MANDIRI
+crop_img/bukti_tf_ss002_crop_10.jpg	1213123
+crop_img/bukti_tf_ss004_crop_0.jpg	17 Jun 2019
+crop_img/bukti_tf_ss004_crop_1.jpg	07.41
+crop_img/bukti_tf_ss004_crop_2.jpg	Dari
+crop_img/bukti_tf_ss004_crop_3.jpg	MUHAMMAD SYAIKHU RAIS
+crop_img/bukti_tf_ss004_crop_4.jpg	OVO
+crop_img/bukti_tf_ss004_crop_5.jpg	089666666268
+crop_img/bukti_tf_ss004_crop_6.jpg	Penerima
+crop_img/bukti_tf_ss004_crop_7.jpg	Tony Hermawan
+crop_img/bukti_tf_ss004_crop_8.jpg	No. Referensi
+crop_img/bukti_tf_ss004_crop_9.jpg	TRF-f3279db306fbd551e3d441b6cc6cc58a773
+crop_img/bukti_tf_ss004_crop_10.jpg	6bb0d
+crop_img/bukti_tf_ss004_crop_11.jpg	Sumber Dana
+crop_img/bukti_tf_ss004_crop_12.jpg	OVO Cash
+crop_img/bukti_tf_ss004_crop_13.jpg	-Rp40.000
+crop_img/bukti_tf_ss005_crop_0.jpg	14 Okt 2020
+crop_img/bukti_tf_ss005_crop_1.jpg	21.33
+crop_img/bukti_tf_ss005_crop_2.jpg	Rp597.500
+crop_img/bukti_tf_ss005_crop_3.jpg	Dari
+crop_img/bukti_tf_ss005_crop_4.jpg	REYTA ANDINI
+crop_img/bukti_tf_ss005_crop_5.jpg	OVO
+crop_img/bukti_tf_ss005_crop_6.jpg	08191961
+crop_img/bukti_tf_ss005_crop_7.jpg	Penerima
+crop_img/bukti_tf_ss005_crop_8.jpg	SDR RAENO PRASETIAWAN
+crop_img/bukti_tf_ss005_crop_9.jpg	BANK BNI
+crop_img/bukti_tf_ss005_crop_10.jpg	106020
+crop_img/bukti_tf_ss006_crop_0.jpg	Nominal
+crop_img/bukti_tf_ss006_crop_1.jpg	Rp2.000.000
+crop_img/bukti_tf_ss006_crop_2.jpg	Ke
+crop_img/bukti_tf_ss006_crop_3.jpg	YENNI AFRILIANTY
+crop_img/bukti_tf_ss006_crop_4.jpg	Nama Bank
+crop_img/bukti_tf_ss006_crop_5.jpg	BANK MUAMALAT
+crop_img/bukti_tf_ss006_crop_6.jpg	Nomor Rekening
+crop_img/bukti_tf_ss006_crop_7.jpg	2
+crop_img/bukti_tf_ss007_crop_0.jpg	9 Des 2020
+crop_img/bukti_tf_ss007_crop_1.jpg	17:23
+crop_img/bukti_tf_ss007_crop_2.jpg	Dari
+crop_img/bukti_tf_ss007_crop_3.jpg	DHIKA RAHMAWATI
+crop_img/bukti_tf_ss007_crop_4.jpg	OVO
+crop_img/bukti_tf_ss007_crop_5.jpg	Penerima
+crop_img/bukti_tf_ss007_crop_6.jpg	BANK MANDIRI - DHIKA
+crop_img/bukti_tf_ss007_crop_7.jpg	RAHMAWATI
+crop_img/bukti_tf_ss007_crop_8.jpg	No. Referensi
+crop_img/bukti_tf_ss007_crop_9.jpg	Sumber Dana
+crop_img/bukti_tf_ss007_crop_10.jpg	OVO Cash
+crop_img/bukti_tf_ss007_crop_11.jpg	-Rp800.000
+crop_img/bukti_tf_ss010_crop_0.jpg	4 Apr 2020
+crop_img/bukti_tf_ss010_crop_1.jpg	20.32
+crop_img/bukti_tf_ss010_crop_2.jpg	Rp892.000
+crop_img/bukti_tf_ss010_crop_3.jpg	Dari
+crop_img/bukti_tf_ss010_crop_4.jpg	MUHAMAD IRFAN
+crop_img/bukti_tf_ss010_crop_5.jpg	OVO
+crop_img/bukti_tf_ss010_crop_6.jpg	081225636394
+crop_img/bukti_tf_ss010_crop_7.jpg	Penerima
+crop_img/bukti_tf_ss010_crop_8.jpg	ROBBY FIRMANSYAH
+crop_img/bukti_tf_ss010_crop_9.jpg	BANK BCA
+crop_img/bukti_tf_ss010_crop_10.jpg	8030510993
+crop_img/bukti_tf_ss012_crop_0.jpg	31 Mar 2021
+crop_img/bukti_tf_ss012_crop_1.jpg	12:45
+crop_img/bukti_tf_ss012_crop_2.jpg	Rp910.000
+crop_img/bukti_tf_ss012_crop_3.jpg	Dari
+crop_img/bukti_tf_ss012_crop_4.jpg	BAYNALDI
+crop_img/bukti_tf_ss012_crop_5.jpg	OVO
+crop_img/bukti_tf_ss012_crop_6.jpg	0812222479
+crop_img/bukti_tf_ss012_crop_7.jpg	Penerima
+crop_img/bukti_tf_ss012_crop_8.jpg	TOHA
+crop_img/bukti_tf_ss012_crop_9.jpg	BANK BRI
+crop_img/bukti_tf_ss014_crop_0.jpg	4 Apr 2020
+crop_img/bukti_tf_ss014_crop_1.jpg	20.32
+crop_img/bukti_tf_ss014_crop_2.jpg	Rp892.000
+crop_img/bukti_tf_ss014_crop_3.jpg	Dari
+crop_img/bukti_tf_ss014_crop_4.jpg	MUHAMAD IRFAN
+crop_img/bukti_tf_ss014_crop_5.jpg	OVO
+crop_img/bukti_tf_ss014_crop_6.jpg	081225636394
+crop_img/bukti_tf_ss014_crop_7.jpg	Penerima
+crop_img/bukti_tf_ss014_crop_8.jpg	ROBBYFIRMANSYAH
+crop_img/bukti_tf_ss014_crop_9.jpg	BANK BCA
+crop_img/bukti_tf_ss014_crop_10.jpg	8030510993
+crop_img/bukti_tf_ss016_crop_0.jpg	22 Mei 2020
+crop_img/bukti_tf_ss016_crop_1.jpg	00.47
+crop_img/bukti_tf_ss016_crop_2.jpg	Rp97.500
+crop_img/bukti_tf_ss016_crop_3.jpg	Dari
+crop_img/bukti_tf_ss016_crop_4.jpg	DENI SAPUTRO
+crop_img/bukti_tf_ss016_crop_5.jpg	OVO
+crop_img/bukti_tf_ss016_crop_6.jpg	Penerima
+crop_img/bukti_tf_ss016_crop_7.jpg	DENI SAPUTRO
+crop_img/bukti_tf_ss016_crop_8.jpg	BANK BCA
+crop_img/bukti_tf_ss017_crop_0.jpg	Tanggal
+crop_img/bukti_tf_ss017_crop_1.jpg	2022-02-08 16:33:51 WIB
+crop_img/bukti_tf_ss017_crop_2.jpg	Nomor Referensi
+crop_img/bukti_tf_ss017_crop_3.jpg	440742425856
+crop_img/bukti_tf_ss017_crop_4.jpg	Sumber Dana
+crop_img/bukti_tf_ss017_crop_5.jpg	NOVITASARI
+crop_img/bukti_tf_ss017_crop_6.jpg	0839********508
+crop_img/bukti_tf_ss017_crop_7.jpg	Bank Tujuan
+crop_img/bukti_tf_ss017_crop_8.jpg	BANK BRI
+crop_img/bukti_tf_ss017_crop_9.jpg	Nomor Tujuan
+crop_img/bukti_tf_ss017_crop_10.jpg	00980109502
+crop_img/bukti_tf_ss017_crop_11.jpg	Nama Tujuan
+crop_img/bukti_tf_ss017_crop_12.jpg	HERLINA
+crop_img/bukti_tf_ss017_crop_13.jpg	Nominal
+crop_img/bukti_tf_ss017_crop_14.jpg	Rp1.000.000
+crop_img/bukti_tf_ss017_crop_15.jpg	Biaya Admin
+crop_img/bukti_tf_ss017_crop_16.jpg	Rp0
+crop_img/bukti_tf_ss017_crop_17.jpg	Total
+crop_img/bukti_tf_ss017_crop_18.jpg	Rp1.000.000
+crop_img/bukti_tf_ss018_crop_0.jpg	Tanggal
+crop_img/bukti_tf_ss018_crop_1.jpg	11 Jan 2021 | 02:56:49 WIB
+crop_img/bukti_tf_ss018_crop_2.jpg	Nomor Referensi
+crop_img/bukti_tf_ss018_crop_3.jpg	216409169450
+crop_img/bukti_tf_ss018_crop_4.jpg	Sumber Dana
+crop_img/bukti_tf_ss018_crop_5.jpg	CEPTARINA PELAWI
+crop_img/bukti_tf_ss018_crop_6.jpg	3274 **** ****537
+crop_img/bukti_tf_ss018_crop_7.jpg	Nomor Tujuan
+crop_img/bukti_tf_ss018_crop_8.jpg	081370463233
+crop_img/bukti_tf_ss018_crop_9.jpg	Nama
+crop_img/bukti_tf_ss018_crop_10.jpg	rinapelawi
+crop_img/bukti_tf_ss018_crop_11.jpg	Nominal
+crop_img/bukti_tf_ss018_crop_12.jpg	Rp600.000
+crop_img/bukti_tf_ss018_crop_13.jpg	Biaya Admin
+crop_img/bukti_tf_ss018_crop_14.jpg	Rp0
+crop_img/bukti_tf_ss018_crop_15.jpg	Total
+crop_img/bukti_tf_ss018_crop_16.jpg	Rp600.000
+crop_img/bukti_tf_ss019_crop_0.jpg	Tanggal
+crop_img/bukti_tf_ss019_crop_1.jpg	17 Mar2023 | 08:43:36 WIB
+crop_img/bukti_tf_ss019_crop_2.jpg	Nomor Referensi
+crop_img/bukti_tf_ss019_crop_3.jpg	515151016521
+crop_img/bukti_tf_ss019_crop_4.jpg	Sumber Dana
+crop_img/bukti_tf_ss019_crop_5.jpg	PATRIOT SATRIO WIBOWO
+crop_img/bukti_tf_ss019_crop_6.jpg	0033********501
+crop_img/bukti_tf_ss019_crop_7.jpg	Bank Tujuan
+crop_img/bukti_tf_ss019_crop_8.jpg	BANK BCA
+crop_img/bukti_tf_ss019_crop_9.jpg	Nomor Tujuan
+crop_img/bukti_tf_ss019_crop_10.jpg	090783
+crop_img/bukti_tf_ss019_crop_11.jpg	Nama Tujuan
+crop_img/bukti_tf_ss019_crop_12.jpg	SRIWIJAYANTI
+crop_img/bukti_tf_ss019_crop_13.jpg	Nominal
+crop_img/bukti_tf_ss019_crop_14.jpg	Rp450.000
+crop_img/bukti_tf_ss019_crop_15.jpg	Biaya Admin
+crop_img/bukti_tf_ss019_crop_16.jpg	Rp2.500
+crop_img/bukti_tf_ss019_crop_17.jpg	Total
+crop_img/bukti_tf_ss019_crop_18.jpg	Rp452.500
+crop_img/bukti_tf_ss020_crop_0.jpg	Tanggal
+crop_img/bukti_tf_ss020_crop_1.jpg	16 Mar 2023 | 08:35:20 WIB
+crop_img/bukti_tf_ss020_crop_2.jpg	Nomor Referensi
+crop_img/bukti_tf_ss020_crop_3.jpg	514863737514
+crop_img/bukti_tf_ss020_crop_4.jpg	Sumber Dana
+crop_img/bukti_tf_ss020_crop_5.jpg	MUGI PUSPITA
+crop_img/bukti_tf_ss020_crop_6.jpg	0600********506
+crop_img/bukti_tf_ss020_crop_7.jpg	Nama Bank
+crop_img/bukti_tf_ss020_crop_8.jpg	Kartu Kredit Bank BRI
+crop_img/bukti_tf_ss020_crop_9.jpg	Nomor Kartu
+crop_img/bukti_tf_ss020_crop_10.jpg	55200309
+crop_img/bukti_tf_ss020_crop_11.jpg	Nama Pemilik
+crop_img/bukti_tf_ss020_crop_12.jpg	MUGI
+crop_img/bukti_tf_ss020_crop_13.jpg	Nominal
+crop_img/bukti_tf_ss020_crop_14.jpg	Rp4.934.439
+crop_img/bukti_tf_ss020_crop_15.jpg	Biaya Admin
+crop_img/bukti_tf_ss020_crop_16.jpg	Rp0
+crop_img/bukti_tf_ss020_crop_17.jpg	Total
+crop_img/bukti_tf_ss020_crop_18.jpg	Rp4.934.439
+crop_img/bukti_tf_ss021_crop_0.jpg	Tanggal
+crop_img/bukti_tf_ss021_crop_1.jpg	10 May 2023 | 09:09:41 WIB
+crop_img/bukti_tf_ss021_crop_2.jpg	Nomor Referensi
+crop_img/bukti_tf_ss021_crop_3.jpg	532499537139
+crop_img/bukti_tf_ss021_crop_4.jpg	Sumber Dana
+crop_img/bukti_tf_ss021_crop_5.jpg	VINA VEBRIANTI
+crop_img/bukti_tf_ss021_crop_6.jpg	1859********505
+crop_img/bukti_tf_ss021_crop_7.jpg	Bank Tujuan
+crop_img/bukti_tf_ss021_crop_8.jpg	BANK BRI
+crop_img/bukti_tf_ss021_crop_9.jpg	Nomor Tujuan
+crop_img/bukti_tf_ss021_crop_10.jpg	5773 0103 3924 532
+crop_img/bukti_tf_ss021_crop_11.jpg	Nama Tujuan
+crop_img/bukti_tf_ss021_crop_12.jpg	DIO VITO PUTRATAMA
+crop_img/bukti_tf_ss021_crop_13.jpg	Nominal
+crop_img/bukti_tf_ss021_crop_14.jpg	Rp600.000
+crop_img/bukti_tf_ss021_crop_15.jpg	Biaya Admin
+crop_img/bukti_tf_ss021_crop_16.jpg	Rp0
+crop_img/bukti_tf_ss021_crop_17.jpg	Total
+crop_img/bukti_tf_ss021_crop_18.jpg	Rp600.000
+crop_img/bukti_tf_ss022_crop_0.jpg	30/04 13:21:47
+crop_img/bukti_tf_ss022_crop_1.jpg	Ke 6880010091
+crop_img/bukti_tf_ss022_crop_2.jpg	FERINA SOFYAN
+crop_img/bukti_tf_ss022_crop_3.jpg	Rp.10,000,000.00
+crop_img/bukti_tf_ss022_crop_4.jpg	300420181330
+crop_img/bukti_tf_ss023_crop_0.jpg	22/09 17:02:57
+crop_img/bukti_tf_ss023_crop_1.jpg	Ke 
+crop_img/bukti_tf_ss023_crop_2.jpg	ANDHIKA
+crop_img/bukti_tf_ss023_crop_3.jpg	Rp
+crop_img/bukti_tf_ss023_crop_4.jpg	Ref 022170258386
+crop_img/bukti_tf_ss024_crop_0.jpg	15/05 00:49:01
+crop_img/bukti_tf_ss024_crop_1.jpg	80008190097628816
+crop_img/bukti_tf_ss024_crop_2.jpg	BUKALAPAK
+crop_img/bukti_tf_ss024_crop_3.jpg	Asrul Hoesein
+crop_img/bukti_tf_ss024_crop_4.jpg	BL19133FCSQ7INV
+crop_img/bukti_tf_ss024_crop_5.jpg	Rp.
+crop_img/bukti_tf_ss024_crop_6.jpg	134,800.00
+crop_img/bukti_tf_ss024_crop_7.jpg	TOTAL TAGIHAN Rp.134,800.00
+crop_img/bukti_tf_ss025_crop_0.jpg	Tanggal
+crop_img/bukti_tf_ss025_crop_1.jpg	10/04/2016
+crop_img/bukti_tf_ss025_crop_2.jpg	Jam
+crop_img/bukti_tf_ss025_crop_3.jpg	17:19:17
+crop_img/bukti_tf_ss025_crop_4.jpg	Nomor Referensi
+crop_img/bukti_tf_ss025_crop_5.jpg	A5EDC444-E14A-2A8C-1F1C-CA12A456A9A5
+crop_img/bukti_tf_ss025_crop_6.jpg	Tujuan Transfer
+crop_img/bukti_tf_ss025_crop_7.jpg	1930540419
+crop_img/bukti_tf_ss025_crop_8.jpg	Nama Penerima
+crop_img/bukti_tf_ss025_crop_9.jpg	BUDI UTOMO
+crop_img/bukti_tf_ss025_crop_10.jpg	Jumlah
+crop_img/bukti_tf_ss025_crop_11.jpg	Rp.
+crop_img/bukti_tf_ss025_crop_12.jpg	400.000,00
+crop_img/bukti_tf_ss026_crop_0.jpg	IDR 60,000.00
+crop_img/bukti_tf_ss026_crop_1.jpg	Tanggal Transaksi
+crop_img/bukti_tf_ss026_crop_2.jpg	14 Agu 2023 08:09:26
+crop_img/bukti_tf_ss026_crop_3.jpg	Nama Penerima
+crop_img/bukti_tf_ss026_crop_4.jpg	HERU PURWANTO
+crop_img/bukti_tf_ss026_crop_5.jpg	Rekening Tujuan
+crop_img/bukti_tf_ss026_crop_6.jpg	177-151-0430
+crop_img/bukti_tf_ss026_crop_7.jpg	Dari Rekening
+crop_img/bukti_tf_ss026_crop_8.jpg	084-0**-**97
+crop_img/bukti_tf_ss026_crop_9.jpg	Nominal
+crop_img/bukti_tf_ss026_crop_10.jpg	ID R60,000.00
+crop_img/bukti_tf_ss027_crop_0.jpg	USD 40,000.00
+crop_img/bukti_tf_ss027_crop_1.jpg	Tanggal Transaksi
+crop_img/bukti_tf_ss027_crop_2.jpg	30 Jul 2021 10:56:24
+crop_img/bukti_tf_ss027_crop_3.jpg	Nama Penerima
+crop_img/bukti_tf_ss027_crop_4.jpg	GIRO NONBANK (VALAS)
+crop_img/bukti_tf_ss027_crop_5.jpg	RekeningTujuan
+crop_img/bukti_tf_ss027_crop_6.jpg	045-6**.***51
+crop_img/bukti_tf_ss027_crop_7.jpg	Dari Rekening
+crop_img/bukti_tf_ss027_crop_8.jpg	291-0**.**81
+crop_img/bukti_tf_ss027_crop_9.jpg	Nominal
+crop_img/bukti_tf_ss027_crop_10.jpg	USD 40.000.00
+crop_img/bukti_tf_ss027_crop_11.jpg	Kurs
+crop_img/bukti_tf_ss027_crop_12.jpg	IDR 15,456.00
+crop_img/bukti_tf_ss029_crop_0.jpg	Tanggal
+crop_img/bukti_tf_ss029_crop_1.jpg	10/04/2016
+crop_img/bukti_tf_ss029_crop_2.jpg	Jam
+crop_img/bukti_tf_ss029_crop_3.jpg	17:19:17
+crop_img/bukti_tf_ss029_crop_4.jpg	Nomor Referensi
+crop_img/bukti_tf_ss029_crop_5.jpg	A5EDC444-E14A-2A8C-1F1C-CA12A456A9A5
+crop_img/bukti_tf_ss029_crop_6.jpg	Tujuan Transfer
+crop_img/bukti_tf_ss029_crop_7.jpg	1930540419
+crop_img/bukti_tf_ss029_crop_8.jpg	Nama Penerima
+crop_img/bukti_tf_ss029_crop_9.jpg	BUDI UTOMO
+crop_img/bukti_tf_ss029_crop_10.jpg	Jumlah
+crop_img/bukti_tf_ss029_crop_11.jpg	Rp.
+crop_img/bukti_tf_ss029_crop_12.jpg	400.000,00
+crop_img/bukti_tf_ss030_crop_0.jpg	03 April 2024, 10:36:29 WIB
+crop_img/bukti_tf_ss030_crop_1.jpg	Rp2.450.000
+crop_img/bukti_tf_ss030_crop_2.jpg	No. Ref
+crop_img/bukti_tf_ss030_crop_3.jpg	668225859107
+crop_img/bukti_tf_ss030_crop_4.jpg	Sumber Dana
+crop_img/bukti_tf_ss030_crop_5.jpg	DR LO KURNIAWAN
+crop_img/bukti_tf_ss030_crop_6.jpg	BANK BRI
+crop_img/bukti_tf_ss030_crop_7.jpg	1414********563
+crop_img/bukti_tf_ss030_crop_8.jpg	Tujuan
+crop_img/bukti_tf_ss030_crop_9.jpg	NURUL KHASANAH
+crop_img/bukti_tf_ss030_crop_10.jpg	BANK BRI
+crop_img/bukti_tf_ss030_crop_11.jpg	6629 0104538
+crop_img/bukti_tf_ss030_crop_12.jpg	Nominal
+crop_img/bukti_tf_ss030_crop_13.jpg	Rp2.450.000
+crop_img/bukti_tf_ss030_crop_14.jpg	Biaya Admin
+crop_img/bukti_tf_ss030_crop_15.jpg	Rp0
+crop_img/bukti_tf_ss031_crop_0.jpg	Tanggal
+crop_img/bukti_tf_ss031_crop_1.jpg	2022-01-19 12:57:01 WIB
+crop_img/bukti_tf_ss031_crop_2.jpg	Nomor Referensi
+crop_img/bukti_tf_ss031_crop_3.jpg	438816214377
+crop_img/bukti_tf_ss031_crop_4.jpg	Sumber Dana
+crop_img/bukti_tf_ss031_crop_5.jpg	IBIK PRISMATAMA
+crop_img/bukti_tf_ss031_crop_6.jpg	1248********502
+crop_img/bukti_tf_ss031_crop_7.jpg	Bank Tujuan
+crop_img/bukti_tf_ss031_crop_8.jpg	BANK BRI
+crop_img/bukti_tf_ss031_crop_9.jpg	Nomor Tujuan
+crop_img/bukti_tf_ss031_crop_10.jpg	067201000332303
+crop_img/bukti_tf_ss031_crop_11.jpg	Nama Tujuan
+crop_img/bukti_tf_ss031_crop_12.jpg	FLIPTECH LENTERA INS
+crop_img/bukti_tf_ss031_crop_13.jpg	Nominal
+crop_img/bukti_tf_ss031_crop_14.jpg	Rp20.050
+crop_img/bukti_tf_ss031_crop_15.jpg	Biaya Admin
+crop_img/bukti_tf_ss031_crop_16.jpg	Rp0
+crop_img/bukti_tf_ss031_crop_17.jpg	Total
+crop_img/bukti_tf_ss031_crop_18.jpg	Rp20.050
+crop_img/bukti_tf_ss032_crop_0.jpg	26 December 2023 21:40:49 WIB
+crop_img/bukti_tf_ss032_crop_1.jpg	Rp170.000
+crop_img/bukti_tf_ss032_crop_2.jpg	Penerima
+crop_img/bukti_tf_ss032_crop_3.jpg	SYAMROTUL FIKRIYAH
+crop_img/bukti_tf_ss032_crop_4.jpg	Bank Penerima
+crop_img/bukti_tf_ss032_crop_5.jpg	BCA
+crop_img/bukti_tf_ss032_crop_6.jpg	Nomor Rekening
+crop_img/bukti_tf_ss032_crop_7.jpg	4720408533
+crop_img/bukti_tf_ss032_crop_8.jpg	Pengirim
+crop_img/bukti_tf_ss032_crop_9.jpg	Laily Nur Faiqotul Himmah
+crop_img/bukti_tf_ss032_crop_10.jpg	Transfer melalui
+crop_img/bukti_tf_ss032_crop_11.jpg	PT Fliptech Lentera
+crop_img/bukti_tf_ss033_crop_0.jpg	01/09 13:47:55
+crop_img/bukti_tf_ss033_crop_1.jpg	Ke Rekening Tujuan
+crop_img/bukti_tf_ss033_crop_2.jpg	SINARMAS
+crop_img/bukti_tf_ss033_crop_3.jpg	0054192754
+crop_img/bukti_tf_ss033_crop_4.jpg	TRI SUTANTI BUDIKANIA
+crop_img/bukti_tf_ss033_crop_5.jpg	NOMINAL TRANSFER Rp2,260,000.00
+crop_img/bukti_tf_ss033_crop_6.jpg	BIAYA Rp6,500.00
+crop_img/bukti_tf_ss034_crop_0.jpg	17/03 19:26:10
+crop_img/bukti_tf_ss034_crop_1.jpg	Ke 3452172418
+crop_img/bukti_tf_ss034_crop_2.jpg	DESY ANIS SETIAWATI
+crop_img/bukti_tf_ss034_crop_3.jpg	Rp.100,000.00
+crop_img/bukti_tf_ss034_crop_4.jpg	Ref 017192610118
+crop_img/bukti_tf_ss035_crop_0.jpg	Tanggal
+crop_img/bukti_tf_ss035_crop_1.jpg	07 Aug 2023 | 00:47:18 WIB
+crop_img/bukti_tf_ss035_crop_2.jpg	Referensi
+crop_img/bukti_tf_ss035_crop_3.jpg	483338168872
+crop_img/bukti_tf_ss035_crop_4.jpg	Sumber Dana
+crop_img/bukti_tf_ss035_crop_5.jpg	CIKA FADILAH
+crop_img/bukti_tf_ss035_crop_6.jpg	4796********537
+crop_img/bukti_tf_ss035_crop_7.jpg	NomorTujuan
+crop_img/bukti_tf_ss035_crop_8.jpg	0858 453
+crop_img/bukti_tf_ss035_crop_9.jpg	Nama
+crop_img/bukti_tf_ss035_crop_10.jpg	DNID DEXXX LESXXXX
+crop_img/bukti_tf_ss035_crop_11.jpg	Nominal
+crop_img/bukti_tf_ss035_crop_12.jpg	Rp2.650.000
+crop_img/bukti_tf_ss035_crop_13.jpg	Biaya Admin
+crop_img/bukti_tf_ss035_crop_14.jpg	Rp0
+crop_img/bukti_tf_ss035_crop_15.jpg	Total
+crop_img/bukti_tf_ss035_crop_16.jpg	Rp2.650.000
+crop_img/bukti_tf_ss036_crop_0.jpg	Nomor Referensi
+crop_img/bukti_tf_ss036_crop_1.jpg	20230617120412821553
+crop_img/bukti_tf_ss036_crop_2.jpg	Tanggal Transaksi
+crop_img/bukti_tf_ss036_crop_3.jpg	17-06-2023
+crop_img/bukti_tf_ss036_crop_4.jpg	Waktu Transaksi
+crop_img/bukti_tf_ss036_crop_5.jpg	12:04:35 WIB
+crop_img/bukti_tf_ss036_crop_6.jpg	No.VA
+crop_img/bukti_tf_ss036_crop_7.jpg	8069314063090068
+crop_img/bukti_tf_ss036_crop_8.jpg	Nama
+crop_img/bukti_tf_ss036_crop_9.jpg	Erischa Putri Anggita
+crop_img/bukti_tf_ss036_crop_10.jpg	Total Tagihan
+crop_img/bukti_tf_ss036_crop_11.jpg	Rp 7.290.000
+crop_img/bukti_tf_ss036_crop_12.jpg	Biaya admin
+crop_img/bukti_tf_ss036_crop_13.jpg	Rpo
+crop_img/bukti_tf_ss036_crop_14.jpg	Total Bayar
+crop_img/bukti_tf_ss036_crop_15.jpg	Rp7.290.000,00
+crop_img/bukti_tf_ss036_crop_16.jpg	Rekening Debet
+crop_img/bukti_tf_ss036_crop_17.jpg	*******773
+crop_img/bukti_tf_ss037_crop_0.jpg	Rp2.000.000
+crop_img/bukti_tf_ss037_crop_1.jpg	Nomor Referensi
+crop_img/bukti_tf_ss037_crop_2.jpg	69442385
+crop_img/bukti_tf_ss037_crop_3.jpg	Tanggal Transaksi
+crop_img/bukti_tf_ss037_crop_4.jpg	29-Juli-2023
+crop_img/bukti_tf_ss037_crop_5.jpg	Waktu Transaksi
+crop_img/bukti_tf_ss037_crop_6.jpg	14:07:59 WIB
+crop_img/bukti_tf_ss037_crop_7.jpg	Bank Tujuan
+crop_img/bukti_tf_ss037_crop_8.jpg	BANK BTN
+crop_img/bukti_tf_ss037_crop_9.jpg	Nomor Rekening
+crop_img/bukti_tf_ss037_crop_10.jpg	0113201300000130
+crop_img/bukti_tf_ss037_crop_11.jpg	Nama Penerima
+crop_img/bukti_tf_ss037_crop_12.jpg	YAYASAN KESEHATAN NASIONAL BAUBAU
+crop_img/bukti_tf_ss037_crop_13.jpg	Nama Pengirim
+crop_img/bukti_tf_ss037_crop_14.jpg	YUVI NORVIA
+crop_img/bukti_tf_ss037_crop_15.jpg	Rekening Debet
+crop_img/bukti_tf_ss037_crop_16.jpg	******232
+crop_img/bukti_tf_ss037_crop_17.jpg	Nominal
+crop_img/bukti_tf_ss037_crop_18.jpg	Rp2.000.000
+crop_img/bukti_tf_ss037_crop_19.jpg	Biaya Admin
+crop_img/bukti_tf_ss037_crop_20.jpg	Rp2.500
+crop_img/bukti_tf_ss037_crop_21.jpg	Total
+crop_img/bukti_tf_ss037_crop_22.jpg	Rp2.002.500
+crop_img/bukti_tf_ss041_crop_0.jpg	Tanggal
+crop_img/bukti_tf_ss041_crop_1.jpg	2022-09-12 13:09:59WIB
+crop_img/bukti_tf_ss041_crop_2.jpg	Nomor Referensi
+crop_img/bukti_tf_ss041_crop_3.jpg	470493755884
+crop_img/bukti_tf_ss041_crop_4.jpg	Sumber Dana
+crop_img/bukti_tf_ss041_crop_5.jpg	HANAFI
+crop_img/bukti_tf_ss041_crop_6.jpg	5701********536
+crop_img/bukti_tf_ss041_crop_7.jpg	Bank Tujuan
+crop_img/bukti_tf_ss041_crop_8.jpg	BANK BRI
+crop_img/bukti_tf_ss041_crop_9.jpg	Nomor Tujuan
+crop_img/bukti_tf_ss041_crop_10.jpg	185801000001301
+crop_img/bukti_tf_ss041_crop_11.jpg	Nama Tujuan
+crop_img/bukti_tf_ss041_crop_12.jpg	RPL 017 BLU UIN RADE
+crop_img/bukti_tf_ss041_crop_13.jpg	Nominal
+crop_img/bukti_tf_ss041_crop_14.jpg	Rp50.000
+crop_img/bukti_tf_ss041_crop_15.jpg	Biaya Admin
+crop_img/bukti_tf_ss041_crop_16.jpg	Rp0
+crop_img/bukti_tf_ss041_crop_17.jpg	Total
+crop_img/bukti_tf_ss041_crop_18.jpg	Rp50.000
+crop_img/bukti_tf_ss042_crop_0.jpg	Rp 248.900
+crop_img/bukti_tf_ss042_crop_1.jpg	Dari
+crop_img/bukti_tf_ss042_crop_2.jpg	Ria Suprihatin
+crop_img/bukti_tf_ss042_crop_3.jpg	Dana
+crop_img/bukti_tf_ss042_crop_4.jpg	**********4071
+crop_img/bukti_tf_ss042_crop_5.jpg	Ke
+crop_img/bukti_tf_ss042_crop_6.jpg	Daniel Setya Dharma
+crop_img/bukti_tf_ss042_crop_7.jpg	SeaBank:
+crop_img/bukti_tf_ss042_crop_8.jpg	********4360
+crop_img/bukti_tf_ss042_crop_9.jpg	Jumlah Transfer
+crop_img/bukti_tf_ss042_crop_10.jpg	Rp 248.900
+crop_img/bukti_tf_ss042_crop_11.jpg	No.Transaksi
+crop_img/bukti_tf_ss042_crop_12.jpg	20230501DANAIDJ101009937996701
+crop_img/bukti_tf_ss042_crop_13.jpg	Waktu Transaksi
+crop_img/bukti_tf_ss042_crop_14.jpg	01 Mei 2023, 05:11
+crop_img/bukti_tf_ss043_crop_0.jpg	Tanggal
+crop_img/bukti_tf_ss043_crop_1.jpg	16 Mar2023 | 13:02:16 WIB
+crop_img/bukti_tf_ss043_crop_2.jpg	Nomor Referensi
+crop_img/bukti_tf_ss043_crop_3.jpg	514935529010
+crop_img/bukti_tf_ss043_crop_4.jpg	Sumber Dana
+crop_img/bukti_tf_ss043_crop_5.jpg	MUGI PUSPITA
+crop_img/bukti_tf_ss043_crop_6.jpg	0600**** ****506
+crop_img/bukti_tf_ss043_crop_7.jpg	Nama Bank
+crop_img/bukti_tf_ss043_crop_8.jpg	Bank BRI
+crop_img/bukti_tf_ss043_crop_9.jpg	Nomor Kartu
+crop_img/bukti_tf_ss043_crop_10.jpg	5520 309
+crop_img/bukti_tf_ss043_crop_11.jpg	Nama Pemilik
+crop_img/bukti_tf_ss043_crop_12.jpg	MUGI
+crop_img/bukti_tf_ss043_crop_13.jpg	Nominal
+crop_img/bukti_tf_ss043_crop_14.jpg	Rp7.000
+crop_img/bukti_tf_ss043_crop_15.jpg	Biaya Admin
+crop_img/bukti_tf_ss043_crop_16.jpg	Rp0
+crop_img/bukti_tf_ss043_crop_17.jpg	Total
+crop_img/bukti_tf_ss043_crop_18.jpg	Rp7.000
+crop_img/bukti_tf_ss047_crop_0.jpg	13/07 14:39:57
+crop_img/bukti_tf_ss047_crop_1.jpg	Ke 3491587171
+crop_img/bukti_tf_ss047_crop_2.jpg	FAKRIZAL
+crop_img/bukti_tf_ss047_crop_3.jpg	Rp.1,700,000.00
+crop_img/bukti_tf_ss048_crop_0.jpg	Tanggal
+crop_img/bukti_tf_ss048_crop_1.jpg	02 ju l2022 | 16:58:08 WIB
+crop_img/bukti_tf_ss048_crop_2.jpg	Nomor Referensi
+crop_img/bukti_tf_ss048_crop_3.jpg	457192274579
+crop_img/bukti_tf_ss048_crop_4.jpg	Sumber Dana
+crop_img/bukti_tf_ss048_crop_5.jpg	AMIN SAMSURI
+crop_img/bukti_tf_ss048_crop_6.jpg	5594********532
+crop_img/bukti_tf_ss048_crop_7.jpg	Bank Tujuan
+crop_img/bukti_tf_ss048_crop_8.jpg	BANK BCA
+crop_img/bukti_tf_ss048_crop_9.jpg	Nomor Tujuan
+crop_img/bukti_tf_ss048_crop_10.jpg	5065372930
+crop_img/bukti_tf_ss048_crop_11.jpg	Nama Tujuan
+crop_img/bukti_tf_ss048_crop_12.jpg	MILENI INDASARI
+crop_img/bukti_tf_ss048_crop_13.jpg	Nominal
+crop_img/bukti_tf_ss048_crop_14.jpg	Rp2.200.000
+crop_img/bukti_tf_ss048_crop_15.jpg	Biaya Admin
+crop_img/bukti_tf_ss048_crop_16.jpg	Rp6.500
+crop_img/bukti_tf_ss048_crop_17.jpg	Total
+crop_img/bukti_tf_ss048_crop_18.jpg	Rp2.206.500
+crop_img/bukti_tf_ss049_crop_0.jpg	Tanggal
+crop_img/bukti_tf_ss049_crop_1.jpg	06 November 2024 20:40 WIB
+crop_img/bukti_tf_ss049_crop_2.jpg	Nomor Referensi
+crop_img/bukti_tf_ss049_crop_3.jpg	757826639274
+crop_img/bukti_tf_ss049_crop_4.jpg	Sumber Dana
+crop_img/bukti_tf_ss049_crop_5.jpg	ACHMAD FAUZAN SYAIKHONI
+crop_img/bukti_tf_ss049_crop_6.jpg	6422 ********532
+crop_img/bukti_tf_ss049_crop_7.jpg	Bank Tujuan
+crop_img/bukti_tf_ss049_crop_8.jpg	BANK BRI
+crop_img/bukti_tf_ss049_crop_9.jpg	Nomor Tujuan
+crop_img/bukti_tf_ss049_crop_10.jpg	3204 0104 7925 537
+crop_img/bukti_tf_ss049_crop_11.jpg	Nama Tujuan
+crop_img/bukti_tf_ss049_crop_12.jpg	ATIK KHUSNIAH
+crop_img/bukti_tf_ss049_crop_13.jpg	Nominal
+crop_img/bukti_tf_ss049_crop_14.jpg	Rp2.382.901
+crop_img/bukti_tf_ss049_crop_15.jpg	Biaya Admin
+crop_img/bukti_tf_ss049_crop_16.jpg	Rp0
+crop_img/bukti_tf_ss049_crop_17.jpg	Total
+crop_img/bukti_tf_ss049_crop_18.jpg	Rp2.382.901
+crop_img/bukti_tf_ss051_crop_0.jpg	Tanggal
+crop_img/bukti_tf_ss051_crop_1.jpg	2022-01-19 12:57:01 WIB
+crop_img/bukti_tf_ss051_crop_2.jpg	Nomor Referensi
+crop_img/bukti_tf_ss051_crop_3.jpg	438816214377
+crop_img/bukti_tf_ss051_crop_4.jpg	Sumber Dana
+crop_img/bukti_tf_ss051_crop_5.jpg	IBIK PRISMATAMA
+crop_img/bukti_tf_ss051_crop_6.jpg	1248********502
+crop_img/bukti_tf_ss051_crop_7.jpg	Bank Tujuan
+crop_img/bukti_tf_ss051_crop_8.jpg	BANK BRI
+crop_img/bukti_tf_ss051_crop_9.jpg	Nomor Tujuan
+crop_img/bukti_tf_ss051_crop_10.jpg	067201000332303
+crop_img/bukti_tf_ss051_crop_11.jpg	Nama Tujuan
+crop_img/bukti_tf_ss051_crop_12.jpg	FLIPTECH LENTERA INS
+crop_img/bukti_tf_ss051_crop_13.jpg	Nominal
+crop_img/bukti_tf_ss051_crop_14.jpg	Rp20.050
+crop_img/bukti_tf_ss051_crop_15.jpg	Biaya Admin
+crop_img/bukti_tf_ss051_crop_16.jpg	Rp0
+crop_img/bukti_tf_ss051_crop_17.jpg	Total
+crop_img/bukti_tf_ss051_crop_18.jpg	Rp20.050
+crop_img/bukti_tf_ss052_crop_0.jpg	Tanggal
+crop_img/bukti_tf_ss052_crop_1.jpg	13 Nov 2023 | 18:45:10 WIB
+crop_img/bukti_tf_ss052_crop_2.jpg	Nomor Referensi
+crop_img/bukti_tf_ss052_crop_3.jpg	608951304693
+crop_img/bukti_tf_ss052_crop_4.jpg	Sumber Dana
+crop_img/bukti_tf_ss052_crop_5.jpg	ANITA A TINJA
+crop_img/bukti_tf_ss052_crop_6.jpg	4996********537
+crop_img/bukti_tf_ss052_crop_7.jpg	Bank Tujuan
+crop_img/bukti_tf_ss052_crop_8.jpg	BANK BCA
+crop_img/bukti_tf_ss052_crop_9.jpg	Nomor Tujuan
+crop_img/bukti_tf_ss052_crop_10.jpg	3491587171
+crop_img/bukti_tf_ss052_crop_11.jpg	Nama Tujuan
+crop_img/bukti_tf_ss052_crop_12.jpg	FAKRIZAL
+crop_img/bukti_tf_ss052_crop_13.jpg	Alias Penerima
+crop_img/bukti_tf_ss052_crop_14.jpg	Catatan
+crop_img/bukti_tf_ss052_crop_15.jpg	Nominal
+crop_img/bukti_tf_ss052_crop_16.jpg	Rp2.000.000
+crop_img/bukti_tf_ss052_crop_17.jpg	Biaya Admin
+crop_img/bukti_tf_ss052_crop_18.jpg	Rp2.500
+crop_img/bukti_tf_ss052_crop_19.jpg	Total
+crop_img/bukti_tf_ss052_crop_20.jpg	Rp2.002.500
+crop_img/bukti_tf_ss053_crop_0.jpg	09/09/2023 16:34:25
+crop_img/bukti_tf_ss053_crop_1.jpg	Ke 3491587171
+crop_img/bukti_tf_ss053_crop_2.jpg	FAKRIZAL
+crop_img/bukti_tf_ss053_crop_3.jpg	Rp. 6,000,000.00
+crop_img/bukti_tf_ss054_crop_0.jpg	01/09 13:47:55
+crop_img/bukti_tf_ss054_crop_1.jpg	Ke Rekening Tujuan
+crop_img/bukti_tf_ss054_crop_2.jpg	SINARMAS
+crop_img/bukti_tf_ss054_crop_3.jpg	0054192754
+crop_img/bukti_tf_ss054_crop_4.jpg	TRI SUTANTI BUDIKANIA
+crop_img/bukti_tf_ss054_crop_5.jpg	NOMINAL TRANSFER Rp2,260,000.00
+crop_img/bukti_tf_ss054_crop_6.jpg	BIAYA Rp6,500.00
+crop_img/bukti_tf_ss055_crop_0.jpg	24 ApriI 2024. 20:12:17WIB
+crop_img/bukti_tf_ss055_crop_1.jpg	Total Transaksi
+crop_img/bukti_tf_ss055_crop_2.jpg	Rp15.006.500
+crop_img/bukti_tf_ss055_crop_3.jpg	No.Ref
+crop_img/bukti_tf_ss055_crop_4.jpg	665695756976
+crop_img/bukti_tf_ss055_crop_5.jpg	Sumber Dana
+crop_img/bukti_tf_ss055_crop_6.jpg	M. RIZKY ALVIAN
+crop_img/bukti_tf_ss055_crop_7.jpg	BANK BRI
+crop_img/bukti_tf_ss055_crop_8.jpg	0318******506
+crop_img/bukti_tf_ss055_crop_9.jpg	Tujuan
+crop_img/bukti_tf_ss055_crop_10.jpg	AYU DWI LESTARI
+crop_img/bukti_tf_ss055_crop_11.jpg	BANK BCA
+crop_img/bukti_tf_ss055_crop_12.jpg	1890600391
+crop_img/bukti_tf_ss055_crop_13.jpg	Nominal
+crop_img/bukti_tf_ss055_crop_14.jpg	Rp15.000.000
+crop_img/bukti_tf_ss055_crop_15.jpg	Biaya Admin
+crop_img/bukti_tf_ss055_crop_16.jpg	Rp6.500
+crop_img/bukti_tf_ss056_crop_0.jpg	IDR 1,110,000.00
+crop_img/bukti_tf_ss056_crop_1.jpg	20250110SYACIDJ1010O0224747219
+crop_img/bukti_tf_ss056_crop_2.jpg	No Referensi
+crop_img/bukti_tf_ss056_crop_3.jpg	Waktu
+crop_img/bukti_tf_ss056_crop_4.jpg	10-Jan-2025 14:14:12 WIB
+crop_img/bukti_tf_ss056_crop_5.jpg	Dari Rekening
+crop_img/bukti_tf_ss056_crop_6.jpg	Bank Aceh Syariah
+crop_img/bukti_tf_ss056_crop_7.jpg	***********773
+crop_img/bukti_tf_ss056_crop_8.jpg	HAFAZ FURQAN
+crop_img/bukti_tf_ss056_crop_9.jpg	Ke Rekening
+crop_img/bukti_tf_ss056_crop_10.jpg	BANK SYARIAHINDONESIA
+crop_img/bukti_tf_ss056_crop_11.jpg	5555425551
+crop_img/bukti_tf_ss056_crop_12.jpg	UNIVERSITAS ALMUSLIM
+crop_img/bukti_tf_ss056_crop_13.jpg	Nominal
+crop_img/bukti_tf_ss056_crop_14.jpg	IDR 1,110,000.00
+crop_img/bukti_tf_ss056_crop_15.jpg	Biaya
+crop_img/bukti_tf_ss056_crop_16.jpg	IDR 2,500.00
+crop_img/bukti_tf_ss057_crop_0.jpg	Tanggal
+crop_img/bukti_tf_ss057_crop_1.jpg	2022-12-26 19:04:03 WIB
+crop_img/bukti_tf_ss057_crop_2.jpg	Nomor Referensi
+crop_img/bukti_tf_ss057_crop_3.jpg	494862180277
+crop_img/bukti_tf_ss057_crop_4.jpg	Sumber Dana
+crop_img/bukti_tf_ss057_crop_5.jpg	SURATLHANAFI
+crop_img/bukti_tf_ss057_crop_6.jpg	Jenis Transaksi
+crop_img/bukti_tf_ss057_crop_7.jpg	Transfer BankBRI
+crop_img/bukti_tf_ss057_crop_8.jpg	Bank Tujuan
+crop_img/bukti_tf_ss057_crop_9.jpg	BANKBRI
+crop_img/bukti_tf_ss057_crop_10.jpg	NomorTujuan
+crop_img/bukti_tf_ss057_crop_11.jpg	065701001426531
+crop_img/bukti_tf_ss057_crop_12.jpg	Nama Tujuan
+crop_img/bukti_tf_ss057_crop_13.jpg	NUR AINI
+crop_img/bukti_tf_ss057_crop_14.jpg	Nominal
+crop_img/bukti_tf_ss057_crop_15.jpg	Rp94.175
+crop_img/bukti_tf_ss057_crop_16.jpg	Biaya Admin
+crop_img/bukti_tf_ss057_crop_17.jpg	Rp0
+crop_img/bukti_tf_ss057_crop_18.jpg	Total
+crop_img/bukti_tf_ss057_crop_19.jpg	Rp94.175
+crop_img/bukti_tf_ss057_crop_20.jpg	0281********509
+crop_img/bukti_tf_ss062_crop_0.jpg	Rp100.000
+crop_img/bukti_tf_ss062_crop_1.jpg	02 Jun 2023 . 08:29
+crop_img/bukti_tf_ss062_crop_2.jpg	Detail Penerima
+crop_img/bukti_tf_ss062_crop_3.jpg	Nama
+crop_img/bukti_tf_ss062_crop_4.jpg	BPN 132 STAHN MPU KU
+crop_img/bukti_tf_ss062_crop_5.jpg	Akun Bank
+crop_img/bukti_tf_ss062_crop_6.jpg	Mandiri....9799
+crop_img/bukti_tf_ss062_crop_7.jpg	Detail Transaksi
+crop_img/bukti_tf_ss062_crop_8.jpg	ID Transaksi
+crop_img/bukti_tf_ss062_crop_9.jpg	2023060210121420010100166651899684238
+crop_img/bukti_tf_ss063_crop_0.jpg	Tanggal
+crop_img/bukti_tf_ss063_crop_1.jpg	06 November 2024, 20:02:40
+crop_img/bukti_tf_ss063_crop_2.jpg	Nomor Referensi
+crop_img/bukti_tf_ss063_crop_3.jpg	757826639274
+crop_img/bukti_tf_ss063_crop_4.jpg	Sumber Dana
+crop_img/bukti_tf_ss063_crop_5.jpg	ACHMAD FAUZAN SYAIKHONI
+crop_img/bukti_tf_ss063_crop_6.jpg	6422******532
+crop_img/bukti_tf_ss063_crop_7.jpg	Bank Tujuan
+crop_img/bukti_tf_ss063_crop_8.jpg	BANK BRI
+crop_img/bukti_tf_ss063_crop_9.jpg	Nomor Tujuan
+crop_img/bukti_tf_ss063_crop_10.jpg	3204 0104 7925 537
+crop_img/bukti_tf_ss063_crop_11.jpg	Nama Tujuan
+crop_img/bukti_tf_ss063_crop_12.jpg	ATIK KHUSNIAH
+crop_img/bukti_tf_ss063_crop_13.jpg	Nominal
+crop_img/bukti_tf_ss063_crop_14.jpg	Rp2.382.901
+crop_img/bukti_tf_ss063_crop_15.jpg	Biaya Admin
+crop_img/bukti_tf_ss063_crop_16.jpg	Rp0
+crop_img/bukti_tf_ss063_crop_17.jpg	Total
+crop_img/bukti_tf_ss063_crop_18.jpg	Rp2.382.901
+crop_img/bukti_tf_ss064_crop_0.jpg	NomorTransaksi: FT24122N0KML
+crop_img/bukti_tf_ss064_crop_1.jpg	Tanggal Transaksi: 01May202417:12:56
+crop_img/bukti_tf_ss064_crop_2.jpg	Pengirim: INES JAYAPRATIWI
+crop_img/bukti_tf_ss064_crop_3.jpg	Dari Rekening: XXXXXX6644
+crop_img/bukti_tf_ss064_crop_4.jpg	Ke Rekening: 7107120739
+crop_img/bukti_tf_ss064_crop_5.jpg	Bank Penerima: BSI
+crop_img/bukti_tf_ss064_crop_6.jpg	Penerima: PUSATBAHASAUNMUHA
+crop_img/bukti_tf_ss064_crop_7.jpg	Jumlah:Rp35,000
+crop_img/bukti_tf_ss065_crop_0.jpg	Tanggal
+crop_img/bukti_tf_ss065_crop_1.jpg	17 Mar 2023 | 08:43:36 WIB
+crop_img/bukti_tf_ss065_crop_2.jpg	Nomor Referensi
+crop_img/bukti_tf_ss065_crop_3.jpg	515151016521
+crop_img/bukti_tf_ss065_crop_4.jpg	Sumber Dana
+crop_img/bukti_tf_ss065_crop_5.jpg	PATRIOT SATRIO WIBOWO
+crop_img/bukti_tf_ss065_crop_6.jpg	0033********501
+crop_img/bukti_tf_ss065_crop_7.jpg	Jenis Transaksi
+crop_img/bukti_tf_ss065_crop_8.jpg	Transfer BI-FAST
+crop_img/bukti_tf_ss065_crop_9.jpg	Bank Tujuan
+crop_img/bukti_tf_ss065_crop_10.jpg	BANK BCA
+crop_img/bukti_tf_ss065_crop_11.jpg	Nomor Tujuan
+crop_img/bukti_tf_ss065_crop_12.jpg	090783
+crop_img/bukti_tf_ss065_crop_13.jpg	Nama Tujuan
+crop_img/bukti_tf_ss065_crop_14.jpg	SRI WIJAYANTI
+crop_img/bukti_tf_ss065_crop_15.jpg	Nominal
+crop_img/bukti_tf_ss065_crop_16.jpg	Rp450.000
+crop_img/bukti_tf_ss065_crop_17.jpg	Biaya Admin
+crop_img/bukti_tf_ss065_crop_18.jpg	Rp2.500
+crop_img/bukti_tf_ss065_crop_19.jpg	Total
+crop_img/bukti_tf_ss065_crop_20.jpg	Rp452.500
+crop_img/bukti_tf_ss066_crop_0.jpg	Tanggal
+crop_img/bukti_tf_ss066_crop_1.jpg	04 Feb 2023 | 19:43:32 WIB
+crop_img/bukti_tf_ss066_crop_2.jpg	Nomor Referensi
+crop_img/bukti_tf_ss066_crop_3.jpg	504609058258
+crop_img/bukti_tf_ss066_crop_4.jpg	Sumber Dana
+crop_img/bukti_tf_ss066_crop_5.jpg	ANA RAHMAWATI
+crop_img/bukti_tf_ss066_crop_6.jpg	7005********533
+crop_img/bukti_tf_ss066_crop_7.jpg	Jenis Transaksi
+crop_img/bukti_tf_ss066_crop_8.jpg	Transfer Bank BRI
+crop_img/bukti_tf_ss066_crop_9.jpg	Bank Tujuan
+crop_img/bukti_tf_ss066_crop_10.jpg	BANK BRI
+crop_img/bukti_tf_ss066_crop_11.jpg	Nomor Tujuan
+crop_img/bukti_tf_ss066_crop_12.jpg	57173533
+crop_img/bukti_tf_ss066_crop_13.jpg	Nama Tujuan
+crop_img/bukti_tf_ss066_crop_14.jpg	MISNI
+crop_img/bukti_tf_ss066_crop_15.jpg	Nominal
+crop_img/bukti_tf_ss066_crop_16.jpg	Rp800.000
+crop_img/bukti_tf_ss066_crop_17.jpg	Biaya Admin
+crop_img/bukti_tf_ss066_crop_18.jpg	Rp0
+crop_img/bukti_tf_ss066_crop_19.jpg	Total
+crop_img/bukti_tf_ss066_crop_20.jpg	Rp800.000
+crop_img/bukti_tf_ss068_crop_0.jpg	13/1112:13:37
+crop_img/bukti_tf_ss068_crop_1.jpg	S
+crop_img/bukti_tf_ss068_crop_2.jpg	Rp.4,000.000.00
+crop_img/bukti_tf_ss068_crop_3.jpg	Ke
+crop_img/bukti_tf_ss069_crop_0.jpg	13/02 12:09:19
+crop_img/bukti_tf_ss069_crop_1.jpg	Ke 6560256688
+crop_img/bukti_tf_ss069_crop_2.jpg	ALVERON PRODATA SUKSESTA
+crop_img/bukti_tf_ss069_crop_3.jpg	Rp. 8,000,000.00
+crop_img/bukti_tf_ss069_crop_4.jpg	Ref 013120918782
+crop_img/bukti_tf_ss070_crop_0.jpg	15/05 18:19:59
+crop_img/bukti_tf_ss070_crop_1.jpg	Ke 51021
+crop_img/bukti_tf_ss070_crop_2.jpg	DADAN SURYANA
+crop_img/bukti_tf_ss070_crop_3.jpg	Rp. 500,000.00
+crop_img/bukti_tf_ss070_crop_4.jpg	Ref 015181959119
+crop_img/bukti_tf_ss071_crop_0.jpg	Transaction Date
+crop_img/bukti_tf_ss071_crop_1.jpg	06 Jun 2023
+crop_img/bukti_tf_ss071_crop_2.jpg	Transaction Time
+crop_img/bukti_tf_ss071_crop_3.jpg	14:15:59
+crop_img/bukti_tf_ss071_crop_4.jpg	Source Account
+crop_img/bukti_tf_ss071_crop_5.jpg	0107990836001
+crop_img/bukti_tf_ss071_crop_6.jpg	Source Account Name
+crop_img/bukti_tf_ss071_crop_7.jpg	BOPD SMK NEGERI13 BANDUNG
+crop_img/bukti_tf_ss071_crop_8.jpg	Destination Account No
+crop_img/bukti_tf_ss071_crop_9.jpg	0076895317100
+crop_img/bukti_tf_ss071_crop_10.jpg	Destination Account Name
+crop_img/bukti_tf_ss071_crop_11.jpg	HASANASYARI
+crop_img/bukti_tf_ss071_crop_12.jpg	Amount
+crop_img/bukti_tf_ss071_crop_13.jpg	IDR 450.000.00
+crop_img/bukti_tf_ss071_crop_14.jpg	Total Debit Amount
+crop_img/bukti_tf_ss071_crop_15.jpg	IDR 450.000.00
+crop_img/bukti_tf_ss071_crop_16.jpg	Transaction Reference Number
+crop_img/bukti_tf_ss071_crop_17.jpg	C202306061710025532
+crop_img/bukti_tf_ss071_crop_18.jpg	Transaction Date
+crop_img/bukti_tf_ss071_crop_19.jpg	06Jun 2023
+crop_img/bukti_tf_ss071_crop_20.jpg	Transaction Time
+crop_img/bukti_tf_ss071_crop_21.jpg	14:15:59
+crop_img/bukti_tf_ss071_crop_22.jpg	Source Account
+crop_img/bukti_tf_ss071_crop_23.jpg	0107990836001
+crop_img/bukti_tf_ss071_crop_24.jpg	Source Account Name
+crop_img/bukti_tf_ss071_crop_25.jpg	BOPD SMK NEGERI13 BANDUNG
+crop_img/bukti_tf_ss071_crop_26.jpg	Destination Account No
+crop_img/bukti_tf_ss071_crop_27.jpg	0076895317100
+crop_img/bukti_tf_ss071_crop_28.jpg	Destination Account Name
+crop_img/bukti_tf_ss071_crop_29.jpg	HASANASYARI
+crop_img/bukti_tf_ss071_crop_30.jpg	Amount
+crop_img/bukti_tf_ss071_crop_31.jpg	IDR450.000.00
+crop_img/bukti_tf_ss071_crop_32.jpg	Total Debit Amount
+crop_img/bukti_tf_ss071_crop_33.jpg	IDR450.000.00
+crop_img/bukti_tf_ss071_crop_34.jpg	Description
+crop_img/bukti_tf_ss071_crop_35.jpg	Bimtek DAKFIsIk SMK 2023
+crop_img/bukti_tf_ss071_crop_36.jpg	Transaction Reference Number
+crop_img/bukti_tf_ss071_crop_37.jpg	C202306061710025532
+crop_img/bukti_tf_ss071_crop_38.jpg	Transaction Status
+crop_img/bukti_tf_ss071_crop_39.jpg	Executed Successtully
+crop_img/bukti_tf_ss072_crop_0.jpg	09/07 12:40:32
+crop_img/bukti_tf_ss072_crop_1.jpg	Ke 3491587171
+crop_img/bukti_tf_ss072_crop_2.jpg	FAKRIZAL
+crop_img/bukti_tf_ss072_crop_3.jpg	Rp. 5,300,000.00
+crop_img/bukti_tf_ss074_crop_0.jpg	Tanggal Transaksi
+crop_img/bukti_tf_ss074_crop_1.jpg	25-04-2023
+crop_img/bukti_tf_ss074_crop_2.jpg	Waktu Transaksi
+crop_img/bukti_tf_ss074_crop_3.jpg	11:54:38 WIB
+crop_img/bukti_tf_ss074_crop_4.jpg	Nama Rekening DPLK
+crop_img/bukti_tf_ss074_crop_5.jpg	DHANIKRISNAMURTI
+crop_img/bukti_tf_ss074_crop_6.jpg	Nomor Rekening DPLK
+crop_img/bukti_tf_ss074_crop_7.jpg	*******00
+crop_img/bukti_tf_ss074_crop_8.jpg	Nama Rekening Taplus
+crop_img/bukti_tf_ss074_crop_9.jpg	DH**KR******
+crop_img/bukti_tf_ss074_crop_10.jpg	Nomor Rekening Taplus
+crop_img/bukti_tf_ss074_crop_11.jpg	******734
+crop_img/bukti_tf_ss074_crop_12.jpg	Nominal
+crop_img/bukti_tf_ss074_crop_13.jpg	Rp1.000.000,00
+crop_img/bukti_tf_ss074_crop_14.jpg	Fee
+crop_img/bukti_tf_ss074_crop_15.jpg	Rp0,00
+crop_img/bukti_tf_ss074_crop_16.jpg	Total
+crop_img/bukti_tf_ss074_crop_17.jpg	Rp1.000.000,00
+crop_img/bukti_tf_ss075_crop_0.jpg	21 Mar 2022 · 20:31
+crop_img/bukti_tf_ss075_crop_1.jpg	Total Bayar
+crop_img/bukti_tf_ss075_crop_2.jpg	Rp300.000
+crop_img/bukti_tf_ss075_crop_3.jpg	Metode Pembayaran
+crop_img/bukti_tf_ss075_crop_4.jpg	Saldo DANA
+crop_img/bukti_tf_ss075_crop_5.jpg	Detail Penerima
+crop_img/bukti_tf_ss075_crop_6.jpg	Nama
+crop_img/bukti_tf_ss075_crop_7.jpg	THERESIA MORETTY CLAUDYA
+crop_img/bukti_tf_ss075_crop_8.jpg	Akun Bank
+crop_img/bukti_tf_ss075_crop_9.jpg	BRI…3534
+crop_img/bukti_tf_ss077_crop_0.jpg	Tanggal Transaksi
+crop_img/bukti_tf_ss077_crop_1.jpg	25-04-2023
+crop_img/bukti_tf_ss077_crop_2.jpg	Waktu Transaksi
+crop_img/bukti_tf_ss077_crop_3.jpg	11:54:38 WIB
+crop_img/bukti_tf_ss077_crop_4.jpg	Nama Rekening DPLK
+crop_img/bukti_tf_ss077_crop_5.jpg	DHANIKRISNAMURTI
+crop_img/bukti_tf_ss077_crop_6.jpg	Nomor Rekening DPLK
+crop_img/bukti_tf_ss077_crop_7.jpg	*********000
+crop_img/bukti_tf_ss077_crop_8.jpg	Nama Rekening Taplus
+crop_img/bukti_tf_ss077_crop_9.jpg	DH**KR*******
+crop_img/bukti_tf_ss077_crop_10.jpg	Nomor Rekening Taplus
+crop_img/bukti_tf_ss077_crop_11.jpg	******734
+crop_img/bukti_tf_ss077_crop_12.jpg	Nominal
+crop_img/bukti_tf_ss077_crop_13.jpg	Rp1.000.000,00
+crop_img/bukti_tf_ss077_crop_14.jpg	Fee
+crop_img/bukti_tf_ss077_crop_15.jpg	Rp0,00
+crop_img/bukti_tf_ss077_crop_16.jpg	Total
+crop_img/bukti_tf_ss077_crop_17.jpg	Rp1.000.000,00
+crop_img/bukti_tf_ss078_crop_0.jpg	15/05 00:49:01
+crop_img/bukti_tf_ss078_crop_1.jpg	80008190097628816
+crop_img/bukti_tf_ss078_crop_2.jpg	BUKALAPAK
+crop_img/bukti_tf_ss078_crop_3.jpg	Asrul Hoesein
+crop_img/bukti_tf_ss078_crop_4.jpg	BL19133FCSQ7INVRp.
+crop_img/bukti_tf_ss078_crop_5.jpg	134,800.00
+crop_img/bukti_tf_ss078_crop_6.jpg	TOTAL TAGIHAN Rp.134,800.00
+crop_img/bukti_tf_ss079_crop_0.jpg	28/09/2023 17:28:16
+crop_img/bukti_tf_ss079_crop_1.jpg	Ke Rekening Tujuan
+crop_img/bukti_tf_ss079_crop_2.jpg	BRI
+crop_img/bukti_tf_ss079_crop_3.jpg	423101006376533
+crop_img/bukti_tf_ss079_crop_4.jpg	FEBY ASRIYANTI
+crop_img/bukti_tf_ss079_crop_5.jpg	NOMINAL TRANSFER Rp 200,000.00
+crop_img/bukti_tf_ss080_crop_0.jpg	04/02 10:05:31
+crop_img/bukti_tf_ss080_crop_1.jpg	1037902117012045
+crop_img/bukti_tf_ss080_crop_2.jpg	AKULAKU
+crop_img/bukti_tf_ss080_crop_3.jpg	KIBAR SETIAWAN
+crop_img/bukti_tf_ss080_crop_4.jpg	TOTAL TAGIHAN Rp. 705,000.00
+crop_img/bukti_tf_ss080_crop_5.jpg	Ref 19707979611
+crop_img/bukti_tf_ss081_crop_0.jpg	Tanggal
+crop_img/bukti_tf_ss081_crop_1.jpg	13 Sep 2021
+crop_img/bukti_tf_ss081_crop_2.jpg	Jam
+crop_img/bukti_tf_ss081_crop_3.jpg	10:27:13
+crop_img/bukti_tf_ss081_crop_4.jpg	Rekening Sumber
+crop_img/bukti_tf_ss081_crop_5.jpg	0163200242305
+crop_img/bukti_tf_ss081_crop_6.jpg	Atas Nama Rekening Sumber
+crop_img/bukti_tf_ss081_crop_7.jpg	PEMERINTAH DESA TEGALSARI
+crop_img/bukti_tf_ss081_crop_8.jpg	Nomor Rekening Penerima
+crop_img/bukti_tf_ss081_crop_9.jpg	0117786447100
+crop_img/bukti_tf_ss081_crop_10.jpg	Nama Penerima
+crop_img/bukti_tf_ss081_crop_11.jpg	ANGGAYUDANUGRAHA
+crop_img/bukti_tf_ss081_crop_12.jpg	Nominal
+crop_img/bukti_tf_ss081_crop_13.jpg	IDR 4,049,320.00
+crop_img/bukti_tf_ss081_crop_14.jpg	Total Nominal Debet
+crop_img/bukti_tf_ss081_crop_15.jpg	IDR 4,049.320.00
+crop_img/bukti_tf_ss081_crop_16.jpg	Nomor Referensi
+crop_img/bukti_tf_ss081_crop_17.jpg	C20210913222191523
+crop_img/bukti_tf_ss082_crop_0.jpg	Tanggal
+crop_img/bukti_tf_ss082_crop_1.jpg	24 Apr 2021 | 09:19:24 WIB
+crop_img/bukti_tf_ss082_crop_2.jpg	Nomor Referensi
+crop_img/bukti_tf_ss082_crop_3.jpg	220981294872
+crop_img/bukti_tf_ss082_crop_4.jpg	Sumber Dana
+crop_img/bukti_tf_ss082_crop_5.jpg	DIMAS DWI IVANDRI
+crop_img/bukti_tf_ss082_crop_6.jpg	3182****502
+crop_img/bukti_tf_ss082_crop_7.jpg	Jenis Transaksi
+crop_img/bukti_tf_ss082_crop_8.jpg	Transfer Bank Lain
+crop_img/bukti_tf_ss082_crop_9.jpg	Bank Tujuan
+crop_img/bukti_tf_ss082_crop_10.jpg	BANK JATIM
+crop_img/bukti_tf_ss082_crop_11.jpg	Nomor Tujuan
+crop_img/bukti_tf_ss082_crop_12.jpg	0012167784
+crop_img/bukti_tf_ss082_crop_13.jpg	Nama Tujuan
+crop_img/bukti_tf_ss082_crop_14.jpg	FAKULTAS TEKNIK
+crop_img/bukti_tf_ss082_crop_15.jpg	Nominal
+crop_img/bukti_tf_ss082_crop_16.jpg	Rp150.156
+crop_img/bukti_tf_ss082_crop_17.jpg	Biaya Admin
+crop_img/bukti_tf_ss082_crop_18.jpg	Rp6.500
+crop_img/bukti_tf_ss082_crop_19.jpg	Total
+crop_img/bukti_tf_ss082_crop_20.jpg	Rp156.656
+crop_img/bukti_tf_ss083_crop_0.jpg	15/09/2024 19:30:05
+crop_img/bukti_tf_ss083_crop_1.jpg	Ke Rekening Tujuan
+crop_img/bukti_tf_ss083_crop_2.jpg	CIMB NIAGA
+crop_img/bukti_tf_ss083_crop_3.jpg	707943515400
+crop_img/bukti_tf_ss083_crop_4.jpg	NUR ASIH
+crop_img/bukti_tf_ss083_crop_5.jpg	NOMINAL TRANSFER RP.75O,OOO.0O
+crop_img/bukti_tf_ss083_crop_6.jpg	BIAYA.Rp 2,500.00
+crop_img/bukti_tf_ss084_crop_0.jpg	Tanggal
+crop_img/bukti_tf_ss084_crop_1.jpg	21 May 2022 | 19:29.01
+crop_img/bukti_tf_ss084_crop_2.jpg	1511 ****** 509
+crop_img/bukti_tf_ss084_crop_3.jpg	Bark Tujuan
+crop_img/bukti_tf_ss084_crop_4.jpg	BANK BRI
+crop_img/bukti_tf_ss084_crop_5.jpg	Rp2.500.000
+crop_img/bukti_tf_ss084_crop_6.jpg	Rp0
+crop_img/bukti_tf_ss084_crop_7.jpg	Total
+crop_img/bukti_tf_ss084_crop_8.jpg	Rp2.500.000
+crop_img/bukti_tf_ss084_crop_9.jpg	Sumber Dana
+crop_img/bukti_tf_ss084_crop_10.jpg	Nomor Referensi
+crop_img/bukti_tf_ss084_crop_11.jpg	27
+crop_img/bukti_tf_ss084_crop_12.jpg	Nomor Tujuan
+crop_img/bukti_tf_ss084_crop_13.jpg	Nama Tujuan
+crop_img/bukti_tf_ss084_crop_14.jpg	H
+crop_img/bukti_tf_ss084_crop_15.jpg	Nominal
+crop_img/bukti_tf_ss084_crop_16.jpg	Biaya Admin
+crop_img/bukti_tf_ss085_crop_0.jpg	Tanggal
+crop_img/bukti_tf_ss085_crop_1.jpg	25May 2022|19:29:01
+crop_img/bukti_tf_ss085_crop_2.jpg	Nomor Referensi
+crop_img/bukti_tf_ss085_crop_3.jpg	Bank Tujuan
+crop_img/bukti_tf_ss085_crop_4.jpg	BANK BRI
+crop_img/bukti_tf_ss085_crop_5.jpg	Nomor Tujuan
+crop_img/bukti_tf_ss085_crop_6.jpg	27
+crop_img/bukti_tf_ss085_crop_7.jpg	Nama Tujuan
+crop_img/bukti_tf_ss085_crop_8.jpg	LH
+crop_img/bukti_tf_ss085_crop_9.jpg	Catatan
+crop_img/bukti_tf_ss085_crop_10.jpg	Kurban
+crop_img/bukti_tf_ss086_crop_0.jpg	Nomor Referensi
+crop_img/bukti_tf_ss086_crop_1.jpg	201398122079
+crop_img/bukti_tf_ss086_crop_2.jpg	Dari Rekening
+crop_img/bukti_tf_ss086_crop_3.jpg	009801057258502 BritAma / IDR
+crop_img/bukti_tf_ss086_crop_4.jpg	Untuk Pembayaran
+crop_img/bukti_tf_ss086_crop_5.jpg	Indovision
+crop_img/bukti_tf_ss086_crop_6.jpg	Nomor Pelanggan
+crop_img/bukti_tf_ss086_crop_7.jpg	301010828601
+crop_img/bukti_tf_ss086_crop_8.jpg	Nama Pelanggan
+crop_img/bukti_tf_ss086_crop_9.jpg	KANWIL KEMENTRIAN HUKUM DAN HA
+crop_img/bukti_tf_ss086_crop_10.jpg	Periode
+crop_img/bukti_tf_ss086_crop_11.jpg	05082016-04092016
+crop_img/bukti_tf_ss086_crop_12.jpg	Jumlah
+crop_img/bukti_tf_ss086_crop_13.jpg	IDR 384.900,00
+crop_img/bukti_tf_ss087_crop_0.jpg	Tanggal
+crop_img/bukti_tf_ss087_crop_1.jpg	26 Jul 2023 |07:34:01 WIB
+crop_img/bukti_tf_ss087_crop_2.jpg	Referensi
+crop_img/bukti_tf_ss087_crop_3.jpg	563370253910
+crop_img/bukti_tf_ss087_crop_4.jpg	Sumber Dana
+crop_img/bukti_tf_ss087_crop_5.jpg	SUGIARTO
+crop_img/bukti_tf_ss087_crop_6.jpg	5258********534
+crop_img/bukti_tf_ss087_crop_7.jpg	Bank Tujuan
+crop_img/bukti_tf_ss087_crop_8.jpg	BANK BRI
+crop_img/bukti_tf_ss087_crop_9.jpg	Nomor Tujuan
+crop_img/bukti_tf_ss087_crop_10.jpg	52580102536
+crop_img/bukti_tf_ss087_crop_11.jpg	NamaTujuan
+crop_img/bukti_tf_ss087_crop_12.jpg	MAUNURI_
+crop_img/bukti_tf_ss087_crop_13.jpg	Nominal
+crop_img/bukti_tf_ss087_crop_14.jpg	Rp2.360.000
+crop_img/bukti_tf_ss087_crop_15.jpg	Biaya Admin
+crop_img/bukti_tf_ss087_crop_16.jpg	Rp0
+crop_img/bukti_tf_ss087_crop_17.jpg	Total
+crop_img/bukti_tf_ss087_crop_18.jpg	Rp2.360.000
+crop_img/bukti_tf_st002_crop_0.jpg	12 AUG,2020 14:15
+crop_img/bukti_tf_st002_crop_1.jpg	REF#:0000340128
+crop_img/bukti_tf_st002_crop_2.jpg	TRANSFER SESAMA BRI
+crop_img/bukti_tf_st002_crop_3.jpg	No Rekening : 07800101310533
+crop_img/bukti_tf_st002_crop_4.jpg	Nama
+crop_img/bukti_tf_st002_crop_5.jpg	MOHAMAD JALIL UTAMA
+crop_img/bukti_tf_st002_crop_6.jpg	TOTAL
+crop_img/bukti_tf_st002_crop_7.jpg	Rp.430.000
+crop_img/bukti_tf_st003_crop_0.jpg	TANGGAL : 15 AUG 2019
+crop_img/bukti_tf_st003_crop_1.jpg	JAM : 12:13:32
+crop_img/bukti_tf_st003_crop_2.jpg	TRANSFER ANTAR BANK
+crop_img/bukti_tf_st003_crop_3.jpg	ASAL
+crop_img/bukti_tf_st003_crop_4.jpg	Bank : BRI
+crop_img/bukti_tf_st003_crop_5.jpg	Nama : SUDIRMAN
+crop_img/bukti_tf_st003_crop_6.jpg	NoRek : 817581837465501
+crop_img/bukti_tf_st003_crop_7.jpg	TUJUAN
+crop_img/bukti_tf_st003_crop_8.jpg	Bank : Bank Mandiri
+crop_img/bukti_tf_st003_crop_9.jpg	Nama : TONI KURNIAUAN
+crop_img/bukti_tf_st003_crop_10.jpg	NoRek : 163881843885
+crop_img/bukti_tf_st003_crop_11.jpg	Noref :
+crop_img/bukti_tf_st003_crop_12.jpg	Jumlah : Rp.208.080.00
+crop_img/bukti_tf_st005_crop_0.jpg	TANGGAL : 24/04/20
+crop_img/bukti_tf_st005_crop_1.jpg	WAKTU : 12:28:00
+crop_img/bukti_tf_st005_crop_2.jpg	NO.REF:24227
+crop_img/bukti_tf_st005_crop_3.jpg	DARI
+crop_img/bukti_tf_st005_crop_4.jpg	BANK
+crop_img/bukti_tf_st005_crop_5.jpg	BANK BRI
+crop_img/bukti_tf_st005_crop_6.jpg	NAMA
+crop_img/bukti_tf_st005_crop_7.jpg	SURYA SAID SETIANAN
+crop_img/bukti_tf_st005_crop_8.jpg	KEPADA
+crop_img/bukti_tf_st005_crop_9.jpg	BANK
+crop_img/bukti_tf_st005_crop_10.jpg	NAMA
+crop_img/bukti_tf_st005_crop_11.jpg	BANK MANDIRI
+crop_img/bukti_tf_st005_crop_12.jpg	REKENING
+crop_img/bukti_tf_st005_crop_13.jpg	UNIVERSITAS WIDYA MA
+crop_img/bukti_tf_st005_crop_14.jpg	NO REF
+crop_img/bukti_tf_st005_crop_15.jpg	1370019821079
+crop_img/bukti_tf_st005_crop_16.jpg	JUMLAH
+crop_img/bukti_tf_st005_crop_17.jpg	: RP
+crop_img/bukti_tf_st005_crop_18.jpg	200.000
+crop_img/bukti_tf_st006_crop_0.jpg	TANGGAL:11/12/20
+crop_img/bukti_tf_st006_crop_1.jpg	WAKTU:10:28:44
+crop_img/bukti_tf_st006_crop_2.jpg	NO.REF:04562
+crop_img/bukti_tf_st006_crop_3.jpg	DARI
+crop_img/bukti_tf_st006_crop_4.jpg	BANK
+crop_img/bukti_tf_st006_crop_5.jpg	BANK BRI
+crop_img/bukti_tf_st006_crop_6.jpg	NAMA
+crop_img/bukti_tf_st006_crop_7.jpg	CHRISTIANO RONALDO
+crop_img/bukti_tf_st006_crop_8.jpg	KEPADA
+crop_img/bukti_tf_st006_crop_9.jpg	BANK
+crop_img/bukti_tf_st006_crop_10.jpg	BANK BCA
+crop_img/bukti_tf_st006_crop_11.jpg	NAMA
+crop_img/bukti_tf_st006_crop_12.jpg	LIONEL MESSI
+crop_img/bukti_tf_st006_crop_13.jpg	REKENING
+crop_img/bukti_tf_st006_crop_14.jpg	533201024600528
+crop_img/bukti_tf_st006_crop_15.jpg	NO REF
+crop_img/bukti_tf_st006_crop_16.jpg	342253
+crop_img/bukti_tf_st006_crop_17.jpg	JUMLAH
+crop_img/bukti_tf_st006_crop_18.jpg	8.000.000
+crop_img/bukti_tf_st006_crop_19.jpg	ADMIN BANK
+crop_img/bukti_tf_st006_crop_20.jpg	6.500
+crop_img/bukti_tf_st006_crop_21.jpg	8.006.500
+crop_img/bukti_tf_st006_crop_22.jpg	TOTAL
+crop_img/bukti_tf_st009_crop_0.jpg	29/03/20
+crop_img/bukti_tf_st009_crop_1.jpg	19:59:50
+crop_img/bukti_tf_st009_crop_2.jpg	008 - MANDIRI
+crop_img/bukti_tf_st009_crop_3.jpg	1170006477749
+crop_img/bukti_tf_st009_crop_4.jpg	NAMA
+crop_img/bukti_tf_st009_crop_5.jpg	RIKKY MUHAMMAD FAJ
+crop_img/bukti_tf_st009_crop_6.jpg	JUMLAH
+crop_img/bukti_tf_st009_crop_7.jpg	RP 200,000.00
+crop_img/bukti_tf_st009_crop_8.jpg	TRANSEER
+crop_img/bukti_tf_st009_crop_9.jpg	KE BANK
+crop_img/bukti_tf_st009_crop_10.jpg	KE REK.
+crop_img/bukti_tf_st011_crop_0.jpg	22/05/21
+crop_img/bukti_tf_st011_crop_1.jpg	14:26:30
+crop_img/bukti_tf_st011_crop_2.jpg	TRANSFER
+crop_img/bukti_tf_st011_crop_3.jpg	KE BANK
+crop_img/bukti_tf_st011_crop_4.jpg	013- PERMATA
+crop_img/bukti_tf_st011_crop_5.jpg	KE REK.
+crop_img/bukti_tf_st011_crop_6.jpg	8623068200316890
+crop_img/bukti_tf_st011_crop_7.jpg	NAMA
+crop_img/bukti_tf_st011_crop_8.jpg	TOPUP AKU-+628218
+crop_img/bukti_tf_st011_crop_9.jpg	JUMLAH
+crop_img/bukti_tf_st011_crop_10.jpg	RP
+crop_img/bukti_tf_st011_crop_11.jpg	3,000,000.00
+crop_img/bukti_tf_st012_crop_0.jpg	12/05/20
+crop_img/bukti_tf_st012_crop_1.jpg	05:33:46
+crop_img/bukti_tf_st012_crop_2.jpg	TRANSFER
+crop_img/bukti_tf_st012_crop_3.jpg	KE REK
+crop_img/bukti_tf_st012_crop_4.jpg	089529716557
+crop_img/bukti_tf_st012_crop_5.jpg	NAMA
+crop_img/bukti_tf_st012_crop_6.jpg	CHRISTIANO RONALDO
+crop_img/bukti_tf_st012_crop_7.jpg	JUMLAH
+crop_img/bukti_tf_st012_crop_8.jpg	Rp
+crop_img/bukti_tf_st012_crop_9.jpg	102,965,000.00
+crop_img/bukti_tf_st014_crop_0.jpg	TANGGAL:07/05/18
+crop_img/bukti_tf_st014_crop_1.jpg	WAKTU:13:44:40
+crop_img/bukti_tf_st014_crop_2.jpg	NO.REF:07136
+crop_img/bukti_tf_st014_crop_3.jpg	DARI
+crop_img/bukti_tf_st014_crop_4.jpg	BANK
+crop_img/bukti_tf_st014_crop_5.jpg	BANK BRI
+crop_img/bukti_tf_st014_crop_6.jpg	NANA
+crop_img/bukti_tf_st014_crop_7.jpg	GUSTI AYU WIOYARTI
+crop_img/bukti_tf_st014_crop_8.jpg	KEPADA
+crop_img/bukti_tf_st014_crop_9.jpg	BANK BRI
+crop_img/bukti_tf_st014_crop_10.jpg	BANK
+crop_img/bukti_tf_st014_crop_11.jpg	NAMA
+crop_img/bukti_tf_st014_crop_12.jpg	I KOMANG GEDE YULIAN
+crop_img/bukti_tf_st014_crop_13.jpg	REKENING
+crop_img/bukti_tf_st014_crop_14.jpg	465401000684506
+crop_img/bukti_tf_st014_crop_15.jpg	NO REF
+crop_img/bukti_tf_st014_crop_16.jpg	JUMLAH :RP
+crop_img/bukti_tf_st014_crop_17.jpg	500.000
+crop_img/bukti_tf_st014_crop_18.jpg	ADMIN BANK: RP
+crop_img/bukti_tf_st014_crop_19.jpg	0
+crop_img/bukti_tf_st014_crop_20.jpg	TOTAL :RP
+crop_img/bukti_tf_st014_crop_21.jpg	500.000
+crop_img/bukti_tf_st015_crop_0.jpg	08/11/21
+crop_img/bukti_tf_st015_crop_1.jpg	18:10:32
+crop_img/bukti_tf_st015_crop_2.jpg	TRANSFER
+crop_img/bukti_tf_st015_crop_3.jpg	KE BANK
+crop_img/bukti_tf_st015_crop_4.jpg	008 -MANDIRI
+crop_img/bukti_tf_st015_crop_5.jpg	NO REK.
+crop_img/bukti_tf_st015_crop_6.jpg	1440017132314
+crop_img/bukti_tf_st015_crop_7.jpg	NAMA
+crop_img/bukti_tf_st015_crop_8.jpg	NIZAMUDDIN SYAIFULY
+crop_img/bukti_tf_st015_crop_9.jpg	JUMLAH
+crop_img/bukti_tf_st015_crop_10.jpg	RP 1,500,000.00
+crop_img/bukti_tf_st016_crop_0.jpg	05/05/20
+crop_img/bukti_tf_st016_crop_1.jpg	21:07:53
+crop_img/bukti_tf_st016_crop_2.jpg	TRANSFER
+crop_img/bukti_tf_st016_crop_3.jpg	KE REK.
+crop_img/bukti_tf_st016_crop_4.jpg	1452172418
+crop_img/bukti_tf_st016_crop_5.jpg	NAMA
+crop_img/bukti_tf_st016_crop_6.jpg	DESY ANIS SETIAWAT
+crop_img/bukti_tf_st016_crop_7.jpg	JUMLAH
+crop_img/bukti_tf_st016_crop_8.jpg	RP 180.000.00
+crop_img/bukti_tf_st018_crop_0.jpg	DARI BANK
+crop_img/bukti_tf_st018_crop_1.jpg	BANK BNI
+crop_img/bukti_tf_st018_crop_2.jpg	KE BANK
+crop_img/bukti_tf_st018_crop_3.jpg	BANK BRI
+crop_img/bukti_tf_st018_crop_4.jpg	NAMA PENGIRIM
+crop_img/bukti_tf_st018_crop_5.jpg	SDR ACHMAD ADHITO
+crop_img/bukti_tf_st018_crop_6.jpg	NAMA PENERIMA
+crop_img/bukti_tf_st018_crop_7.jpg	FEBBY IMELDA
+crop_img/bukti_tf_st018_crop_8.jpg	REK.TUJUAN
+crop_img/bukti_tf_st018_crop_9.jpg	0443006
+crop_img/bukti_tf_st018_crop_10.jpg	NO.REFERENSI
+crop_img/bukti_tf_st018_crop_11.jpg	JUMLAH
+crop_img/bukti_tf_st018_crop_12.jpg	RP425.000
+crop_img/bukti_tf_st019_crop_0.jpg	Rp 470.000
+crop_img/bukti_tf_st019_crop_1.jpg	Dari
+crop_img/bukti_tf_st019_crop_2.jpg	Silfiani Prihatin
+crop_img/bukti_tf_st019_crop_3.jpg	SeaBank:901986521
+crop_img/bukti_tf_st019_crop_4.jpg	Ke
+crop_img/bukti_tf_st019_crop_5.jpg	Danaid 081354905
+crop_img/bukti_tf_st019_crop_6.jpg	DANA:081354905
+crop_img/bukti_tf_st019_crop_7.jpg	Jumlah Transfer
+crop_img/bukti_tf_st019_crop_8.jpg	Rp470.000
+crop_img/bukti_tf_st019_crop_9.jpg	No.referensi
+crop_img/bukti_tf_st019_crop_10.jpg	230101c022d30cc1b3417c9ba
+crop_img/bukti_tf_st019_crop_11.jpg	c811ec782db49
+crop_img/bukti_tf_st019_crop_12.jpg	Waktu Transaksi
+crop_img/bukti_tf_st019_crop_13.jpg	01 Jan 2023, 19:44
+crop_img/bukti_tf_st020_crop_0.jpg	DARI REK : 12X000X00X13
+crop_img/bukti_tf_st020_crop_1.jpg	BANK
+crop_img/bukti_tf_st020_crop_2.jpg	BANK PERMATA
+crop_img/bukti_tf_st020_crop_3.jpg	NAMA
+crop_img/bukti_tf_st020_crop_4.jpg	FEBRI DWI PRASETYO
+crop_img/bukti_tf_st020_crop_5.jpg	KE REK
+crop_img/bukti_tf_st020_crop_6.jpg	3452172418
+crop_img/bukti_tf_st020_crop_7.jpg	BANK
+crop_img/bukti_tf_st020_crop_8.jpg	BCA
+crop_img/bukti_tf_st020_crop_9.jpg	NAMA
+crop_img/bukti_tf_st020_crop_10.jpg	DESY ANIS SETIAWATI
+crop_img/bukti_tf_st020_crop_11.jpg	NO.REF
+crop_img/bukti_tf_st020_crop_12.jpg	JUMLAH
+crop_img/bukti_tf_st020_crop_13.jpg	RP 123.000.00
+crop_img/bukti_tf_st023_crop_0.jpg	7 DEC,2019 07:26
+crop_img/bukti_tf_st023_crop_1.jpg	REF#：000007105861
+crop_img/bukti_tf_st023_crop_2.jpg	TRANSFER SESAMA BRI
+crop_img/bukti_tf_st023_crop_3.jpg	Rekening : 054201002385533
+crop_img/bukti_tf_st023_crop_4.jpg	Nama
+crop_img/bukti_tf_st023_crop_5.jpg	EDI BAHTIAR
+crop_img/bukti_tf_st023_crop_6.jpg	TOTAL
+crop_img/bukti_tf_st023_crop_7.jpg	Rp.1.000.000
+crop_img/bukti_tf_st025_crop_0.jpg	02/10/18
+crop_img/bukti_tf_st025_crop_1.jpg	13:04
+crop_img/bukti_tf_st025_crop_2.jpg	DARI BANK
+crop_img/bukti_tf_st025_crop_3.jpg	BANK BNI
+crop_img/bukti_tf_st025_crop_4.jpg	KE BANK
+crop_img/bukti_tf_st025_crop_5.jpg	BANK BRI
+crop_img/bukti_tf_st025_crop_6.jpg	NAMA PENGIRIM:
+crop_img/bukti_tf_st025_crop_7.jpg	BPK DANU ASMARA
+crop_img/bukti_tf_st025_crop_8.jpg	REK.TUJUAN
+crop_img/bukti_tf_st025_crop_9.jpg	312001025457534
+crop_img/bukti_tf_st025_crop_10.jpg	NAMA PENERIMA:
+crop_img/bukti_tf_st025_crop_11.jpg	ADITHIA PERDANA
+crop_img/bukti_tf_st025_crop_12.jpg	NO.REFERENSI:
+crop_img/bukti_tf_st025_crop_13.jpg	JUMLAH
+crop_img/bukti_tf_st025_crop_14.jpg	RP5.000.000
+crop_img/bukti_tf_st026_crop_0.jpg	20/07/18
+crop_img/bukti_tf_st026_crop_1.jpg	08:30
+crop_img/bukti_tf_st026_crop_2.jpg	NANA PENGIRIM:
+crop_img/bukti_tf_st026_crop_3.jpg	SDR MUHAMAD ARIEF HARTAWA
+crop_img/bukti_tf_st026_crop_4.jpg	REK.TUJUAN
+crop_img/bukti_tf_st026_crop_5.jpg	0495286835
+crop_img/bukti_tf_st026_crop_6.jpg	NAMA PENERIMA:
+crop_img/bukti_tf_st026_crop_7.jpg	SDR I KOMANG GEDE YULIANA
+crop_img/bukti_tf_st026_crop_8.jpg	JUMLAH
+crop_img/bukti_tf_st026_crop_9.jpg	RP1.000.000
+crop_img/bukti_tf_st027_crop_0.jpg	TANGGAL : 01/06/19
+crop_img/bukti_tf_st027_crop_1.jpg	WAKTU:20:34:41
+crop_img/bukti_tf_st027_crop_2.jpg	NO.REF:01559
+crop_img/bukti_tf_st027_crop_3.jpg	DARI
+crop_img/bukti_tf_st027_crop_4.jpg	BANK
+crop_img/bukti_tf_st027_crop_5.jpg	BANK BRI
+crop_img/bukti_tf_st027_crop_6.jpg	NAMA
+crop_img/bukti_tf_st027_crop_7.jpg	TRI BUDI SANTOSO
+crop_img/bukti_tf_st027_crop_8.jpg	KEPADA
+crop_img/bukti_tf_st027_crop_9.jpg	BANK
+crop_img/bukti_tf_st027_crop_10.jpg	BANK MANDIRI
+crop_img/bukti_tf_st027_crop_11.jpg	NAMA
+crop_img/bukti_tf_st027_crop_12.jpg	BANDUNG ECO SINERGI
+crop_img/bukti_tf_st027_crop_13.jpg	REKENING
+crop_img/bukti_tf_st027_crop_14.jpg	1310033444334
+crop_img/bukti_tf_st027_crop_15.jpg	NO REF
+crop_img/bukti_tf_st028_crop_0.jpg	12/02/21
+crop_img/bukti_tf_st028_crop_1.jpg	10:34:28
+crop_img/bukti_tf_st028_crop_2.jpg	TRANSFER
+crop_img/bukti_tf_st028_crop_3.jpg	NO.REK
+crop_img/bukti_tf_st028_crop_4.jpg	741040516126
+crop_img/bukti_tf_st028_crop_5.jpg	NAMA
+crop_img/bukti_tf_st028_crop_6.jpg	CHRISTIANO RONALDO
+crop_img/bukti_tf_st028_crop_7.jpg	JUMLAH
+crop_img/bukti_tf_st028_crop_8.jpg	RP 1,250,000.00
+crop_img/bukti_tf_st029_crop_0.jpg	TANGGAL
+crop_img/bukti_tf_st029_crop_1.jpg	05/17/20
+crop_img/bukti_tf_st029_crop_2.jpg	WAKTU
+crop_img/bukti_tf_st029_crop_3.jpg	17:02
+crop_img/bukti_tf_st029_crop_4.jpg	TRANSFER DARI
+crop_img/bukti_tf_st029_crop_5.jpg	BANK:
+crop_img/bukti_tf_st029_crop_6.jpg	MANDIRI
+crop_img/bukti_tf_st029_crop_7.jpg	NAMA: CHRISTIANO RONALDO
+crop_img/bukti_tf_st029_crop_8.jpg	NO.REK:14800152XXXXX
+crop_img/bukti_tf_st029_crop_9.jpg	KE
+crop_img/bukti_tf_st029_crop_10.jpg	BANK: BANK BRI
+crop_img/bukti_tf_st029_crop_11.jpg	NAMA: INDOSCAN
+crop_img/bukti_tf_st029_crop_12.jpg	NO.REK:089529716557
+crop_img/bukti_tf_st029_crop_13.jpg	NO. REF:
+crop_img/bukti_tf_st029_crop_14.jpg	JUMLAH: RP. 7,986,000.00
+crop_img/bukti_tf_st030_crop_0.jpg	No Ref
+crop_img/bukti_tf_st030_crop_1.jpg	428664619652
+crop_img/bukti_tf_st030_crop_2.jpg	Transaksi
+crop_img/bukti_tf_st030_crop_3.jpg	Trf Sesama BRI
+crop_img/bukti_tf_st030_crop_4.jpg	Jumlah Trf
+crop_img/bukti_tf_st030_crop_5.jpg	Rp100.000
+crop_img/bukti_tf_st030_crop_6.jpg	Admin Bank
+crop_img/bukti_tf_st030_crop_7.jpg	Rp 6.500
+crop_img/bukti_tf_st030_crop_8.jpg	Total
+crop_img/bukti_tf_st030_crop_9.jpg	Rp 106.500
+crop_img/bukti_tf_st030_crop_10.jpg	20-08-2021 04:57:24
+crop_img/bukti_tf_st030_crop_11.jpg	No Rekening
+crop_img/bukti_tf_st030_crop_12.jpg	7831xxxxxxx8534
+crop_img/bukti_tf_st030_crop_13.jpg	Jenis Rek
+crop_img/bukti_tf_st030_crop_14.jpg	Rekening Non BSA
+crop_img/bukti_tf_st030_crop_15.jpg	Nama
+crop_img/bukti_tf_st030_crop_16.jpg	BA*******TA
+crop_img/bukti_tf_st030_crop_17.jpg	Rek Tujuan
+crop_img/bukti_tf_st030_crop_18.jpg	783101014108534
+crop_img/bukti_tf_st030_crop_19.jpg	Nama
+crop_img/bukti_tf_st030_crop_20.jpg	CHRISTIANO RONALD
+crop_img/bukti_tf_st031_crop_0.jpg	23/11/17
+crop_img/bukti_tf_st031_crop_1.jpg	15:47:47
+crop_img/bukti_tf_st031_crop_2.jpg	TRANSFER
+crop_img/bukti_tf_st031_crop_3.jpg	KE BANK
+crop_img/bukti_tf_st031_crop_4.jpg	002-BRI
+crop_img/bukti_tf_st031_crop_5.jpg	KE REK.
+crop_img/bukti_tf_st031_crop_6.jpg	226601000099502
+crop_img/bukti_tf_st031_crop_7.jpg	NAMA
+crop_img/bukti_tf_st031_crop_8.jpg	ENDAH PERMATA SARI
+crop_img/bukti_tf_st031_crop_9.jpg	JUMLAH
+crop_img/bukti_tf_st031_crop_10.jpg	RP 109,000.00
+crop_img/bukti_tf_st032_crop_0.jpg	29/03/20
+crop_img/bukti_tf_st032_crop_1.jpg	19:59:50
+crop_img/bukti_tf_st032_crop_2.jpg	TRANSFER
+crop_img/bukti_tf_st032_crop_3.jpg	KE BANK
+crop_img/bukti_tf_st032_crop_4.jpg	008-MANDIRI
+crop_img/bukti_tf_st032_crop_5.jpg	KE REK.
+crop_img/bukti_tf_st032_crop_6.jpg	1170006477749
+crop_img/bukti_tf_st032_crop_7.jpg	NAMA
+crop_img/bukti_tf_st032_crop_8.jpg	RIKKY MUHAMMAD FAJ
+crop_img/bukti_tf_st032_crop_9.jpg	JUMLAH
+crop_img/bukti_tf_st032_crop_10.jpg	RP 200,000.00
+crop_img/bukti_tf_st033_crop_0.jpg	15/12/16
+crop_img/bukti_tf_st033_crop_1.jpg	14:34:14
+crop_img/bukti_tf_st033_crop_2.jpg	TRANSFER
+crop_img/bukti_tf_st033_crop_3.jpg	KE REK.
+crop_img/bukti_tf_st033_crop_4.jpg	7640896251
+crop_img/bukti_tf_st033_crop_5.jpg	NAMA
+crop_img/bukti_tf_st033_crop_6.jpg	RIDHO SETIAWAN RAH
+crop_img/bukti_tf_st033_crop_7.jpg	JUMLAH
+crop_img/bukti_tf_st033_crop_8.jpg	RP 20.000.00
+crop_img/bukti_tf_st036_crop_0.jpg	08/03/21
+crop_img/bukti_tf_st036_crop_1.jpg	21:32:55
+crop_img/bukti_tf_st036_crop_2.jpg	TRANSFER
+crop_img/bukti_tf_st036_crop_3.jpg	KE
+crop_img/bukti_tf_st036_crop_4.jpg	BANK
+crop_img/bukti_tf_st036_crop_5.jpg	002-BRI
+crop_img/bukti_tf_st036_crop_6.jpg	KE REK.
+crop_img/bukti_tf_st036_crop_7.jpg	089529716557
+crop_img/bukti_tf_st036_crop_8.jpg	NAMA
+crop_img/bukti_tf_st036_crop_9.jpg	INDOSCAN
+crop_img/bukti_tf_st036_crop_10.jpg	JUMLAH
+crop_img/bukti_tf_st036_crop_11.jpg	RP 10,000,000.00
+crop_img/bukti_tf_st037_crop_0.jpg	04/10/18
+crop_img/bukti_tf_st037_crop_1.jpg	12:41:37
+crop_img/bukti_tf_st037_crop_2.jpg	TRANSFER
+crop_img/bukti_tf_st037_crop_3.jpg	KE REK.:7890645652
+crop_img/bukti_tf_st037_crop_4.jpg	NUR FADILLAH
+crop_img/bukti_tf_st037_crop_5.jpg	NAMA
+crop_img/bukti_tf_st037_crop_6.jpg	RP 500,000.00
+crop_img/bukti_tf_st038_crop_0.jpg	17/02/15
+crop_img/bukti_tf_st038_crop_1.jpg	20:18:56
+crop_img/bukti_tf_st038_crop_2.jpg	TRANSFER
+crop_img/bukti_tf_st038_crop_3.jpg	KE BANK
+crop_img/bukti_tf_st038_crop_4.jpg	014-BCA
+crop_img/bukti_tf_st038_crop_5.jpg	KE REK.
+crop_img/bukti_tf_st038_crop_6.jpg	6630429976
+crop_img/bukti_tf_st038_crop_7.jpg	NAMA
+crop_img/bukti_tf_st038_crop_8.jpg	I KHWAN ROLANDO
+crop_img/bukti_tf_st038_crop_9.jpg	JUMLAH
+crop_img/bukti_tf_st038_crop_10.jpg	RP 365,000.00
+crop_img/bukti_tf_st039_crop_0.jpg	08/03/21
+crop_img/bukti_tf_st039_crop_1.jpg	21:32:55
+crop_img/bukti_tf_st039_crop_2.jpg	TRANSFER
+crop_img/bukti_tf_st039_crop_3.jpg	KE BANK
+crop_img/bukti_tf_st039_crop_4.jpg	002-BRI
+crop_img/bukti_tf_st039_crop_5.jpg	KE REK.
+crop_img/bukti_tf_st039_crop_6.jpg	089529716557
+crop_img/bukti_tf_st039_crop_7.jpg	NAMA
+crop_img/bukti_tf_st039_crop_8.jpg	INDOSCAN
+crop_img/bukti_tf_st039_crop_9.jpg	JUMLAH
+crop_img/bukti_tf_st039_crop_10.jpg	RP 10,000,000.00
+crop_img/bukti_tf_st040_crop_0.jpg	12/05/20
+crop_img/bukti_tf_st040_crop_1.jpg	11:29:27
+crop_img/bukti_tf_st040_crop_2.jpg	TRANSFER
+crop_img/bukti_tf_st040_crop_3.jpg	KE REK
+crop_img/bukti_tf_st040_crop_4.jpg	089529716557
+crop_img/bukti_tf_st040_crop_5.jpg	NAMA
+crop_img/bukti_tf_st040_crop_6.jpg	MR INDOSCAN
+crop_img/bukti_tf_st040_crop_7.jpg	JUMLAH
+crop_img/bukti_tf_st040_crop_8.jpg	Rp 1,623,750.00
+crop_img/bukti_tf_st043_crop_0.jpg	05/07/2018
+crop_img/bukti_tf_st043_crop_1.jpg	00:26
+crop_img/bukti_tf_st043_crop_2.jpg	DARI BANK
+crop_img/bukti_tf_st043_crop_3.jpg	BANK BNI
+crop_img/bukti_tf_st043_crop_4.jpg	KE BANK
+crop_img/bukti_tf_st043_crop_5.jpg	BANK BCA
+crop_img/bukti_tf_st043_crop_6.jpg	NAMA PENGIRIM
+crop_img/bukti_tf_st043_crop_7.jpg	SDR PERMADA SATRIA
+crop_img/bukti_tf_st043_crop_8.jpg	NAMA PENERIMA
+crop_img/bukti_tf_st043_crop_9.jpg	AHMAD AYATULLOH
+crop_img/bukti_tf_st043_crop_10.jpg	REK.TUJUAN
+crop_img/bukti_tf_st043_crop_11.jpg	1310333391
+crop_img/bukti_tf_st043_crop_12.jpg	NO.REFERENSI
+crop_img/bukti_tf_st043_crop_13.jpg	RP. 5,000,000.00
+crop_img/bukti_tf_st044_crop_0.jpg	08/03/21
+crop_img/bukti_tf_st044_crop_1.jpg	21:32:55
+crop_img/bukti_tf_st044_crop_2.jpg	TRANSFER
+crop_img/bukti_tf_st044_crop_3.jpg	KE BANK
+crop_img/bukti_tf_st044_crop_4.jpg	002-BRI
+crop_img/bukti_tf_st044_crop_5.jpg	KE REK.
+crop_img/bukti_tf_st044_crop_6.jpg	NAMA
+crop_img/bukti_tf_st044_crop_7.jpg	JUMLAH
+crop_img/bukti_tf_st044_crop_8.jpg	089529716557
+crop_img/bukti_tf_st044_crop_9.jpg	INDOSCAN
+crop_img/bukti_tf_st044_crop_10.jpg	RP 10,000,000.00
+crop_img/bukti_tf_st046_crop_0.jpg	24/05/2014 15:17:21
+crop_img/bukti_tf_st046_crop_1.jpg	TRANSFER ATM PRIMA
+crop_img/bukti_tf_st046_crop_2.jpg	PENGIRIM : YUDA DWI BAKTI
+crop_img/bukti_tf_st046_crop_3.jpg	BANK ASAL : BRI
+crop_img/bukti_tf_st046_crop_4.jpg	BANK TUJ. : BANK BCA
+crop_img/bukti_tf_st046_crop_5.jpg	NO.REK. : 8635006567
+crop_img/bukti_tf_st046_crop_6.jpg	NO.REF.:
+crop_img/bukti_tf_st046_crop_7.jpg	NAMA : ROZI
+crop_img/bukti_tf_st046_crop_8.jpg	JUMLAH : RP.1,400,000
+crop_img/bukti_tf_st049_crop_0.jpg	13/02 12:09:19
+crop_img/bukti_tf_st049_crop_1.jpg	Ke 6560256688
+crop_img/bukti_tf_st049_crop_2.jpg	ALVERON PRODATA SUKSESTA
+crop_img/bukti_tf_st049_crop_3.jpg	Rp.8,000,000.00
+crop_img/bukti_tf_st049_crop_4.jpg	Ref 013120918782
+crop_img/bukti_tf_st050_crop_0.jpg	TANGGAL : 24/04/20
+crop_img/bukti_tf_st050_crop_1.jpg	NO.REF : 24227
+crop_img/bukti_tf_st050_crop_2.jpg	DARI
+crop_img/bukti_tf_st050_crop_3.jpg	BANK
+crop_img/bukti_tf_st050_crop_4.jpg	BANK BRI
+crop_img/bukti_tf_st050_crop_5.jpg	NAMA
+crop_img/bukti_tf_st050_crop_6.jpg	SURYA SAID SETIANAN
+crop_img/bukti_tf_st050_crop_7.jpg	KEPADA
+crop_img/bukti_tf_st050_crop_8.jpg	BANK
+crop_img/bukti_tf_st050_crop_9.jpg	BANK MANDIRI
+crop_img/bukti_tf_st050_crop_10.jpg	NAA
+crop_img/bukti_tf_st050_crop_11.jpg	UNIVERSITAS WIDYA MA
+crop_img/bukti_tf_st050_crop_12.jpg	REKENING
+crop_img/bukti_tf_st050_crop_13.jpg	1370019821079
+crop_img/bukti_tf_st050_crop_14.jpg	NO REF
+crop_img/bukti_tf_st050_crop_15.jpg	JUMLAH
+crop_img/bukti_tf_st050_crop_16.jpg	RP 200.000
+crop_img/bukti_tf_st050_crop_17.jpg	WAKTU : 12:28:00
+crop_img/bukti_tf_st051_crop_0.jpg	01 11 18
+crop_img/bukti_tf_st051_crop_1.jpg	09:56:26
+crop_img/bukti_tf_st051_crop_2.jpg	NAMA PENGIRIM
+crop_img/bukti_tf_st051_crop_3.jpg	BPK RISAL
+crop_img/bukti_tf_st051_crop_4.jpg	DARI BANK
+crop_img/bukti_tf_st051_crop_5.jpg	BANKBNI
+crop_img/bukti_tf_st051_crop_6.jpg	KE BANK.
+crop_img/bukti_tf_st051_crop_7.jpg	BANK MANDIRI
+crop_img/bukti_tf_st051_crop_8.jpg	NAMA PENERIMA
+crop_img/bukti_tf_st051_crop_9.jpg	AHMAD FAISAL
+crop_img/bukti_tf_st051_crop_10.jpg	REK TUJUAN.
+crop_img/bukti_tf_st051_crop_11.jpg	1570002175918
+crop_img/bukti_tf_st051_crop_12.jpg	JUMLAH
+crop_img/bukti_tf_st051_crop_13.jpg	RP. 8,500,000
+crop_img/bukti_tf_st056_crop_0.jpg	TANGGAL
+crop_img/bukti_tf_st056_crop_1.jpg	07/25/18
+crop_img/bukti_tf_st056_crop_2.jpg	WAKTU
+crop_img/bukti_tf_st056_crop_3.jpg	17:11
+crop_img/bukti_tf_st056_crop_4.jpg	TRANSFER DARI
+crop_img/bukti_tf_st056_crop_5.jpg	BANK : MANDIRI
+crop_img/bukti_tf_st056_crop_6.jpg	NAMA :
+crop_img/bukti_tf_st056_crop_7.jpg	NO.REK : 15600122XXXXX
+crop_img/bukti_tf_st056_crop_8.jpg	KE
+crop_img/bukti_tf_st056_crop_9.jpg	BANK : BANK BRI
+crop_img/bukti_tf_st056_crop_10.jpg	NAMA : DWI SILVAWATI
+crop_img/bukti_tf_st056_crop_11.jpg	NO.REK : 129801000040503
+crop_img/bukti_tf_st056_crop_12.jpg	NO.REF :
+crop_img/bukti_tf_st056_crop_13.jpg	JUMLAH
+crop_img/bukti_tf_st056_crop_14.jpg	RP. 200,000.00
+crop_img/bukti_tf_st059_crop_0.jpg	TANGGAL
+crop_img/bukti_tf_st059_crop_1.jpg	05/26/19
+crop_img/bukti_tf_st059_crop_2.jpg	WAKTU
+crop_img/bukti_tf_st059_crop_3.jpg	13:01
+crop_img/bukti_tf_st059_crop_4.jpg	TRANSFER DARI
+crop_img/bukti_tf_st059_crop_5.jpg	BANK:MANDIRI
+crop_img/bukti_tf_st059_crop_6.jpg	NAMA:
+crop_img/bukti_tf_st059_crop_7.jpg	NO.REK:
+crop_img/bukti_tf_st059_crop_8.jpg	KE
+crop_img/bukti_tf_st059_crop_9.jpg	BANK : BANK BRI
+crop_img/bukti_tf_st059_crop_10.jpg	NAMA :
+crop_img/bukti_tf_st059_crop_11.jpg	NO.REK :
+crop_img/bukti_tf_st059_crop_12.jpg	NO.REF :
+crop_img/bukti_tf_st059_crop_13.jpg	JUMLAH : 
+crop_img/bukti_tf_st059_crop_14.jpg	RP. 285,000.00
+crop_img/bukti_tf_st060_crop_0.jpg	TANGGAL
+crop_img/bukti_tf_st060_crop_1.jpg	10/17/18
+crop_img/bukti_tf_st060_crop_2.jpg	WAKTU
+crop_img/bukti_tf_st060_crop_3.jpg	22:43
+crop_img/bukti_tf_st060_crop_4.jpg	TRANSFER DARI
+crop_img/bukti_tf_st060_crop_5.jpg	BANK:
+crop_img/bukti_tf_st060_crop_6.jpg	MANDIRI
+crop_img/bukti_tf_st060_crop_7.jpg	NAMA:
+crop_img/bukti_tf_st060_crop_8.jpg	NO,Rek:
+crop_img/bukti_tf_st060_crop_9.jpg	90000372XXXXX
+crop_img/bukti_tf_st060_crop_10.jpg	KE
+crop_img/bukti_tf_st060_crop_11.jpg	BANK: BANK BRI
+crop_img/bukti_tf_st060_crop_12.jpg	NAMA:DWI SILVAWATI
+crop_img/bukti_tf_st060_crop_13.jpg	NO.REK:129801000040503
+crop_img/bukti_tf_st060_crop_14.jpg	NO. REF
+crop_img/bukti_tf_st060_crop_15.jpg	JUMLAH
+crop_img/bukti_tf_st060_crop_16.jpg	RP. 109,000.00
+crop_img/bukti_tf_st061_crop_0.jpg	TAMGGAL:08 AUG 2020
+crop_img/bukti_tf_st061_crop_1.jpg	JAM
+crop_img/bukti_tf_st061_crop_2.jpg	14:52:20
+crop_img/bukti_tf_st061_crop_3.jpg	REF NO : 00007143344
+crop_img/bukti_tf_st061_crop_4.jpg	TRANSFER SESAMA BRI
+crop_img/bukti_tf_st061_crop_5.jpg	NoRek : 678581828883537
+crop_img/bukti_tf_st061_crop_6.jpg	NAMA : ABDI SALAM ASSA'IBI
+crop_img/bukti_tf_st061_crop_7.jpg	TOTAL ： Rp. 169.000,00
+crop_img/bukti_tf_st062_crop_0.jpg	21/01/2018
+crop_img/bukti_tf_st062_crop_1.jpg	17:40:22
+crop_img/bukti_tf_st062_crop_2.jpg	TRANSFER ATM
+crop_img/bukti_tf_st062_crop_3.jpg	DARI REK.:
+crop_img/bukti_tf_st062_crop_4.jpg	458201001808504
+crop_img/bukti_tf_st062_crop_5.jpg	KE REK.
+crop_img/bukti_tf_st062_crop_6.jpg	423501004783536
+crop_img/bukti_tf_st062_crop_7.jpg	NAMA
+crop_img/bukti_tf_st062_crop_8.jpg	AGUS CATIM
+crop_img/bukti_tf_st062_crop_9.jpg	JUMLAH
+crop_img/bukti_tf_st062_crop_10.jpg	RP. 202,000.00
+crop_img/bukti_tf_st063_crop_0.jpg	09/08/2015
+crop_img/bukti_tf_st063_crop_1.jpg	09:01:21
+crop_img/bukti_tf_st063_crop_2.jpg	DARI REK.
+crop_img/bukti_tf_st063_crop_3.jpg	417801009700520
+crop_img/bukti_tf_st063_crop_4.jpg	KE REK.
+crop_img/bukti_tf_st063_crop_5.jpg	32830101420054
+crop_img/bukti_tf_st063_crop_6.jpg	NAMA
+crop_img/bukti_tf_st063_crop_7.jpg	RINA SRI EKA PURWA
+crop_img/bukti_tf_st063_crop_8.jpg	JUMLAH
+crop_img/bukti_tf_st063_crop_9.jpg	RP. 400,000
+crop_img/WhatsApp_Image_2026-05-10_at_21.56.26_crop_0.jpg	02 Mar 2026 14:34:02
+crop_img/WhatsApp_Image_2026-05-10_at_21.56.26_crop_1.jpg	IDR 18.032.500.00
+crop_img/WhatsApp_Image_2026-05-10_at_21.56.26_crop_2.jpg	Nama Penerima
+crop_img/WhatsApp_Image_2026-05-10_at_21.56.26_crop_3.jpg	TUMIRIN
+crop_img/WhatsApp_Image_2026-05-10_at_21.56.26_crop_4.jpg	Bank Tujuan
+crop_img/WhatsApp_Image_2026-05-10_at_21.56.26_crop_5.jpg	BRI
+crop_img/WhatsApp_Image_2026-05-10_at_21.56.26_crop_6.jpg	No.Rekening Tujuan
+crop_img/WhatsApp_Image_2026-05-10_at_21.56.26_crop_7.jpg	720-5010-3616-8534
+crop_img/WhatsApp_Image_2026-05-10_at_21.56.26_crop_8.jpg	DariRekening
+crop_img/WhatsApp_Image_2026-05-10_at_21.56.26_crop_9.jpg	567-5**-**32
+crop_img/WhatsApp_Image_2026-05-10_at_21.56.26_crop_10.jpg	Nominal
+crop_img/WhatsApp_Image_2026-05-10_at_21.56.26_crop_11.jpg	IDR 18,032.500.00
+crop_img/WhatsApp_Image_2026-05-10_at_21.56.26_crop_12.jpg	Biaya
+crop_img/WhatsApp_Image_2026-05-10_at_21.56.26_crop_13.jpg	IDR 2,500.00
+crop_img/WhatsApp_Image_2026-05-10_at_21.56.26_crop_14.jpg	No.Referensi
+crop_img/WhatsApp_Image_2026-05-10_at_21.56.26_crop_15.jpg	20260302CENAIDJA51018617335
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.36_crop_0.jpg	23 Juni 2025, 15:05:24WIB
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.36_crop_1.jpg	Total Transaksi
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.36_crop_2.jpg	Rp252.500
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.36_crop_3.jpg	No.Ref
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.36_crop_4.jpg	860923184192
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.36_crop_5.jpg	Sumber Dana
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.36_crop_6.jpg	DADAN NUH FATURAHMAN
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.36_crop_7.jpg	BANK BRI
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.36_crop_8.jpg	7375********536
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.36_crop_9.jpg	Tujuan
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.36_crop_10.jpg	ERLANGGA HADI SASMITA
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.36_crop_11.jpg	BSI
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.36_crop_12.jpg	7190121776
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.36_crop_13.jpg	Nominal
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.36_crop_14.jpg	Rp250.000
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.36_crop_15.jpg	Biaya Admin
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.36_crop_16.jpg	Rp2.500
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.36_1_crop_0.jpg	Transaksi Berhasil
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.36_1_crop_1.jpg	Rekening Tujuan
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.36_1_crop_2.jpg	1803190728
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.36_1_crop_3.jpg	Nama Penerima
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.36_1_crop_4.jpg	ANNISA HASNA SYAHARANI
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.36_1_crop_5.jpg	Tanggal Transaksi
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.36_1_crop_6.jpg	24-06-2025
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.36_1_crop_7.jpg	Waktu Transaksi
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.36_1_crop_8.jpg	17:46:16 WIB
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.36_1_crop_9.jpg	Bank Tujuan
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.36_1_crop_10.jpg	BNI
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.36_1_crop_11.jpg	Nama Pengirim
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.36_1_crop_12.jpg	DADAN NUH FATURAHMAN
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.36_1_crop_13.jpg	Nominal
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.36_1_crop_14.jpg	100.000
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.36_1_crop_15.jpg	Fee
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.36_1_crop_16.jpg	Total
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.36_1_crop_17.jpg	100.000
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.37_crop_0.jpg	13 Jan 2025 · 16:18:25 WIB
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.37_crop_1.jpg	Penerima
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.37_crop_2.jpg	MAYA RATNA SARI
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.37_crop_3.jpg	Bank CentralAsia - 74O1885521
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.37_crop_4.jpg	Nominal Transfer
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.37_crop_5.jpg	Rp 2.800.000
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.37_crop_6.jpg	No. Referensi
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.37_crop_7.jpg	20250113BMRIIDJAO
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.37_crop_8.jpg	Biaya Transaksi
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.37_crop_9.jpg	Rp 2.500
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.37_crop_10.jpg	Total Transaksi
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.37_crop_11.jpg	Rp 2.802.500
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.37_crop_12.jpg	Rekening Sumber
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.37_crop_13.jpg	DODI APRIYANTO
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.37_crop_14.jpg	Bank Mandiri-…..5290
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.37_1_crop_0.jpg	16/12/2024 16:24:09
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.37_1_crop_1.jpg	Ke Rekening Tujuan
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.37_1_crop_2.jpg	BNI
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.37_1_crop_3.jpg	1803190728
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.37_1_crop_4.jpg	ANNISA HASNA SYAHARANI
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.37_1_crop_5.jpg	NOMINAL TRANSFER Rp125,000.00
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.37_1_crop_6.jpg	BIAYA Rp2,500.00
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.37_1_crop_7.jpg	Ref 20241216CENAIDJA51084143231
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.38_1_crop_0.jpg	17 Septembe r2024, 15:02:33 WIB
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.38_1_crop_1.jpg	Total Transaksi
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.38_1_crop_2.jpg	Rp205.500
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.38_1_crop_3.jpg	No.Ref
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.38_1_crop_4.jpg	735847319470
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.38_1_crop_5.jpg	Sumber Dana
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.38_1_crop_6.jpg	DADAN NUH FATURAHMAN
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.38_1_crop_7.jpg	BANK BRI
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.38_1_crop_8.jpg	7375********536
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.38_1_crop_9.jpg	Tujuan
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.38_1_crop_10.jpg	KASIH SULISTYANTI
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.38_1_crop_11.jpg	BANK BCA
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.38_1_crop_12.jpg	1652282436
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.38_1_crop_13.jpg	Nominal
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.38_1_crop_14.jpg	Rp203.000
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.38_1_crop_15.jpg	Biaya Admin
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.38_1_crop_16.jpg	Rp2.500
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.38_2_crop_0.jpg	24 Sep 2024 · 17:51:23 WIB
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.38_2_crop_1.jpg	Penerima
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.38_2_crop_2.jpg	MASRURI
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.38_2_crop_3.jpg	Bank Central Asia -7402196001
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.38_2_crop_4.jpg	Detail Transaksi
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.38_2_crop_5.jpg	Nominal Transfer
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.38_2_crop_6.jpg	Rp 350.745
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.38_2_crop_7.jpg	Metode Transfer
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.38_2_crop_8.jpg	BIFast
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.38_2_crop_9.jpg	No. Referensi
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.38_2_crop_10.jpg	2024O924BMRIIDJA
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.38_2_crop_11.jpg	Biaya Transaksi
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.38_2_crop_12.jpg	Rp2.500
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.38_2_crop_13.jpg	Total Transaksi
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.38_2_crop_14.jpg	Rp 353.245
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.38_2_crop_15.jpg	Rekening Sumber
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.38_2_crop_16.jpg	ROKHIMAH
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.38_2_crop_17.jpg	BankMandiri-…0300
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.39_crop_0.jpg	25/09/2024 21:15:56
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.39_crop_1.jpg	Ke 7402196001
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.39_crop_2.jpg	MASRURI
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.39_crop_3.jpg	Rp.250,919.00
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.39_1_crop_0.jpg	22/09/2024
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.39_1_crop_1.jpg	15:16:36
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.39_1_crop_2.jpg	Ke 7402196001
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.39_1_crop_3.jpg	MASRURI
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.39_1_crop_4.jpg	Rp. 300,865.00
+crop_img/WhatsApp_Image_2026-06-09_at_09.45.39_1_crop_5.jpg	Sekar razita
+crop_img/WhatsApp Image 2026-06-10 at 17.30.58_crop_0.jpg	Rp 570.000
+crop_img/WhatsApp Image 2026-06-10 at 17.30.58_crop_1.jpg	Dari
+crop_img/WhatsApp Image 2026-06-10 at 17.30.58_crop_2.jpg	Nur Kholifah
+crop_img/WhatsApp Image 2026-06-10 at 17.30.58_crop_3.jpg	SeaBank:********8203
+crop_img/WhatsApp Image 2026-06-10 at 17.30.58_crop_4.jpg	Ke
+crop_img/WhatsApp Image 2026-06-10 at 17.30.58_crop_5.jpg	Smk Bit Bina Aulia
+crop_img/WhatsApp Image 2026-06-10 at 17.30.58_crop_6.jpg	BR:**********7569
+crop_img/WhatsApp Image 2026-06-10 at 17.30.58_crop_7.jpg	Jumlah Transfer
+crop_img/WhatsApp Image 2026-06-10 at 17.30.58_crop_8.jpg	Rp 570.000
+crop_img/WhatsApp Image 2026-06-10 at 17.30.58_crop_9.jpg	Biaya Transfer
+crop_img/WhatsApp Image 2026-06-10 at 17.30.58_crop_10.jpg	GRATIS
+crop_img/WhatsApp Image 2026-06-10 at 17.30.58_crop_11.jpg	Jumlah Total
+crop_img/WhatsApp Image 2026-06-10 at 17.30.58_crop_12.jpg	Rp 570.000
+crop_img/WhatsApp Image 2026-06-10 at 17.30.58_crop_13.jpg	No. Transaksi
+crop_img/WhatsApp Image 2026-06-10 at 17.30.58_crop_14.jpg	2026060543506387687818332
+crop_img/WhatsApp Image 2026-06-10 at 17.30.58_crop_15.jpg	Waktu Transaksi
+crop_img/WhatsApp Image 2026-06-10 at 17.30.58_crop_16.jpg	05 Jun 2026, 19:47
+crop_img/WhatsApp Image 2026-06-10 at 17.30.59 (1)_crop_0.jpg	Rp570.000
+crop_img/WhatsApp Image 2026-06-10 at 17.30.59 (1)_crop_1.jpg	Ditransfer ke
+crop_img/WhatsApp Image 2026-06-10 at 17.30.59 (1)_crop_2.jpg	Smk Bit Bina Aulia
+crop_img/WhatsApp Image 2026-06-10 at 17.30.59 (1)_crop_3.jpg	BRI 218001000867569
+crop_img/WhatsApp Image 2026-06-10 at 17.30.59 (1)_crop_4.jpg	Waktu
+crop_img/WhatsApp Image 2026-06-10 at 17.30.59 (1)_crop_5.jpg	10:25
+crop_img/WhatsApp Image 2026-06-10 at 17.30.59 (1)_crop_6.jpg	Tanggal
+crop_img/WhatsApp Image 2026-06-10 at 17.30.59 (1)_crop_7.jpg	07 Jun 2026
+crop_img/WhatsApp Image 2026-06-10 at 17.30.59 (1)_crop_8.jpg	Jumlah
+crop_img/WhatsApp Image 2026-06-10 at 17.30.59 (1)_crop_9.jpg	Rp570.000
+crop_img/WhatsApp Image 2026-06-10 at 17.30.59 (1)_crop_10.jpg	Biaya admin
+crop_img/WhatsApp Image 2026-06-10 at 17.30.59 (1)_crop_11.jpg	Gratis!
+crop_img/WhatsApp Image 2026-06-10 at 17.30.59 (1)_crop_12.jpg	Total
+crop_img/WhatsApp Image 2026-06-10 at 17.30.59 (1)_crop_13.jpg	Rp570.000
+crop_img/WhatsApp Image 2026-06-10 at 17.30.59_crop_0.jpg	07 Juni 2026, 13:54:28WIB
+crop_img/WhatsApp Image 2026-06-10 at 17.30.59_crop_1.jpg	Rp770.000
+crop_img/WhatsApp Image 2026-06-10 at 17.30.59_crop_2.jpg	No.Ref
+crop_img/WhatsApp Image 2026-06-10 at 17.30.59_crop_3.jpg	155741545916
+crop_img/WhatsApp Image 2026-06-10 at 17.30.59_crop_4.jpg	Sumber Dana
+crop_img/WhatsApp Image 2026-06-10 at 17.30.59_crop_5.jpg	SLAMET
+crop_img/WhatsApp Image 2026-06-10 at 17.30.59_crop_6.jpg	BANKBRI
+crop_img/WhatsApp Image 2026-06-10 at 17.30.59_crop_7.jpg	5857********532
+crop_img/WhatsApp Image 2026-06-10 at 17.30.59_crop_8.jpg	Tujuan
+crop_img/WhatsApp Image 2026-06-10 at 17.30.59_crop_9.jpg	SMK BIT BINA AULIA
+crop_img/WhatsApp Image 2026-06-10 at 17.30.59_crop_10.jpg	BANK BRI
+crop_img/WhatsApp Image 2026-06-10 at 17.30.59_crop_11.jpg	218001000867569
+crop_img/WhatsApp Image 2026-06-10 at 17.30.59_crop_12.jpg	Nominal
+crop_img/WhatsApp Image 2026-06-10 at 17.30.59_crop_13.jpg	Rp770.000
+crop_img/WhatsApp Image 2026-06-10 at 17.30.59_crop_14.jpg	Biaya Admin
+crop_img/WhatsApp Image 2026-06-10 at 17.30.59_crop_15.jpg	Rp0

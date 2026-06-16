@@ -37,7 +37,10 @@ class FieldExtractor:
     
     def extract_all_fields(self, text: str, detections: List[Dict]) -> Dict[str, Any]:
         """
-        Extract all important fields from OCR text
+        Extract all important fields from OCR text.
+        
+        PRIMARY: BankReceiptParser (format-aware structural parser)
+        FALLBACK: individual regex extractors for any missing field.
         
         Args:
             text: Full OCR text
@@ -48,33 +51,68 @@ class FieldExtractor:
         """
         logger.debug(f"Extracting fields from text ({len(text)} chars, {len(detections)} detections)")
         
-        # Extract datetime first for better context
-        datetime_obj = self.extract_datetime(text, detections)
+        # ── PRIMARY: Bank-specific structural parser ──────────────────────
+        try:
+            from bank_parser import BankReceiptParser
+            brp = BankReceiptParser()
+            parsed = brp.parse(text, detections)
+            primary = brp.to_field_extractor_format(parsed)
+            logger.info(
+                f"BankReceiptParser: format={parsed.bank_format}, "
+                f"nominal={primary.get('amount')}, ref={primary.get('reference_no')}, "
+                f"penerima={primary.get('recipient_name')}"
+            )
+        except Exception as exc:
+            logger.warning(f"BankReceiptParser failed ({exc}), falling back to individual extractors")
+            primary = {}
+
+        # ── FALLBACK: individual extractors for any field still missing ───
+        # Extract datetime
+        paid_at = primary.get('paid_at') or self.extract_datetime(text, detections)
         
-        # Extract banks (sender and recipient)
-        sender_bank, recipient_bank = self.extract_banks(text, detections)
-        
+        # Extract banks
+        fb_sender_bank, fb_recipient_bank = self.extract_banks(text, detections)
+        sender_bank = primary.get('sender_bank') or fb_sender_bank
+        recipient_bank = primary.get('recipient_bank') or fb_recipient_bank
+
+        # Extract names
+        sender_name = primary.get('sender_name') or self.extract_sender_name(text)
+        recipient_name = primary.get('recipient_name') or self.extract_recipient_name(text, detections)
+
+        # Extract account
+        recipient_account = primary.get('recipient_account_no') or self.extract_recipient_account_number(text, detections)
+
+        # Extract amount
+        amount = primary.get('amount') or self.extract_amount(text, detections)
+
+        # Extract reference
+        reference_no = primary.get('reference_no') or self.extract_reference_number(text)
+
         fields = {
-            'amount': self.extract_amount(text, detections),
-            'paid_at': datetime_obj,
+            'amount': amount,
+            'paid_at': paid_at,
             'sender_bank': sender_bank,
             'recipient_bank': recipient_bank,
-            # Prefer destination bank for validation (rekening tujuan sekolah)
+            # Prefer destination bank for validation
             'bank_name': recipient_bank or sender_bank,
-            'sender_name': self.extract_sender_name(text),
-            'recipient_name': self.extract_recipient_name(text, detections),
-            'recipient_account_no': self.extract_recipient_account_number(text, detections),
-            'reference_no': self.extract_reference_number(text)
+            'sender_name': sender_name,
+            'recipient_name': recipient_name,
+            'recipient_account_no': recipient_account,
+            'sender_account_no': primary.get('sender_account_no'),
+            'reference_no': reference_no,
+            # Debug metadata
+            '_bank_format': primary.get('_bank_format', 'fallback'),
         }
         
         # Log extraction results
-        extracted_count = sum(1 for v in fields.values() if v is not None)
-        logger.info(f"Extracted {extracted_count}/8 fields successfully")
+        extracted_count = sum(1 for k, v in fields.items() if v is not None and not k.startswith('_'))
+        logger.info(f"Extracted {extracted_count}/9 fields successfully")
         for k, v in fields.items():
-            if v:
+            if v and not k.startswith('_'):
                 logger.debug(f"  {k}: {v}")
         
         return fields
+
 
     def extract_recipient_account_number(self, text: str, detections: List[Dict] = None) -> Optional[str]:
         """Extract destination account number (rekening tujuan) from OCR text.

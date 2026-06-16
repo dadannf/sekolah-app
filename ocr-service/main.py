@@ -379,13 +379,27 @@ async def process_receipt(
         print('  ' + _c(CYAN, '│') + _c(GRAY, '  Status  : [2/4] Ekstraksi Field (Nominal, Tgl, Bank)...').ljust(72) + _c(CYAN, '│'))
 
         # =================================================
-        # EXTRACT FIELDS
+        # EXTRACT FIELDS (using BankReceiptParser + fallback)
         # =================================================
 
         extracted = field_extractor.extract_all_fields(
             full_text,
             detections
         )
+
+        # Debug: print raw OCR text for diagnosis
+        logger.info("=== RAW OCR TEXT ===")
+        for ln in full_text.splitlines():
+            if ln.strip():
+                logger.info(f"  | {ln}")
+        logger.info("=== END RAW OCR ===")
+        
+        # Debug: print extracted fields
+        bank_format = extracted.pop('_bank_format', 'unknown')
+        logger.info(f"=== EXTRACTED FIELDS (format: {bank_format}) ===")
+        for k, v in extracted.items():
+            logger.info(f"  {k}: {v}")
+        logger.info("=== END EXTRACTED ===")
 
         # =================================================
         # VALIDATE EXTRACTION

@@ -130,14 +130,24 @@ class PaymentController extends Controller
                         } catch (\Exception $e) {}
                     }
                     
-                    // Override the Python extraction so frontend uses Ninja Layer
+                    // Prefer Python's structural extraction if available, fallback to Ninja Layer
+                    $pyFields = $json['extracted_fields'] ?? [];
+                    
                     $json['extracted_fields'] = [
-                        'amount' => $mapped['nominal'] ?? null,
-                        'paid_at' => $paidAt,
-                        'bank_name' => $mapped['bank_pengirim'] ?? $mapped['bank_tujuan'] ?? null,
-                        'recipient_name' => $mapped['nama_penerima'] ?? null,
-                        'reference_no' => $mapped['nomor_referensi'] ?? null,
+                        'amount' => $pyFields['amount'] ?? $mapped['nominal'] ?? null,
+                        'paid_at' => !empty($pyFields['paid_at']) ? $pyFields['paid_at'] : $paidAt,
+                        'bank_name' => $pyFields['bank_name'] ?? $mapped['bank_tujuan'] ?? null,
+                        'recipient_name' => $pyFields['recipient_name'] ?? $mapped['nama_penerima'] ?? null,
+                        'recipient_account' => $pyFields['recipient_account'] ?? $mapped['rekening_tujuan'] ?? null,
+                        'sender_name' => $pyFields['sender_name'] ?? $mapped['nama_pengirim'] ?? null,
+                        'sender_bank' => $pyFields['sender_bank'] ?? $mapped['bank_pengirim'] ?? null,
+                        'sender_account' => $pyFields['sender_account'] ?? $mapped['rekening_pengirim'] ?? null,
+                        'reference_no' => $pyFields['reference_no'] ?? $mapped['nomor_referensi'] ?? null,
                     ];
+                    
+                    // Update mapped fields for ninja validation fallback
+                    $mapped['nominal'] = $json['extracted_fields']['amount'];
+                    $mapped['tanggal_transaksi'] = $json['extracted_fields']['paid_at'];
                     
                     // Override Python validation with Ninja validation
                     $expectedDate = $request->input('expected_date');

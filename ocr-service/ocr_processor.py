@@ -6,6 +6,8 @@ import os
 # Disable oneDNN/MKLDNN as early as possible (must be set before importing Paddle/PaddleOCR)
 os.environ.setdefault('FLAGS_use_mkldnn', '0')
 os.environ.setdefault('FLAGS_use_onednn', '0')
+os.environ.setdefault('KMP_DUPLICATE_LIB_OK', 'True')
+os.environ.setdefault('OMP_NUM_THREADS', '1')
 
 from paddleocr import PaddleOCR
 from config import settings
@@ -55,18 +57,20 @@ class OCRProcessor:
                 'use_mp': False,  # Disable multiprocessing which can cause issues
                 'enable_mkldnn': False,
                 'use_mkldnn': False,
+                'use_onnx': True, # Use ONNX runtime to bypass Paddle inference crash
 
                 # === DETECTION PARAMETERS (DBNet) ===
                 'det_algorithm': 'DB',
                 'det_db_thresh': 0.3,           # Turunkan dari 0.5 → lebih sensitif
                 'det_db_box_thresh': 0.5,       # Threshold box confidence
-                'det_db_unclip_ratio': 1.6,     # Perbesar box sedikit
+                'det_db_unclip_ratio': 1.5,     # Turunkan ke 1.5 agar kotak teks tidak tumpang tindih (gabung baris atas-bawah)
                 'det_limit_side_len': 960,      # Max size untuk detection
 
                 # === RECOGNITION PARAMETERS ===
                 'rec_algorithm': 'SVTR_LCNet',  # Model terbaru, lebih akurat
+                'rec_model_dir': 'models/rec_custom', # Menunjuk ke folder ekstrak model buatan Anda
                 'rec_batch_num': 6,
-                'rec_char_dict_path': None,     # Gunakan default atau custom
+                'rec_char_dict_path': 'models/en_dict.txt', # Dictionary bahasa inggris yang didownload
                 'drop_score': 0.5,              # Drop hasil confidence rendah
 
                 # === OPTIONAL: untuk gambar berkualitas rendah ===

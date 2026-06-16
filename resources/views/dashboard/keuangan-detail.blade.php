@@ -1178,7 +1178,7 @@
                                 <label for="received_by_user_id" class="form-label fw-semibold text-dark mb-1" style="font-size: 0.8rem;">
                                     Diterima Oleh <span class="text-danger">*</span>
                                 </label>
-                                <input type="hidden" name="received_by_user_id" value="{{ auth()->user()->id }}">
+                                <input type="hidden" id="received_by_user_id" name="received_by_user_id" value="{{ auth()->user()->id }}">
                                 <input type="text" class="form-control form-control-sm rounded-2 border-2 bg-light" 
                                        value="{{ auth()->user()->name }}" readonly style="font-size: 0.8rem;">
                             </div>
@@ -1284,6 +1284,7 @@
                                             <div id="ocrValidationStatus" style="display: none;"></div>
                                             
                                             <div class="row g-2">
+                                                <!-- Row 1: Nominal & Tanggal -->
                                                 <div class="col-6">
                                                     <small class="text-muted d-block" style="font-size: 0.7rem;">Nominal</small>
                                                     <p class="mb-0 fw-semibold text-dark" id="ocrAmount" style="font-size: 0.8rem;">-</p>
@@ -1292,15 +1293,51 @@
                                                     <small class="text-muted d-block" style="font-size: 0.7rem;">Tanggal</small>
                                                     <p class="mb-0 fw-semibold text-dark" id="ocrDate" style="font-size: 0.8rem;">-</p>
                                                 </div>
-                                                <div class="col-6">
-                                                    <small class="text-muted d-block" style="font-size: 0.7rem;">Bank</small>
-                                                    <p class="mb-0 fw-semibold text-dark" id="ocrBank" style="font-size: 0.8rem;">-</p>
+                                                
+                                                <!-- Row 2: Pengirim -->
+                                                <div class="col-12 mt-2">
+                                                    <div class="p-2 rounded bg-light border">
+                                                        <small class="text-muted d-block mb-1 fw-bold" style="font-size: 0.7rem;">DATA PENGIRIM</small>
+                                                        <div class="row g-2">
+                                                            <div class="col-6">
+                                                                <small class="text-muted d-block" style="font-size: 0.7rem;">Nama Pengirim</small>
+                                                                <p class="mb-0 fw-semibold text-dark" id="ocrSenderName" style="font-size: 0.8rem;">-</p>
+                                                            </div>
+                                                            <div class="col-6">
+                                                                <small class="text-muted d-block" style="font-size: 0.7rem;">Bank Pengirim</small>
+                                                                <p class="mb-0 fw-semibold text-dark" id="ocrSenderBank" style="font-size: 0.8rem;">-</p>
+                                                            </div>
+                                                            <div class="col-12">
+                                                                <small class="text-muted d-block" style="font-size: 0.7rem;">No. Rekening Pengirim</small>
+                                                                <p class="mb-0 fw-semibold text-dark" id="ocrSenderAccount" style="font-size: 0.8rem;">-</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="col-6">
-                                                    <small class="text-muted d-block" style="font-size: 0.7rem;">Penerima (Sekolah)</small>
-                                                    <p class="mb-0 fw-semibold text-dark" id="ocrRecipient" style="font-size: 0.8rem;">-</p>
+
+                                                <!-- Row 3: Penerima -->
+                                                <div class="col-12 mt-2">
+                                                    <div class="p-2 rounded bg-light border">
+                                                        <small class="text-muted d-block mb-1 fw-bold" style="font-size: 0.7rem;">DATA PENERIMA</small>
+                                                        <div class="row g-2">
+                                                            <div class="col-6">
+                                                                <small class="text-muted d-block" style="font-size: 0.7rem;">Nama Penerima</small>
+                                                                <p class="mb-0 fw-semibold text-dark" id="ocrRecipientName" style="font-size: 0.8rem;">-</p>
+                                                            </div>
+                                                            <div class="col-6">
+                                                                <small class="text-muted d-block" style="font-size: 0.7rem;">Bank Penerima</small>
+                                                                <p class="mb-0 fw-semibold text-dark" id="ocrRecipientBank" style="font-size: 0.8rem;">-</p>
+                                                            </div>
+                                                            <div class="col-12">
+                                                                <small class="text-muted d-block" style="font-size: 0.7rem;">No. Rekening Penerima</small>
+                                                                <p class="mb-0 fw-semibold text-dark" id="ocrRecipientAccount" style="font-size: 0.8rem;">-</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="col-12">
+
+                                                <!-- Row 4: Referensi -->
+                                                <div class="col-12 mt-2">
                                                     <small class="text-muted d-block" style="font-size: 0.7rem;">No. Referensi</small>
                                                     <p class="mb-0 fw-semibold text-dark" id="ocrReference" style="font-size: 0.8rem;">-</p>
                                                 </div>
@@ -2189,12 +2226,16 @@ document.addEventListener('DOMContentLoaded', function() {
         
         document.getElementById('ocrDate').textContent = 
             fields.paid_at ? new Date(fields.paid_at).toLocaleString('id-ID') : '-';
-        
-        document.getElementById('ocrBank').textContent = fields.bank_name || '-';
-        
-        // Prioritize recipient_name (penerima) over sender_name
-        const recipientName = fields.recipient_name || fields.sender_name || '-';
-        document.getElementById('ocrRecipient').textContent = recipientName;
+            
+        // Pengirim
+        document.getElementById('ocrSenderName').textContent = fields.sender_name || '-';
+        document.getElementById('ocrSenderBank').textContent = fields.sender_bank || '-';
+        document.getElementById('ocrSenderAccount').textContent = fields.sender_account || '-';
+
+        // Penerima
+        document.getElementById('ocrRecipientName').textContent = fields.recipient_name || '-';
+        document.getElementById('ocrRecipientBank').textContent = fields.bank_name || '-';
+        document.getElementById('ocrRecipientAccount').textContent = fields.recipient_account || '-';
         
         document.getElementById('ocrReference').textContent = fields.reference_no || '-';
         

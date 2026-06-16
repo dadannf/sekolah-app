@@ -101,7 +101,7 @@ class OcrFieldMapperService
         }
         
         // Regex Fallback for highly critical fields if not found by Dictionary
-        $mappedData = $this->applyRegexFallback($mappedData, $unmatchedLines);
+        $mappedData = $this->applyRegexFallback($mappedData, $unmatchedLines, $rawOcrText);
 
         // Logging missing critical fields
         $this->logMissingFields($mappedData);
@@ -157,6 +157,11 @@ class OcrFieldMapperService
         // Exact & Case-insensitive Matching
         $normalizedLabel = strtolower(trim($labelCandidate));
         
+        // Mencegah SeaBank fuzzy match ke 'ke bank'
+        if ($normalizedLabel === 'seabank') {
+            return null;
+        }
+
         // Append section context for generic labels (e.g. "BANK" + "pengirim" => "bank pengirim")
         if ($currentSection && preg_match('/^(bank|nama|no\.?\s*rek|rek|rekening)$/i', $normalizedLabel)) {
             $normalizedLabel = $normalizedLabel . ' ' . $currentSection;
@@ -203,11 +208,33 @@ class OcrFieldMapperService
     /**
      * Apply regex fallback for fields that are missing
      */
-    protected function applyRegexFallback(array $mappedData, array $unmatchedLines): array
+    protected function applyRegexFallback(array $mappedData, array $unmatchedLines, string $fullRawText = ''): array
     {
         $rawText = implode(" ", $unmatchedLines);
+        // Normalize full raw text to single line for easy regex matching
+        $fullTextStr = preg_replace('/\s+/', ' ', $fullRawText);
         
         Log::debug("OcrFieldMapper: RAW TEXT UNMATCHED: " . $rawText);
+        
+        // --- NEW FALLBACK FOR DANA / SEABANK / E-WALLET FORMAT ---
+        // Format Sender: "Dari Ria Suprihatin Dana: **********4071"
+        if (preg_match('/(?:dari|pengirim)\s+([A-Za-z\s\.:\-]+?)\s+(DANA|OVO|GOPAY|SHOPEEPAY|LINKAJA|SEABANK|JAGO|NEOBANK|BCA|MANDIRI|BRI|BNI|BSI|PERMATA|DANAMON|MEGA)[\s:]+([\*\.\dxX]{8,20})/i', $fullTextStr, $matches)) {
+            // Kita bisa override karena match ini sangat spesifik dan akurat
+            $mappedData['nama_pengirim'] = trim(trim($matches[1], ':-. '));
+            $mappedData['bank_pengirim'] = strtoupper($matches[2]);
+            $mappedData['rekening_pengirim'] = preg_replace('/[^\d]/', '', $matches[3]);
+            Log::debug("OcrFieldMapper: Regex fallback found Pengirim (E-Wallet): {$mappedData['nama_pengirim']} - {$mappedData['bank_pengirim']} {$mappedData['rekening_pengirim']}");
+        }
+
+        // Format Recipient: "Ke Daniel Setya Dharma SeaBank: ********4360"
+        if (preg_match('/(?:ke|kepada|tujuan)\s+([A-Za-z\s\.:\-]+?)\s+(DANA|OVO|GOPAY|SHOPEEPAY|LINKAJA|SEABANK|JAGO|NEOBANK|BCA|MANDIRI|BRI|BNI|BSI|PERMATA|DANAMON|MEGA)[\s:]+([\*\.\dxX]{8,20})/i', $fullTextStr, $matches)) {
+            $mappedData['nama_penerima'] = trim(trim($matches[1], ':-. '));
+            $mappedData['bank_tujuan'] = strtoupper($matches[2]);
+            $mappedData['rekening_tujuan'] = preg_replace('/[^\d]/', '', $matches[3]);
+            Log::debug("OcrFieldMapper: Regex fallback found Penerima (E-Wallet): {$mappedData['nama_penerima']} - {$mappedData['bank_tujuan']} {$mappedData['rekening_tujuan']}");
+        }
+        // ---------------------------------------------------------
+        // ---------------------------------------------------------
         
         // Fallback Nominal
         if (empty($mappedData['nominal'])) {
@@ -341,7 +368,8 @@ class OcrFieldMapperService
         // Fallback Date
         if (empty($mappedData['tanggal_transaksi']) || !preg_match('/\d/', $mappedData['tanggal_transaksi'])) {
             // dd/mm/yyyy or dd-mm-yyyy or dd mmm yyyy (with optional time HH:MM:SS)
-            if (preg_match('/\b(\d{1,2}[\/\-\s]+(?:[a-zA-Z]{3,}|\d{1,2})[\/\-\s]+\d{2,4}(?:[\s,]+(?:pukul|jam)?\s*\d{2}[:\.]\d{2}(?:[:\.]\d{2})?)?)\b/i', $rawText, $matches)) {
+            $months = '(?:januari|februari|maret|april|mei|juni|juli|agustus|september|oktober|november|desember|jan|peb|feb|mar|apr|jun|jul|agu|agt|sep|okt|nov|des|january|february|march|may|june|july|august|october|december|aug|oct|dec)';
+            if (preg_match('/\b(\d{1,2}[\/\-\s]+(?:' . $months . '|\d{1,2})[\/\-\s]+\d{2,4}(?:[\s,]+(?:pukul|jam)?\s*\d{2}[:\.]\d{2}(?:[:\.]\d{2})?)?)\b/i', $rawText, $matches)) {
                 $mappedData['tanggal_transaksi'] = $this->cleanValue('tanggal_transaksi', $matches[1]);
                 Log::debug("OcrFieldMapper: Regex fallback found Tanggal Transaksi: " . $mappedData['tanggal_transaksi']);
             }
@@ -441,28 +469,47 @@ class OcrFieldMapperService
             'tanggal_transaksi' => false,
         ];
 
+        // CEK DATA WAJIB (JIKA KOSONG KEMUNGKINAN GAMBAR BLUR)
+        $requiredFields = [
+            'tanggal_transaksi' => 'Tanggal Transaksi',
+            'nama_penerima' => 'Nama Penerima',
+            'bank_tujuan' => 'Bank Penerima',
+            'rekening_tujuan' => 'Nomor Rekening Penerima',
+            'nomor_referensi' => 'Nomor Referensi'
+        ];
+        $missingRequired = [];
+        foreach ($requiredFields as $key => $label) {
+            if (empty($mappedData[$key]) || trim($mappedData[$key]) === '-' || trim($mappedData[$key]) === '') {
+                $missingRequired[] = $label;
+            }
+        }
+        
+        if (count($missingRequired) > 0) {
+            $errors[] = "Tolong upload ulang, gambar blur karena data wajib tidak terdeteksi (" . implode(', ', $missingRequired) . ").";
+        }
+
         // 1. Nama penerima sesuai dengan: SMK BIT BINA AULIA
         $namaPenerima = strtolower($mappedData['nama_penerima'] ?? '');
         if (!empty($namaPenerima) && (strpos($namaPenerima, 'bina aulia') !== false || strpos($namaPenerima, 'smk bit') !== false)) {
             $checks['nama_penerima'] = true;
-        } else {
-            $errors[] = "Nama penerima tidak sesuai (Dibutuhkan: SMK BIT BINA AULIA). Terbaca: " . ($mappedData['nama_penerima'] ?? 'Kosong');
+        } elseif (!empty($namaPenerima)) {
+            $errors[] = "Nama penerima tidak sesuai (Dibutuhkan: SMK BIT BINA AULIA). Terbaca: " . $namaPenerima;
         }
 
         // 2. Nomor rekening tujuan sesuai dengan: 218001000867569
         $rekTujuan = preg_replace('/\D/', '', $mappedData['rekening_tujuan'] ?? '');
         if (strpos($rekTujuan, '218001000867569') !== false || $rekTujuan === '218001000867569') {
             $checks['rekening_tujuan'] = true;
-        } else {
-            $errors[] = "Nomor rekening tujuan tidak sesuai (Dibutuhkan: 218001000867569). Terbaca: " . ($mappedData['rekening_tujuan'] ?? 'Kosong');
+        } elseif (!empty($rekTujuan)) {
+            $errors[] = "Nomor rekening tujuan tidak sesuai (Dibutuhkan: 218001000867569). Terbaca: " . $rekTujuan;
         }
 
         // 3. Bank tujuan sesuai dengan: BRI
         $bankTujuan = strtolower($mappedData['bank_tujuan'] ?? '');
         if (!empty($bankTujuan) && strpos($bankTujuan, 'bri') !== false) {
             $checks['bank_tujuan'] = true;
-        } else {
-            $errors[] = "Bank tujuan tidak sesuai (Dibutuhkan: BRI). Terbaca: " . ($mappedData['bank_tujuan'] ?? 'Kosong');
+        } elseif (!empty($bankTujuan)) {
+            $errors[] = "Bank tujuan tidak sesuai (Dibutuhkan: BRI). Terbaca: " . $bankTujuan;
         }
 
         // 4. Nomor referensi berhasil ditemukan
@@ -472,13 +519,13 @@ class OcrFieldMapperService
         } else {
             // Beberapa bukti seperti m-Transfer modal tidak memiliki nomor referensi eksplisit
             $checks['nomor_referensi'] = true; 
-            // Kita tidak menjadikan ini sebagai error agar OCR tetap valid
+            // Kita tidak menjadikan ini sebagai error selain dari pesan blur di atas
         }
 
         // 5. Tanggal transaksi sesuai dengan form pembayaran (toleransi 7 hari)
         $tanggalTransaksi = $mappedData['tanggal_transaksi'] ?? '';
         if (empty($tanggalTransaksi)) {
-            $errors[] = "Tanggal transaksi tidak ditemukan pada bukti transfer.";
+            // Sudah dihandle oleh deteksi blur di atas, namun bisa juga di log
         } elseif ($expectedDate) {
             $ocrDate = null;
             // Bersihkan tanggal dari karakter selain angka, huruf, dan separator

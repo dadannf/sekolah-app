@@ -105,17 +105,20 @@
                 <div class="col-12 col-lg-8">
                     <div class="row g-2">
                         <div class="col-12 col-sm-7 col-md-8">
-                            <div class="position-relative mb-2">
-                                <input type="text" id="searchStudent" placeholder="Cari NIS, Nama, Jurusan, atau Kelas..." class="form-control ps-5 border-0" style="background: rgba(255,255,255,0.95); font-size: 0.9rem; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); padding: 10px 16px 10px 45px;">
-                                <i class="fas fa-search position-absolute" style="left: 16px; top: 50%; transform: translateY(-50%); font-size: 0.95rem; color: #3b82f6;"></i>
-                            </div>
-                            <div class="d-flex align-items-center gap-2 flex-wrap">
-                                <label for="studentSort" class="text-white fw-semibold small mb-0" style="letter-spacing: 0.3px;">Sortir:</label>
-                                <select id="studentSort" class="form-select form-select-sm border-0 fw-semibold" style="max-width: 180px; background: rgba(255,255,255,0.95); border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.08);">
-                                    <option value="az" @selected(($sort ?? 'az') === 'az')>A - Z</option>
-                                    <option value="za" @selected(($sort ?? 'az') === 'za')>Z - A</option>
-                                </select>
-                            </div>
+                            <form method="GET" action="{{ route('dashboard.siswa') }}">
+                                <div class="position-relative mb-2">
+                                    <input type="text" id="searchStudentInput" name="search" value="{{ request('search') }}" placeholder="Cari NIS, Nama, Jurusan, atau Kelas..." class="form-control ps-5 border-0" style="background: rgba(255,255,255,0.95); font-size: 0.9rem; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); padding: 10px 16px 10px 45px;">
+                                    <i class="fas fa-search position-absolute" style="left: 16px; top: 50%; transform: translateY(-50%); font-size: 0.95rem; color: #3b82f6;"></i>
+                                </div>
+                                <div class="d-flex align-items-center gap-2 flex-wrap">
+                                    <label for="studentSort" class="text-white fw-semibold small mb-0" style="letter-spacing: 0.3px;">Sortir:</label>
+                                    <select name="sort" class="form-select form-select-sm border-0 fw-semibold" onchange="this.form.submit()" style="max-width: 180px; background: rgba(255,255,255,0.95); border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.08);">
+                                        <option value="az" @selected(($sort ?? 'az') === 'az')>A - Z</option>
+                                        <option value="za" @selected(($sort ?? 'az') === 'za')>Z - A</option>
+                                    </select>
+                                    <button type="submit" class="btn btn-sm text-white fw-semibold ms-2" style="background: rgba(255,255,255,0.2); border-radius: 8px;">Cari</button>
+                                </div>
+                            </form>
                         </div>
                         <div class="col-12 col-sm-5 col-md-4">
                             <div class="d-grid gap-2">
@@ -145,7 +148,7 @@
         </div>
 
         <!-- Table Section -->
-        <div class="p-3 p-md-4">
+        <div class="p-3 p-md-4" id="siswaTableAndPaginationWrapper">
             <form id="bulkDeleteForm" action="{{ route('dashboard.siswa.bulk-delete') }}" method="POST">
                 @csrf
                 <input type="hidden" id="selectAllStudentsFlag" name="select_all_students" value="false">
@@ -1933,162 +1936,75 @@ document.querySelector('form[action="{{ route("dashboard.siswa.store") }}"]')?.a
         return false;
     }
 });
-
-// Search functionality
-const searchInput = document.getElementById('searchStudent');
-if (searchInput) {
-    searchInput.addEventListener('input', function(e) {
-        const searchTerm = e.target.value.toLowerCase().trim();
-        
-        // Filter desktop table
-        const desktopRows = document.querySelectorAll('.table tbody tr');
-        let visibleDesktopCount = 0;
-        
-        desktopRows.forEach(row => {
-            // Skip empty state row
-            if (row.querySelector('td[colspan]')) {
-                return;
-            }
-            
-            const nis = row.querySelector('td:nth-child(4) .fw-semibold')?.textContent?.toLowerCase() || '';
-            const name = row.querySelector('td:nth-child(4) .fw-bold')?.textContent?.toLowerCase() || '';
-            const kelas = row.querySelector('td:nth-child(5)')?.textContent?.toLowerCase() || '';
-            
-            // Get the onclick attribute to extract student data
-            const detailBtn = row.querySelector('button[title="Lihat Detail"]');
-            let studentData = {};
-            if (detailBtn) {
-                const onclickAttr = detailBtn.getAttribute('onclick');
-                try {
-                    const jsonMatch = onclickAttr.match(/showStudentDetail\((.+)\)/);
-                    if (jsonMatch) {
-                        studentData = JSON.parse(jsonMatch[1]);
-                    }
-                } catch (e) {
-                    console.error('Error parsing student data:', e);
-                }
-            }
-            
-            const major = (studentData.major || '').toLowerCase();
-            
-            // Check if search term matches any field
-            const matches = nis.includes(searchTerm) || 
-                          name.includes(searchTerm) || 
-                          kelas.includes(searchTerm) || 
-                          major.includes(searchTerm);
-            
-            if (matches || searchTerm === '') {
-                row.style.display = '';
-                visibleDesktopCount++;
-            } else {
-                row.style.display = 'none';
-            }
-        });
-        
-        // Filter mobile cards
-        const mobileCards = document.querySelectorAll('.d-lg-none > div > div.rounded-4');
-        let visibleMobileCount = 0;
-        
-        mobileCards.forEach(card => {
-            const nis = card.querySelector('code')?.textContent?.toLowerCase() || '';
-            const name = card.querySelector('h3')?.textContent?.toLowerCase() || '';
-            const kelas = card.querySelector('.badge.px-3.py-2.rounded-pill:not(.flex-shrink-0)')?.textContent?.toLowerCase() || '';
-            
-            // Get student data from detail button
-            const detailBtn = card.querySelector('button[onclick*="showStudentDetail"]');
-            let studentData = {};
-            if (detailBtn) {
-                const onclickAttr = detailBtn.getAttribute('onclick');
-                try {
-                    const jsonMatch = onclickAttr.match(/showStudentDetail\((.+)\)/);
-                    if (jsonMatch) {
-                        studentData = JSON.parse(jsonMatch[1]);
-                    }
-                } catch (e) {
-                    console.error('Error parsing student data:', e);
-                }
-            }
-            
-            const major = (studentData.major || '').toLowerCase();
-            
-            // Check if search term matches any field
-            const matches = nis.includes(searchTerm) || 
-                          name.includes(searchTerm) || 
-                          kelas.includes(searchTerm) || 
-                          major.includes(searchTerm);
-            
-            if (matches || searchTerm === '') {
-                card.style.display = '';
-                visibleMobileCount++;
-            } else {
-                card.style.display = 'none';
-            }
-        });
-        
-        // Update count display
-        const countDisplay = document.querySelector('.small.text-secondary');
-        if (countDisplay) {
-            const totalCount = visibleDesktopCount > 0 ? visibleDesktopCount : visibleMobileCount;
-            if (searchTerm === '') {
-                countDisplay.innerHTML = 'Menampilkan <strong>' + {{ $siswa->count() }} + '</strong> dari <strong>' + {{ $siswa->total() }} + '</strong> siswa (Halaman <strong>{{ $siswa->currentPage() }}</strong> dari <strong>{{ $siswa->lastPage() }}</strong>)';
-            } else {
-                countDisplay.textContent = `Menampilkan ${totalCount} siswa dari pencarian di halaman ini`;
-            }
-        }
-        
-        // Show/hide empty state for desktop
-        const emptyRow = document.querySelector('.table tbody tr td[colspan]');
-        if (emptyRow) {
-            const parentRow = emptyRow.parentElement;
-            if (visibleDesktopCount === 0 && searchTerm !== '') {
-                // Show "no results" message
-                emptyRow.innerHTML = `
-                    <div class="py-4">
-                        <div class="rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px; background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(29, 78, 216, 0.1) 100%);">
-                            <i class="fas fa-search" style="font-size: 2.5rem; color: #3b82f6;"></i>
-                        </div>
-                        <h6 class="fw-bold text-dark mb-2">Tidak ada hasil pencarian</h6>
-                        <p class="text-muted small mb-0">Coba gunakan kata kunci lain</p>
-                    </div>
-                `;
-                parentRow.style.display = '';
-            }
-        }
-        
-        // Show/hide empty state for mobile
-        const mobileEmpty = document.querySelector('.d-lg-none .text-center.py-5');
-        if (mobileEmpty && visibleMobileCount === 0 && searchTerm !== '') {
-            mobileEmpty.style.display = '';
-            mobileEmpty.innerHTML = `
-                <div class="rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px; background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(29, 78, 216, 0.1) 100%);">
-                    <i class="fas fa-search" style="font-size: 2.5rem; color: #3b82f6;"></i>
-                </div>
-                <h6 class="fw-bold text-dark mb-2">Tidak ada hasil pencarian</h6>
-                <p class="text-muted small mb-0">Coba gunakan kata kunci lain</p>
-            `;
-        } else if (mobileEmpty && (visibleMobileCount > 0 || searchTerm === '')) {
-            // Restore original empty message
-            mobileEmpty.innerHTML = `
-                <div class="rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px; background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(29, 78, 216, 0.1) 100%);">
-                    <i class="fas fa-users" style="font-size: 2.5rem; color: #3b82f6;"></i>
-                </div>
-                <h6 class="fw-bold text-dark mb-2">Belum Ada Data Siswa</h6>
-                <p class="text-muted small mb-0">Klik tombol "Tambah Siswa" untuk menambahkan data siswa baru</p>
-            `;
-        }
-    });
-}
 </script>
 
 <script>
-    const studentSort = document.getElementById('studentSort');
-    if (studentSort) {
-        studentSort.addEventListener('change', function () {
-            const url = new URL(window.location.href);
-            url.searchParams.set('sort', this.value);
-            window.location.href = url.toString();
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('searchStudentInput');
+    const form = searchInput?.closest('form');
+    
+    if (searchInput && form) {
+        // Position cursor at the end of text
+        const valLength = searchInput.value.length;
+        if (valLength > 0) {
+            searchInput.focus();
+            searchInput.setSelectionRange(valLength, valLength);
+        }
+
+        let debounceTimer;
+        
+        searchInput.addEventListener('input', function() {
+            clearTimeout(debounceTimer);
+            
+            // Add loading indicator to search icon
+            const searchIcon = searchInput.nextElementSibling;
+            if (searchIcon && searchIcon.classList.contains('fa-search')) {
+                searchIcon.className = 'fas fa-spinner fa-spin position-absolute';
+            }
+            
+            debounceTimer = setTimeout(() => {
+                const url = new URL(form.action);
+                url.searchParams.set('search', this.value);
+                
+                const sortSelect = form.querySelector('select[name="sort"]');
+                if (sortSelect) {
+                    url.searchParams.set('sort', sortSelect.value);
+                }
+                
+                fetch(url.toString(), {
+                    headers: { 'X-Requested-With': 'XMLHttpRequest' }
+                })
+                .then(response => response.text())
+                .then(html => {
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(html, 'text/html');
+                    
+                    const newContent = doc.getElementById('siswaTableAndPaginationWrapper');
+                    const currentContent = document.getElementById('siswaTableAndPaginationWrapper');
+                    
+                    if (newContent && currentContent) {
+                        currentContent.innerHTML = newContent.innerHTML;
+                        window.history.pushState({}, '', url.toString());
+                    }
+                    
+                    // Restore search icon
+                    if (searchIcon) {
+                        searchIcon.className = 'fas fa-search position-absolute';
+                    }
+                })
+                .catch(err => {
+                    console.error('AJAX Search Error:', err);
+                    if (searchIcon) searchIcon.className = 'fas fa-search position-absolute';
+                });
+            }, 300); // 300ms debounce
+        });
+        
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            searchInput.dispatchEvent(new Event('input'));
         });
     }
+});
 </script>
 
 @if(session('success'))

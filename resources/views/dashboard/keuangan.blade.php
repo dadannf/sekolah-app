@@ -96,7 +96,7 @@
                     <form method="GET" action="{{ route('dashboard.keuangan') }}" class="row g-2">
                         <div class="col-12 col-sm-4 col-md-3">
                             <div class="position-relative">
-                                <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari NIS / Nama..." class="form-control ps-5 border-0" style="background: rgba(255,255,255,0.95); font-size: 0.9rem; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); padding: 10px 16px 10px 45px;">
+                                <input type="text" id="searchKeuanganInput" name="search" value="{{ request('search') }}" placeholder="Cari NIS / Nama..." class="form-control ps-5 border-0" style="background: rgba(255,255,255,0.95); font-size: 0.9rem; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); padding: 10px 16px 10px 45px;">
                                 <i class="fas fa-search position-absolute" style="left: 16px; top: 50%; transform: translateY(-50%); font-size: 0.95rem; color: #3b82f6;"></i>
                             </div>
                         </div>
@@ -244,7 +244,7 @@
         </div>
 
         <!-- Table Section -->
-        <div class="p-3 p-md-4">
+        <div class="p-3 p-md-4" id="keuanganTableAndPaginationWrapper">
             <!-- Desktop Table -->
             <div class="d-none d-lg-block table-responsive">
                 <table class="table table-hover align-middle mb-0" style="border-collapse: separate; border-spacing: 0;">
@@ -507,6 +507,85 @@
         </div>
     </div>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('searchKeuanganInput');
+    const form = searchInput?.closest('form');
+    
+    if (searchInput && form) {
+        // Position cursor at the end of text
+        const valLength = searchInput.value.length;
+        if (valLength > 0) {
+            searchInput.focus();
+            searchInput.setSelectionRange(valLength, valLength);
+        }
+
+        let debounceTimer;
+        
+        searchInput.addEventListener('input', function() {
+            clearTimeout(debounceTimer);
+            
+            // Add loading indicator to search icon
+            const searchIcon = searchInput.nextElementSibling;
+            if (searchIcon && searchIcon.classList.contains('fa-search')) {
+                searchIcon.className = 'fas fa-spinner fa-spin position-absolute';
+            }
+            
+            debounceTimer = setTimeout(() => {
+                const url = new URL(form.action);
+                url.searchParams.set('search', this.value);
+                
+                // Keep other filter values
+                const selects = form.querySelectorAll('select');
+                selects.forEach(select => {
+                    url.searchParams.set(select.name, select.value);
+                });
+                
+                fetch(url.toString(), {
+                    headers: { 'X-Requested-With': 'XMLHttpRequest' }
+                })
+                .then(response => response.text())
+                .then(html => {
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(html, 'text/html');
+                    
+                    const newContent = doc.getElementById('keuanganTableAndPaginationWrapper');
+                    const currentContent = document.getElementById('keuanganTableAndPaginationWrapper');
+                    
+                    if (newContent && currentContent) {
+                        currentContent.innerHTML = newContent.innerHTML;
+                        window.history.pushState({}, '', url.toString());
+                    }
+                    
+                    // Restore search icon
+                    if (searchIcon) {
+                        searchIcon.className = 'fas fa-search position-absolute';
+                    }
+                })
+                .catch(err => {
+                    console.error('AJAX Search Error:', err);
+                    if (searchIcon) searchIcon.className = 'fas fa-search position-absolute';
+                });
+            }, 300); // 300ms debounce
+        });
+        
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            searchInput.dispatchEvent(new Event('input'));
+        });
+        
+        // Also auto-submit when changing filters like dropdowns
+        const selects = form.querySelectorAll('select');
+        selects.forEach(select => {
+            select.addEventListener('change', function() {
+                searchInput.dispatchEvent(new Event('input'));
+            });
+        });
+    }
+});
+</script>
+
 @endsection
 
 <style>

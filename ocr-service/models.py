@@ -16,10 +16,15 @@ class ExtractedFields(BaseModel):
     amount: Optional[float] = None
     paid_at: Optional[datetime] = None
     bank_name: Optional[str] = None
+    sender_bank: Optional[str] = None
+    recipient_bank: Optional[str] = None
     sender_name: Optional[str] = None
     recipient_name: Optional[str] = None
+    sender_account_no: Optional[str] = None
     recipient_account_no: Optional[str] = None
     reference_no: Optional[str] = None
+    detected_format: Optional[str] = None
+    field_confidence: Optional[Dict[str, float]] = None
 
 
 class OCRProcessResponse(BaseModel):

@@ -355,12 +355,16 @@ async def process_receipt(
         # =================================================
         # SAVE FILE
         # =================================================
+        import time
+        t_start = time.perf_counter()
 
         relative_path, full_path = save_upload_file(file)
 
         # =================================================
         # PROCESS OCR
         # =================================================
+        import time
+        t_upload = time.perf_counter()
 
         print()
         print('  ' + _c(CYAN, '┌───────────────────────────────────────────────────────────────┐'))
@@ -375,6 +379,8 @@ async def process_receipt(
             use_preprocessing=False,
             use_multivariant=True
         )
+        
+        t_ocr = time.perf_counter()
 
         print('  ' + _c(CYAN, '│') + _c(GRAY, '  Status  : [2/4] Ekstraksi Field (Nominal, Tgl, Bank)...').ljust(72) + _c(CYAN, '│'))
 
@@ -386,6 +392,8 @@ async def process_receipt(
             full_text,
             detections
         )
+        
+        t_parsing = time.perf_counter()
 
         # Debug: print raw OCR text for diagnosis
         logger.info("=== RAW OCR TEXT ===")
@@ -427,6 +435,8 @@ async def process_receipt(
             expected_date=expected_date_obj,
             expected_bank=expected_bank
         )
+        
+        t_validation = time.perf_counter()
 
         # =================================================
         # DETERMINE STATUS
@@ -472,6 +482,29 @@ async def process_receipt(
         else:
             print('  ' + _c(CYAN, '│') + _c(GRAY, '  CER/WER    : Tidak ada ground_truth untuk dievaluasi').ljust(72) + _c(CYAN, '│'))
             
+        print('  ' + _c(CYAN, '└───────────────────────────────────────────────────────────────┘'))
+        print()
+
+        # =================================================
+        # LOGGING PROFILING (TAHAP 2)
+        # =================================================
+        print()
+        print('  ' + _c(CYAN, '┌───────────────────────────────────────────────────────────────┐'))
+        print('  ' + _c(CYAN, '│') + _c(BOLD + GREEN, '  OCR PROFILING REPORT: ').ljust(61) + _c(CYAN, '│'))
+        print('  ' + _c(CYAN, '├───────────────────────────────────────────────────────────────┤'))
+        
+        upload_time = t_upload - t_start
+        ocr_time = t_ocr - t_upload
+        parsing_time = t_parsing - t_ocr
+        validation_time = t_validation - t_parsing
+        total_time = t_validation - t_start
+        
+        print('  ' + _c(CYAN, '│') + f"  [1/6] Upload           : {upload_time:.3f}s".ljust(63) + _c(CYAN, '│'))
+        print('  ' + _c(CYAN, '│') + f"  [2-4] OCR Engine       : {ocr_time:.3f}s".ljust(63) + _c(CYAN, '│'))
+        print('  ' + _c(CYAN, '│') + f"  [5/6] Parsing          : {parsing_time:.3f}s".ljust(63) + _c(CYAN, '│'))
+        print('  ' + _c(CYAN, '│') + f"  [6/6] Validation       : {validation_time:.3f}s".ljust(63) + _c(CYAN, '│'))
+        print('  ' + _c(CYAN, '├───────────────────────────────────────────────────────────────┤'))
+        print('  ' + _c(CYAN, '│') + f"  TOTAL WAKTU PROSES     : {total_time:.3f}s".ljust(63) + _c(CYAN, '│'))
         print('  ' + _c(CYAN, '└───────────────────────────────────────────────────────────────┘'))
         print()
 

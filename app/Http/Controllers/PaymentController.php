@@ -39,6 +39,88 @@ class PaymentController extends Controller
         return Storage::disk('public')->response($payment->proof_path);
     }
 
+    private function normalizeOcrExtractedFields(array $pyFields, array $mappedFields = []): array
+    {
+        $senderBank = $pyFields['sender_bank'] ?? $mappedFields['bank_pengirim'] ?? null;
+        $recipientBank = $pyFields['recipient_bank'] ?? $pyFields['bank_name'] ?? $mappedFields['bank_tujuan'] ?? null;
+        $senderAccount = $pyFields['sender_account_no'] ?? $pyFields['sender_account'] ?? $mappedFields['rekening_pengirim'] ?? null;
+        $recipientAccount = $pyFields['recipient_account_no'] ?? $pyFields['recipient_account'] ?? $mappedFields['rekening_tujuan'] ?? null;
+
+        $fields = [
+            'amount' => $pyFields['amount'] ?? $mappedFields['total_pembayaran'] ?? $mappedFields['nominal'] ?? null,
+            'paid_at' => $pyFields['paid_at'] ?? $mappedFields['tanggal_transaksi'] ?? null,
+            'sender_bank' => $senderBank,
+            'recipient_bank' => $recipientBank,
+            'bank_name' => $recipientBank ?: $senderBank,
+            'sender_name' => $pyFields['sender_name'] ?? $mappedFields['nama_pengirim'] ?? null,
+            'recipient_name' => $pyFields['recipient_name'] ?? $mappedFields['nama_penerima'] ?? null,
+            'sender_account_no' => $senderAccount,
+            'sender_account' => $senderAccount,
+            'recipient_account_no' => $recipientAccount,
+            'recipient_account' => $recipientAccount,
+            'reference_no' => $pyFields['reference_no'] ?? $mappedFields['nomor_referensi'] ?? null,
+            'detected_format' => $pyFields['detected_format'] ?? $pyFields['_bank_format'] ?? null,
+            'field_confidence' => $pyFields['field_confidence'] ?? null,
+        ];
+
+        $schoolAccount = preg_replace('/\D/', '', env('SCHOOL_ACCOUNT_NUMBER', '218001000867569'));
+        $recipientDigits = preg_replace('/\D/', '', (string) ($fields['recipient_account_no'] ?? ''));
+        if ($schoolAccount !== '' && ($recipientDigits === $schoolAccount || $this->isNearSchoolAccount($recipientDigits, $schoolAccount))) {
+            $schoolBank = strtoupper((string) env('SCHOOL_ACCOUNT_BANK', 'BRI'));
+            $fields['recipient_account_no'] = $schoolAccount;
+            $fields['recipient_account'] = $schoolAccount;
+            $fields['recipient_bank'] = $schoolBank;
+            $fields['bank_name'] = $schoolBank;
+            $fields['recipient_name'] = env('SCHOOL_ACCOUNT_NAME', 'SMK BIT BINA AULIA');
+            if ($recipientDigits !== $schoolAccount) {
+                $fields['account_correction'] = [
+                    'field' => 'recipient_account_no',
+                    'from' => $recipientDigits,
+                    'to' => $schoolAccount,
+                    'reason' => 'near_school_account_match',
+                ];
+            }
+        }
+
+        return $fields;
+    }
+
+    private function isNearSchoolAccount(string $candidate, string $schoolAccount): bool
+    {
+        if ($candidate === '' || $schoolAccount === '') {
+            return false;
+        }
+
+        if (strlen($candidate) < strlen($schoolAccount) - 1) {
+            return false;
+        }
+
+        if (abs(strlen($candidate) - strlen($schoolAccount)) > 1) {
+            return false;
+        }
+
+        if (substr($candidate, 0, min(8, strlen($candidate))) !== substr($schoolAccount, 0, min(8, strlen($candidate)))) {
+            return false;
+        }
+
+        return levenshtein($candidate, $schoolAccount) <= 1;
+    }
+
+    private function buildOcrValidationFields(array $normalizedFields, array $mappedFields = []): array
+    {
+        return array_filter([
+            'nominal' => $normalizedFields['amount'] ?? $mappedFields['total_pembayaran'] ?? $mappedFields['nominal'] ?? null,
+            'tanggal_transaksi' => $normalizedFields['paid_at'] ?? $mappedFields['tanggal_transaksi'] ?? null,
+            'bank_tujuan' => $normalizedFields['recipient_bank'] ?? $mappedFields['bank_tujuan'] ?? null,
+            'nama_penerima' => $normalizedFields['recipient_name'] ?? $mappedFields['nama_penerima'] ?? null,
+            'rekening_tujuan' => $normalizedFields['recipient_account_no'] ?? $mappedFields['rekening_tujuan'] ?? null,
+            'bank_pengirim' => $normalizedFields['sender_bank'] ?? $mappedFields['bank_pengirim'] ?? null,
+            'nama_pengirim' => $normalizedFields['sender_name'] ?? $mappedFields['nama_pengirim'] ?? null,
+            'rekening_pengirim' => $normalizedFields['sender_account_no'] ?? $mappedFields['rekening_pengirim'] ?? null,
+            'nomor_referensi' => $normalizedFields['reference_no'] ?? $mappedFields['nomor_referensi'] ?? null,
+        ], static fn($value) => $value !== null && $value !== '');
+    }
+
     /**
      * Proxy OCR request through Laravel (same-origin) to avoid hosting path issues.
      */
@@ -67,32 +149,19 @@ class PaymentController extends Controller
 
         $ocrUrl = config('services.ocr.process_url');
 
-        // Gunakan parameter file + user sebagai key cache agar lebih reliable antar request
-        $fileHash = md5(\Illuminate\Support\Facades\Auth::id() . '_' . $file->getClientOriginalName() . '_' . $file->getSize());
-        $cacheKey = 'ocr_raw_' . $fileHash;
-
         try {
-            if (\Illuminate\Support\Facades\Cache::has($cacheKey)) {
-                $responseJson = \Illuminate\Support\Facades\Cache::get($cacheKey);
-                $statusCode = 200;
-            } else {
-                $response = Http::timeout(300)
-                    ->attach('file', fopen($sourcePath, 'r'), $file->getClientOriginalName() ?: 'proof.jpg')
-                    ->post($ocrUrl, array_filter([
-                        'student_id' => $request->input('student_id'),
-                        'uploaded_by' => Auth::id() ?: $request->input('uploaded_by'),
-                        'expected_amount' => $request->input('expected_amount'),
-                        'expected_date' => $request->input('expected_date'),
-                        'expected_bank' => $request->input('expected_bank'),
-                    ], static fn($v) => $v !== null && $v !== ''));
-                
-                $statusCode = $response->status();
-                $responseJson = $response->json();
-                
-                if ($response->ok() && is_array($responseJson)) {
-                    \Illuminate\Support\Facades\Cache::put($cacheKey, $responseJson, now()->addMinutes(60));
-                }
-            }
+            $response = Http::timeout(300)
+                ->attach('file', fopen($sourcePath, 'r'), $file->getClientOriginalName() ?: 'proof.jpg')
+                ->post($ocrUrl, array_filter([
+                    'student_id' => $request->input('student_id'),
+                    'uploaded_by' => Auth::id() ?: $request->input('uploaded_by'),
+                    'expected_amount' => $request->input('expected_amount'),
+                    'expected_date' => $request->input('expected_date'),
+                    'expected_bank' => $request->input('expected_bank'),
+                ], static fn($v) => $v !== null && $v !== ''));
+
+            $statusCode = $response->status();
+            $responseJson = $response->json();
         } catch (\Throwable $e) {
             \Log::warning('OCR proxy request failed', [
                 'error' => $e->getMessage(),
@@ -130,44 +199,30 @@ class PaymentController extends Controller
                         } catch (\Exception $e) {}
                     }
                     
-                    // Prefer Python's structural extraction if available, fallback to Ninja Layer
                     $pyFields = $json['extracted_fields'] ?? [];
-                    
-                    $json['extracted_fields'] = [
-                        'amount' => $pyFields['amount'] ?? $mapped['nominal'] ?? null,
-                        'paid_at' => !empty($pyFields['paid_at']) ? $pyFields['paid_at'] : $paidAt,
-                        'bank_name' => $pyFields['bank_name'] ?? $mapped['bank_tujuan'] ?? null,
-                        'recipient_name' => $pyFields['recipient_name'] ?? $mapped['nama_penerima'] ?? null,
-                        'recipient_account' => $pyFields['recipient_account'] ?? $mapped['rekening_tujuan'] ?? null,
-                        'sender_name' => $pyFields['sender_name'] ?? $mapped['nama_pengirim'] ?? null,
-                        'sender_bank' => $pyFields['sender_bank'] ?? $mapped['bank_pengirim'] ?? null,
-                        'sender_account' => $pyFields['sender_account'] ?? $mapped['rekening_pengirim'] ?? null,
-                        'reference_no' => $pyFields['reference_no'] ?? $mapped['nomor_referensi'] ?? null,
-                    ];
-                    
-                    // Update mapped fields for ninja validation fallback
-                    $mapped['nominal'] = $json['extracted_fields']['amount'];
-                    $mapped['tanggal_transaksi'] = $json['extracted_fields']['paid_at'];
+                    $mapped['tanggal_transaksi'] = $mapped['tanggal_transaksi'] ?? $paidAt;
+                    $json['extracted_fields'] = $this->normalizeOcrExtractedFields($pyFields, $mapped);
+                    $validationFields = $this->buildOcrValidationFields($json['extracted_fields'], $mapped);
                     
                     // Override Python validation with Ninja validation
                     $expectedDate = $request->input('expected_date');
                     $expectedAmount = $request->input('expected_amount');
                     
                     // Auto-correct nominal OCR typo (e.g., .00 read as .000) based on expected amount
-                    if ($expectedAmount > 0 && !empty($mapped['nominal'])) {
-                        $nom = (int)$mapped['nominal'];
+                    if ($expectedAmount > 0 && !empty($validationFields['nominal'])) {
+                        $nom = (int)$validationFields['nominal'];
                         $exp = (int)preg_replace('/\D/', '', $expectedAmount);
                         
                         if ($exp > 0 && $nom > $exp * 5) {
                             if ($nom >= 1000) {
                                 $div1000 = $nom / 1000;
-                                if ($div1000 <= $exp + 10000 && $div1000 >= 10000) {
-                                    $mapped['nominal'] = $div1000;
+                                if (abs($div1000 - $exp) <= 5000) {
+                                    $validationFields['nominal'] = $div1000;
                                     $json['extracted_fields']['amount'] = $div1000;
                                 } else {
                                     $div100 = $nom / 100;
-                                    if ($div100 <= $exp + 10000 && $div100 >= 10000) {
-                                        $mapped['nominal'] = $div100;
+                                    if (abs($div100 - $exp) <= 5000) {
+                                        $validationFields['nominal'] = $div100;
                                         $json['extracted_fields']['amount'] = $div100;
                                     }
                                 }
@@ -175,7 +230,8 @@ class PaymentController extends Controller
                         }
                     }
                     
-                    $strictValidation = $mapper->validateStrict($mapped, $expectedDate, $expectedAmount);
+                    $strictValidation = $mapper->validateStrict($validationFields, $expectedDate, $expectedAmount);
+                    $json['mapped_fields'] = $validationFields + $mapped;
                     
                     $json['validation'] = [
                         'is_valid' => $strictValidation['is_valid'],
@@ -467,17 +523,11 @@ class PaymentController extends Controller
                         ]);
                             $ocrStatus = 'unavailable';
                     } else {
-                            // Gunakan parameter file + user sebagai key cache agar lebih reliable antar request
-                            $fileHash = md5(\Illuminate\Support\Facades\Auth::id() . '_' . $file->getClientOriginalName() . '_' . $file->getSize());
-                            $cacheKey = 'ocr_raw_' . $fileHash;
                             $ocrData = null;
                             $multipart = null;
 
-                            if (\Illuminate\Support\Facades\Cache::has($cacheKey)) {
-                                $ocrData = \Illuminate\Support\Facades\Cache::get($cacheKey);
-                            } else {
-                                try {
-                                    $multipart = Http::timeout(300)
+                            try {
+                                $multipart = Http::timeout(300)
                                 ->attach('file', fopen($sourcePath, 'r'), $file->getClientOriginalName() ?: 'proof.jpg')
                                 ->post($ocrUrl, array_filter([
                                     'student_id' => $validated['student_id'] ?? null,
@@ -489,20 +539,16 @@ class PaymentController extends Controller
                                         : ($validated['amount'] ?? null),
                                     ]));
                                     
-                                    if ($multipart && $multipart->ok()) {
-                                        $ocrData = $multipart->json() ?: [];
-                                        if (is_array($ocrData)) {
-                                            \Illuminate\Support\Facades\Cache::put($cacheKey, $ocrData, now()->addMinutes(60));
-                                        }
-                                    }
-                                } catch (\Exception $httpException) {
-                                    \Log::warning('OCR HTTP request failed (service unavailable)', [
-                                        'error' => $httpException->getMessage(),
-                                        'student_id' => $studentId,
-                                    ]);
-                                    $ocrStatus = 'unavailable';
-                                    $multipart = null;
+                                if ($multipart && $multipart->ok()) {
+                                    $ocrData = $multipart->json() ?: [];
                                 }
+                            } catch (\Exception $httpException) {
+                                \Log::warning('OCR HTTP request failed (service unavailable)', [
+                                    'error' => $httpException->getMessage(),
+                                    'student_id' => $studentId,
+                                ]);
+                                $ocrStatus = 'unavailable';
+                                $multipart = null;
                             }
 
                             if (!$ocrData && $multipart && !$multipart->ok()) {
@@ -518,15 +564,19 @@ class PaymentController extends Controller
                             if (isset($ocrData['full_text'])) {
                                 try {
                                     $mapper = new \App\Services\OcrFieldMapperService();
-                                    $ocrData['mapped_fields'] = $mapper->mapFields($ocrData['full_text']);
+                                    $mapped = $mapper->mapFields($ocrData['full_text']);
+                                    $pyFields = $ocrData['extracted_fields'] ?? $ocrData['fields'] ?? [];
+                                    $ocrData['extracted_fields'] = $this->normalizeOcrExtractedFields($pyFields, $mapped);
+                                    $validationFields = $this->buildOcrValidationFields($ocrData['extracted_fields'], $mapped);
+                                    $ocrData['mapped_fields'] = $validationFields + $mapped;
                                     
                                     // STRICT VALIDATION
                                     $expectedDate = $validated['paid_at'] ?? null;
                                     $expectedAmount = ($invoiceType === 'uniform' && is_array($uniformTypes) && count($uniformTypes) > 1) ? null : ($validated['amount'] ?? null);
                                     
                                     // Auto-correct nominal OCR typo (e.g., .00 read as .000) based on expected amount
-                                    if ($expectedAmount > 0 && !empty($ocrData['mapped_fields']['nominal'])) {
-                                        $nom = (int)$ocrData['mapped_fields']['nominal'];
+                                    if ($expectedAmount > 0 && !empty($validationFields['nominal'])) {
+                                        $nom = (int)$validationFields['nominal'];
                                         $exp = (int)preg_replace('/\D/', '', $expectedAmount);
                                         
                                         // If nominal is unreasonably large compared to expected (e.g., > 5x larger)
@@ -534,23 +584,26 @@ class PaymentController extends Controller
                                         if ($exp > 0 && $nom > $exp * 5) {
                                             if ($nom >= 1000) {
                                                 // If dividing by 1000 brings it to a reasonable payment amount
-                                                // (less than or equal to expected amount + tolerance, and at least 10k)
                                                 $div1000 = $nom / 1000;
-                                                if ($div1000 <= $exp + 10000 && $div1000 >= 10000) {
+                                                if (abs($div1000 - $exp) <= 5000) {
+                                                    $validationFields['nominal'] = $div1000;
                                                     $ocrData['mapped_fields']['nominal'] = $div1000;
+                                                    $ocrData['extracted_fields']['amount'] = $div1000;
                                                 }
                                                 // Or dividing by 100
                                                 else {
                                                     $div100 = $nom / 100;
-                                                    if ($div100 <= $exp + 10000 && $div100 >= 10000) {
+                                                    if (abs($div100 - $exp) <= 5000) {
+                                                        $validationFields['nominal'] = $div100;
                                                         $ocrData['mapped_fields']['nominal'] = $div100;
+                                                        $ocrData['extracted_fields']['amount'] = $div100;
                                                     }
                                                 }
                                             }
                                         }
                                     }
-                                    
-                                    $strictValidation = $mapper->validateStrict($ocrData['mapped_fields'], $expectedDate, $expectedAmount);
+
+                                    $strictValidation = $mapper->validateStrict($validationFields, $expectedDate, $expectedAmount);
                                     $ocrData['strict_validation'] = $strictValidation;
                                     
                                     $isOcrValid = $strictValidation['is_valid'];
@@ -560,27 +613,35 @@ class PaymentController extends Controller
 
                                     // Persiapkan data hasil OCR untuk disimpan
                                     $parsedDate = null;
-                                    if (!empty($ocrData['mapped_fields']['tanggal_transaksi'])) {
+                                    if (!empty($validationFields['tanggal_transaksi'])) {
                                         try {
-                                            $tanggalBersih = trim(preg_replace('/[^0-9a-zA-Z\/\-\s\.,:]/', '', $ocrData['mapped_fields']['tanggal_transaksi']));
-                                            $parsedDateStr = str_replace(['\\', '/'], '-', $tanggalBersih);
-                                            $parsedDate = \Carbon\Carbon::parse($parsedDateStr);
+                                            $tanggalBersih = trim(preg_replace('/[^0-9a-zA-Z\/\-\s\.,:]/', '', $validationFields['tanggal_transaksi']));
+                                            $parsedDateStr = str_replace(['\\', '/', ','], ['-', '-', ''], $tanggalBersih);
+
+                                            if (!preg_match('/\d{2}[:\.]\d{2}(?:[:\.]\d{2})?/', $parsedDateStr)) {
+                                                // Jam gagal diekstrak
+                                                \Illuminate\Support\Facades\Log::warning("Jam gagal diekstrak dari dokumen. Return null (tidak fallback ke 00:00:00).");
+                                                $parsedDate = null;
+                                            } else {
+                                                $parsedDate = \Carbon\Carbon::parse($parsedDateStr);
+                                            }
                                         } catch (\Exception $e) {}
                                     }
 
                                     $ocrReceiptData = [
                                         'student_id' => $studentId,
                                         'uploaded_by' => \Illuminate\Support\Facades\Auth::id(),
-                                        'amount' => $ocrData['mapped_fields']['nominal'] ?? null,
+                                        'amount' => $validationFields['nominal'] ?? null,
                                         'paid_at' => $parsedDate ? $parsedDate->format('Y-m-d H:i:s') : null,
-                                        'bank_name' => $ocrData['mapped_fields']['bank_tujuan'] ?? null,
-                                        'sender_name' => $ocrData['mapped_fields']['nama_pengirim'] ?? null,
-                                        'reference_no' => $ocrData['mapped_fields']['nomor_referensi'] ?? null,
+                                        'bank_name' => $validationFields['bank_tujuan'] ?? null,
+                                        'sender_name' => $validationFields['nama_pengirim'] ?? null,
+                                        'reference_no' => $validationFields['nomor_referensi'] ?? null,
                                         'ocr_raw_text' => $ocrData['full_text'],
                                         'ocr_confidence' => $ocrData['confidence'] ?? 1.0,
                                         'status' => 'pending',
                                         'notes' => json_encode([
                                             'mapped_fields' => $ocrData['mapped_fields'],
+                                            'extracted_fields' => $ocrData['extracted_fields'],
                                             'validation_checks' => $strictValidation['checks'],
                                         ]),
                                     ];

@@ -18,6 +18,7 @@ import cv2
 import logging
 from pathlib import Path
 import inspect
+from ocr_normalizer import OcrNormalizer
 
 # Setup logging
 logger = logging.getLogger(__name__)
@@ -48,7 +49,7 @@ class OCRProcessor:
                 pass
             
             ocr_kwargs: Dict[str, Any] = {
-                'use_angle_cls': True,  # Deteksi rotasi otomatis
+                'use_angle_cls': False,  # DIMATIKAN: Mayoritas screenshot m-banking sudah tegak, menghemat 30% waktu CPU
                 'lang': settings.OCR_LANG,
                 'use_gpu': settings.OCR_USE_GPU,
                 'show_log': False,
@@ -155,10 +156,13 @@ class OCRProcessor:
                     except Exception:
                         box = poly
 
-                full_text_lines.append(str(text))
+                # Apply Normalization Layer
+                normalized_text = OcrNormalizer.normalize(str(text))
+
+                full_text_lines.append(normalized_text)
                 confidences.append(conf)
                 detections.append({
-                    "text": str(text),
+                    "text": normalized_text,
                     "confidence": round(conf, 4),
                     "box": box,
                 })
@@ -195,10 +199,13 @@ class OCRProcessor:
             if conf < settings.OCR_CONFIDENCE_THRESHOLD:
                 continue
 
-            full_text_lines.append(str(text))
+            # Apply Normalization Layer
+            normalized_text = OcrNormalizer.normalize(str(text))
+
+            full_text_lines.append(normalized_text)
             confidences.append(conf)
             detections.append({
-                "text": str(text),
+                "text": normalized_text,
                 "confidence": round(conf, 4),
                 "box": box,
             })
@@ -253,15 +260,11 @@ class OCRProcessor:
                 logger.debug("Augmented variant: brightness + contrast + deskew applied")
             # 'original' = no preprocessing (handled above)
 
-            # Save temporary processed image
-            temp_path = str(Path(image_path).parent / f"temp_{variant}.png")
-            cv2.imwrite(temp_path, img)
-
-            # Run OCR
-            result = self._run_ocr(temp_path)
-
-            # Clean up temp file
-            Path(temp_path).unlink(missing_ok=True)
+            # TAHAP 4: OPTIMASI PREPROCESSING (Direct Memory, No Disk I/O)
+            # PaddleOCR menerima numpy array (cv2 image) secara langsung!
+            # Kita TIDAK perlu cv2.imwrite() lalu membaca temp_path.
+            
+            result = self._run_ocr(img)
 
             full_text, detections, avg_confidence = self._parse_ocr_result(result)
             return full_text, detections, avg_confidence
@@ -318,10 +321,12 @@ class OCRProcessor:
                 logger.debug(f"Processing variant: {variant}")
                 text, dets, conf = self.process_image_variant(image_path, variant)
 
-                # Fast path: jika original sudah bagus, skip varian mahal
-                if variant == 'original' and text and conf >= 90.0 and len(dets) >= 12:
+                # TAHAP 3 & 7: OPTIMASI BOTTLENECK MULTIVARIANT
+                # Fast path dilonggarkan: e-wallet (OVO/Dana) seringkali hanya punya <10 kata.
+                # Jika confidence > 85.0% dan jumlah deteksi >= 5, kita langsung percaya original!
+                if variant == 'original' and text and conf >= 85.0 and len(dets) >= 5:
                     logger.info(
-                        f"Original variant good enough: {len(dets)} detections, {conf}% confidence"
+                        f"Original variant good enough: {len(dets)} detections, {conf}% confidence (Bypassed expensive variants)"
                     )
                     return text, dets, conf
 
@@ -378,6 +383,8 @@ class OCRProcessor:
                 f"dets: {best['detection_count']})"
             )
 
+            import gc
+            gc.collect()
             return best['text'], best['detections'], best['confidence']
 
         except Exception as e:

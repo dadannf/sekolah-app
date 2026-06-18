@@ -97,7 +97,7 @@ class PaymentValidator:
                     )
         
         # 3. Validate Bank Name (flexible when account matches)
-        ocr_bank = ocr_data.get('bank_name')
+        ocr_bank = ocr_data.get('recipient_bank') or ocr_data.get('bank_name')
         bank_allowed = False
         if ocr_bank:
             ocr_bank_upper = ocr_bank.upper()
@@ -134,6 +134,10 @@ class PaymentValidator:
                 if ocr_acc_digits == self.school_account_number:
                     details['account_match'] = True
                     account_match = True
+                    if self.allowed_banks and not bank_allowed:
+                        ocr_bank = self.allowed_banks[0]
+                        bank_allowed = True
+                        details['bank_allowed_by_account'] = True
                 else:
                     warnings.append(
                         'Nomor rekening tujuan berbeda. '
@@ -150,9 +154,6 @@ class PaymentValidator:
         
         # 4. Validate Recipient Name (Nama Penerima)
         ocr_recipient = ocr_data.get('recipient_name')
-        if not ocr_recipient:
-            # Fallback to sender_name
-            ocr_recipient = ocr_data.get('sender_name')
         
         if not ocr_recipient:
             # If bank/account already valid, treat as warning

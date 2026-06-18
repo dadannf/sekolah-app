@@ -237,11 +237,27 @@ class DashboardController extends Controller
         $sort = $request->input('sort', 'az');
         $sortDirection = $sort === 'za' ? 'desc' : 'asc';
 
-        // Ambil data siswa dari database dengan pagination
+        $search = $request->input('search');
+
+        // Ambil data siswa dari database dengan pagination dan pencarian
         $siswa = Student::with('user')
+            ->when($search, function ($query) use ($search) {
+                // Gunakan kurung untuk mengelompokkan kondisi OR
+                $query->where(function($q) use ($search) {
+                    $q->where('name', 'like', "%{$search}%")
+                      ->orWhere('nis', 'like', "%{$search}%")
+                      ->orWhere('nisn', 'like', "%{$search}%")
+                      ->orWhere('major', 'like', "%{$search}%")
+                      ->orWhere('current_grade_level', 'like', "%{$search}%");
+                });
+                
+                // Sortir prioritas: Nama yang diawali huruf tersebut muncul paling atas
+                $query->orderByRaw("CASE WHEN name LIKE '{$search}%' THEN 1 ELSE 2 END");
+            })
             ->orderBy('name', $sortDirection)
             ->orderBy('nis', 'asc')
-            ->paginate(15);
+            ->paginate(15)
+            ->withQueryString();
 
         // Ambil semua kolom tabel students untuk ditampilkan di modal detail
         $studentColumns = Schema::getColumnListing('students');
@@ -713,6 +729,9 @@ class DashboardController extends Controller
                 $q->where('nis', 'like', "%{$searchFilter}%")
                   ->orWhere('name', 'like', "%{$searchFilter}%");
             });
+            
+            // Sortir prioritas: Nama yang diawali huruf tersebut muncul paling atas
+            $query->orderByRaw("CASE WHEN name LIKE '{$searchFilter}%' THEN 1 ELSE 2 END");
         }
 
         $query->orderBy('name', $sortDirection)

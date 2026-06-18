@@ -66,6 +66,41 @@ class FieldExtractor:
             logger.warning(f"BankReceiptParser failed ({exc}), falling back to individual extractors")
             primary = {}
 
+        # ── PRIORITY NUMBER ENGINE (Konflik Resolusi) ───────────────
+        try:
+            from priority_engine import PriorityNumberEngine
+            pe = PriorityNumberEngine()
+            raw_lines = [ln.strip() for ln in text.splitlines() if ln.strip()]
+            if detections:
+                dets_sorted = []
+                for det in detections:
+                    t = det.get('text', '').strip()
+                    box = det.get('box')
+                    if t:
+                        ys = [pt[1] for pt in box] if box else [0]
+                        xs = [pt[0] for pt in box] if box else [0]
+                        dets_sorted.append((sum(ys)/len(ys), sum(xs)/len(xs), t))
+                dets_sorted.sort(key=lambda x: (x[0], x[1]))
+                raw_lines = [t for _, _, t in dets_sorted]
+            
+            pe_results = pe.process(raw_lines)
+            logger.info(f"PriorityEngine Results: {pe_results}")
+            
+            # Terapkan hasil PriorityEngine untuk menimpa nilai yang masih null
+            if pe_results['NOMINAL'] and not primary.get('amount'):
+                primary['amount'] = float(pe_results['NOMINAL'])
+                
+            if pe_results['REKENING_PENERIMA'] and not primary.get('recipient_account_no'):
+                primary['recipient_account_no'] = pe_results['REKENING_PENERIMA']
+                
+            if pe_results['REKENING_PENGIRIM'] and not primary.get('sender_account_no'):
+                primary['sender_account_no'] = pe_results['REKENING_PENGIRIM']
+                
+            if pe_results['NOMOR_REFERENSI'] and not primary.get('reference_no'):
+                primary['reference_no'] = pe_results['NOMOR_REFERENSI']
+        except Exception as exc:
+            logger.warning(f"PriorityNumberEngine failed: {exc}")
+
         # ── FALLBACK: individual extractors for any field still missing ───
         # Extract datetime
         paid_at = primary.get('paid_at') or self.extract_datetime(text, detections)
@@ -100,9 +135,73 @@ class FieldExtractor:
             'recipient_account_no': recipient_account,
             'sender_account_no': primary.get('sender_account_no'),
             'reference_no': reference_no,
+            'detected_format': primary.get('detected_format') or primary.get('_bank_format', 'fallback'),
+            'field_confidence': self._build_field_confidence(primary),
             # Debug metadata
             '_bank_format': primary.get('_bank_format', 'fallback'),
+            '_warnings': []
         }
+
+        self._apply_school_recipient_truth(fields)
+        
+        # ── Validasi & Rekonstruksi Ekstra Rekening ───
+        raw_lines = [ln.strip() for ln in text.splitlines() if ln.strip()]
+        
+        def validate_account(acc_no: str, bank: str, field_name: str):
+            if not acc_no or not bank: return
+            
+            # Aturan panjang rekening bank Indonesia
+            expected_lengths = {
+                'BCA': [10],
+                'BNI': [10],
+                'MANDIRI': [13],
+                'BRI': [15],
+                'BSI': [10],
+                'SEABANK': [12],
+                'JAGO': [12]
+            }
+            
+            for b_key, valid_lens in expected_lengths.items():
+                if b_key in bank.upper():
+                    if len(acc_no) not in valid_lens:
+                        # Terlalu pendek atau panjang
+                        if len(acc_no) < min(valid_lens):
+                            # Multi-Line Account Reconstruction
+                            original_acc_no = acc_no
+                            stitched = acc_no
+                            for i, ln in enumerate(raw_lines):
+                                if original_acc_no in re.sub(r'\D', '', ln):
+                                    curr_idx = i + 1
+                                    # Gabungkan selama baris berikutnya hanya digit dan panjang belum mencapai minimum bank
+                                    while curr_idx < len(raw_lines) and len(stitched) < min(valid_lens):
+                                        next_line = raw_lines[curr_idx].strip()
+                                        if next_line and re.match(r'^[\d\s\.\-]+$', next_line):
+                                            next_digits = re.sub(r'\D', '', next_line)
+                                            if next_digits:
+                                                stitched += next_digits
+                                            curr_idx += 1
+                                        else:
+                                            break
+                                    break
+                                    
+                            if len(stitched) > len(original_acc_no):
+                                acc_no = stitched
+                                fields[field_name] = stitched
+                                logger.info(f"Multi-line reconstruction success: {original_acc_no} -> {stitched}")
+                                
+                                # Jika setelah dijahit sudah valid, langsung return
+                                if len(stitched) in valid_lens:
+                                    return
+
+                            # Jika gagal rekonstruksi atau setelah direkonstruksi tetap kurang panjang
+                            msg = f"Nomor rekening {b_key} terlalu pendek. Terbaca {len(acc_no)} digit, butuh {min(valid_lens)} digit. (Kemungkinan terpotong)"
+                            fields['_warnings'].append(msg)
+                            logger.warning(msg)
+                    break
+                    
+        validate_account(fields['recipient_account_no'], fields['recipient_bank'], 'recipient_account_no')
+        validate_account(fields['sender_account_no'], fields['sender_bank'], 'sender_account_no')
+        self._apply_school_recipient_truth(fields)
         
         # Log extraction results
         extracted_count = sum(1 for k, v in fields.items() if v is not None and not k.startswith('_'))
@@ -113,6 +212,76 @@ class FieldExtractor:
         
         return fields
 
+    def _build_field_confidence(self, primary: Dict[str, Any]) -> Dict[str, float]:
+        base = float(primary.get('_confidence') or 0.55)
+        base = max(0.0, min(base, 1.0))
+        return {
+            'amount': base if primary.get('amount') else 0.45,
+            'paid_at': base if primary.get('paid_at') else 0.45,
+            'sender_bank': base if primary.get('sender_bank') else 0.35,
+            'recipient_bank': base if primary.get('recipient_bank') else 0.35,
+            'sender_name': base if primary.get('sender_name') else 0.35,
+            'recipient_name': base if primary.get('recipient_name') else 0.35,
+            'sender_account_no': base if primary.get('sender_account_no') else 0.35,
+            'recipient_account_no': base if primary.get('recipient_account_no') else 0.35,
+            'reference_no': base if primary.get('reference_no') else 0.35,
+        }
+
+    def _apply_school_recipient_truth(self, fields: Dict[str, Any]) -> None:
+        school_account = re.sub(r'\D', '', getattr(settings, 'SCHOOL_ACCOUNT_NUMBER', '') or '')
+        if not school_account:
+            return
+
+        recipient_account = re.sub(r'\D', '', str(fields.get('recipient_account_no') or ''))
+        is_exact = recipient_account == school_account
+        is_near = self._is_near_school_account(recipient_account, school_account)
+        if not is_exact and not is_near:
+            return
+
+        fields['recipient_account_no'] = school_account
+        fields['recipient_name'] = settings.SCHOOL_ACCOUNT_NAME.strip() or fields.get('recipient_name')
+        allowed_banks = settings.allowed_banks_list
+        if allowed_banks:
+            fields['recipient_bank'] = allowed_banks[0]
+            fields['bank_name'] = allowed_banks[0]
+
+        confidence = fields.setdefault('field_confidence', {})
+        confidence['recipient_account_no'] = 0.99 if is_exact else 0.93
+        confidence['recipient_bank'] = 0.98
+        confidence['recipient_name'] = max(float(confidence.get('recipient_name') or 0), 0.95)
+        if is_near and not is_exact:
+            fields.setdefault('_warnings', []).append(
+                f"Nomor rekening tujuan dikoreksi dari {recipient_account} menjadi {school_account} "
+                "karena sangat dekat dengan rekening sekolah."
+            )
+
+    def _is_near_school_account(self, candidate: str, school_account: str) -> bool:
+        if not candidate or not school_account:
+            return False
+        if len(candidate) < len(school_account) - 1:
+            return False
+        if abs(len(candidate) - len(school_account)) > 1:
+            return False
+        if not school_account.startswith(candidate[:min(8, len(candidate))]):
+            return False
+        return self._levenshtein_distance(candidate, school_account) <= 1
+
+    def _levenshtein_distance(self, left: str, right: str) -> int:
+        if left == right:
+            return 0
+        if len(left) < len(right):
+            left, right = right, left
+        previous = list(range(len(right) + 1))
+        for i, left_char in enumerate(left, 1):
+            current = [i]
+            for j, right_char in enumerate(right, 1):
+                current.append(min(
+                    current[j - 1] + 1,
+                    previous[j] + 1,
+                    previous[j - 1] + (left_char != right_char),
+                ))
+            previous = current
+        return previous[-1]
 
     def extract_recipient_account_number(self, text: str, detections: List[Dict] = None) -> Optional[str]:
         """Extract destination account number (rekening tujuan) from OCR text.
@@ -172,7 +341,7 @@ class FieldExtractor:
 
         # Context-first patterns (lebih aman daripada ambil angka panjang random)
         patterns = [
-            r'(?:no\.?\s*(?:rek|rekening)|nomor\s*(?:rek|rekening)|rekening\s*(?:tujuan|penerima)?|account\s*(?:no|number)|acc(?:ount)?\s*no)\s*[:\-]?\s*([0-9\s\-]{10,25})',
+            r'(?:no\.?\s*(?:rek|rekening)|nomor\s*(?:rek|rekening)|rekening\s*(?:tujuan|penerima)?|rek\s*tujuan|account\s*(?:no|number)|acc(?:ount)?\s*no)\s*[:\-]?\s*([0-9\s\-]{10,25})',
             r'(?:ke\s*rekening|transfer\s*ke)\s*[:\-]?\s*([0-9\s\-]{10,25})',
         ]
 
@@ -183,20 +352,8 @@ class FieldExtractor:
                 if 10 <= len(digits) <= 16:
                     return digits
 
-        # Fallback: cari kandidat angka panjang 10-16 digit
-        candidates = []
-        for m in re.finditer(r'\b[0-9][0-9\s\-]{9,25}\b', text):
-            digits = re.sub(r'\D', '', m.group(0) or '')
-            if 10 <= len(digits) <= 16:
-                # Exclude obvious dates (YYYYMMDD) / times etc by length and pattern
-                if len(digits) == 8:
-                    continue
-                candidates.append(digits)
-
-        # Prefer the longest candidate (seringkali rekening lebih panjang daripada ref)
-        if candidates:
-            candidates.sort(key=len, reverse=True)
-            return candidates[0]
+        # ATURAN: Jika tidak ada label, jangan tebak angka panjang.
+        return None
 
         return None
     
@@ -323,9 +480,13 @@ class FieldExtractor:
             return None
 
         def parse_amount_from_line(line: str) -> Optional[float]:
+            # Fix common OCR typos for amounts: RPS -> RP5, RP.S -> RP.5, S.000 -> 5.000
+            line_fixed = re.sub(r'(?i)(RP\.?\s*)S', r'\g<1>5', line)
+            line_fixed = re.sub(r'(?i)\bS(\.\d{3})\b', r'5\1', line_fixed)
+            
             m = re.search(
                 r'(?:Rp\.?\s*)?(\d{1,3}(?:[.,]\d{3})*(?:[.,]\d{2})?|\d{4,})',
-                line,
+                line_fixed,
                 re.IGNORECASE,
             )
             if not m:
@@ -340,31 +501,42 @@ class FieldExtractor:
                 return amount
             return None
 
-        # Priority: Nominal -> Jumlah Transfer -> Amount -> Total
+        # Priority: Total/final amount -> Nominal -> other amount labels.
+        # If admin fees exist, Total is the paid transfer value.
         priority_labels = [
+            ['total transaksi', 'total bayar', 'total'],
             ['nominal'],
             ['jumlah transfer', 'jumlah'],
             ['amount'],
-            ['total'],
         ]
-        amounts = []
         for labels in priority_labels:
+            label_amounts = []
             for i, ln in enumerate(raw_lines):
                 low = ln.lower()
                 if any(lbl in low for lbl in labels):
                     inline = parse_amount_from_line(ln)
                     if inline is not None:
                         logger.debug(f"Found amount (labeled): Rp {inline:,.0f}")
-                        amounts.append(inline)
+                        label_amounts.append(inline)
                     # Try next line for separated value
                     for j in range(i + 1, min(i + 3, len(raw_lines))):
                         cand = parse_amount_from_line(raw_lines[j])
                         if cand is not None:
                             logger.debug(f"Found amount (next line): Rp {cand:,.0f}")
-                            amounts.append(cand)
+                            label_amounts.append(cand)
+            if label_amounts:
+                selected_amount = max(label_amounts)
+                logger.info(f"Extracted amount from preferred label {labels}: Rp {selected_amount:,.0f}")
+                return selected_amount
+
+        amounts = []
 
         # Remove newlines for better matching
         text = text.replace('\n', ' ')
+        
+        # Fix common OCR typos for amounts: RPS -> RP5, RP.S -> RP.5, S.000 -> 5.000
+        text = re.sub(r'(?i)(RP\.?\s*)S', r'\g<1>5', text)
+        text = re.sub(r'(?i)\bS(\.\d{3})\b', r'5\1', text)
         
         logger.debug("Extracting amount from text...")
         
@@ -448,10 +620,10 @@ class FieldExtractor:
         # Enhanced time patterns
         time_patterns = [
             # Format: HH:MM:SS or HH:MM (including those after date like :09/08/1010:39:45)
-            r'(\d{1,2}:\d{2}:\d{2})',
-            r'\b(\d{1,2}:\d{2}(?::\d{2})?)\b',
+            r'(\d{1,2}[:.]\d{2}[:.]\d{2})',
+            r'\b(\d{1,2}[:.]\d{2}(?:[:.]\d{2})?)\b',
             # After keywords
-            r'(?:waktu|time|jam|pukul)[:\s]+(\d{1,2}:\d{2}(?::\d{2})?)',
+            r'(?:waktu|time|jam|pukul)[:\s]+(\d{1,2}[:.]\d{2}(?:[:.]\d{2})?)',
         ]
         
         # Extract date with validation
@@ -468,7 +640,7 @@ class FieldExtractor:
                     if match.lastindex and match.lastindex >= 2:
                         try:
                             time_str = match.group(2)
-                            time_parts = time_str.split(':')
+                            time_parts = re.split(r'[:.]', time_str)
                             if len(time_parts) >= 2:
                                 hour = int(time_parts[0])
                                 minute = int(time_parts[1])
@@ -541,7 +713,7 @@ class FieldExtractor:
                 if match:
                     time_str = match.group(1)
                     try:
-                        time_parts = time_str.split(':')
+                        time_parts = re.split(r'[:.]', time_str)
                         if len(time_parts) >= 2:
                             hour = int(time_parts[0])
                             minute = int(time_parts[1])
@@ -549,16 +721,18 @@ class FieldExtractor:
                             
                             # Validate time values
                             if 0 <= hour <= 23 and 0 <= minute <= 59 and 0 <= second <= 59:
-                                if date_found:
-                                    date_found = date_found.replace(hour=hour, minute=minute, second=second)
-                                else:
-                                    date_found = datetime.now().replace(hour=hour, minute=minute, second=second)
+                                time_found = (hour, minute, second)
+                                date_found = date_found.replace(hour=hour, minute=minute, second=second)
                                 logger.debug(f"Found time: {hour:02d}:{minute:02d}:{second:02d}")
                                 break
                     except ValueError as e:
                         logger.debug(f"Failed to parse time '{time_str}': {e}")
                         continue
         
+        if date_found and not time_found:
+            logger.warning(f"Jam gagal diekstrak dari dokumen. Return null (tidak fallback ke 00:00:00).")
+            return None
+            
         if date_found:
             logger.info(f"Extracted datetime: {date_found.isoformat()}")
         else:
@@ -605,116 +779,46 @@ class FieldExtractor:
             for i, ln in enumerate(raw_lines):
                 low = ln.lower()
                 if any(lbl in low for lbl in labels):
-                    inline = re.search(r':\s*([A-Z\s]+)$', ln, re.IGNORECASE)
-                    if inline:
-                        bank = self._normalize_bank_name(inline.group(1).strip())
-                        if bank:
-                            return bank
+                    # 1. Cari nama bank di baris yang sama (Context-based inline)
+                    for bank in self.BANK_NAMES:
+                        if re.search(r'\b' + re.escape(bank.lower()) + r'\b', low):
+                            normalized = self._normalize_bank_name(bank)
+                            if normalized:
+                                return normalized
+                                
+                    # 2. Jika tidak ada di baris yang sama, cari di 1-2 baris berikutnya
                     for j in range(i + 1, min(i + 3, len(raw_lines))):
-                        bank = self._normalize_bank_name(raw_lines[j])
-                        if bank:
-                            return bank
+                        next_low = raw_lines[j].lower()
+                        for bank in self.BANK_NAMES:
+                            if re.search(r'\b' + re.escape(bank.lower()) + r'\b', next_low):
+                                normalized = self._normalize_bank_name(bank)
+                                if normalized:
+                                    return normalized
             return None
 
-        recipient_bank = find_bank_from_label(['bank tujuan', 'bank penerima'])
-        sender_bank = find_bank_from_label(['bank asal', 'bank pengirim', 'sumber dana'])
+        # Gunakan label mutlak untuk mencari bank
+        recipient_bank = find_bank_from_label(['bank tujuan', 'bank penerima', 'ke bank', 'tujuan bank'])
+        sender_bank = find_bank_from_label(['bank asal', 'bank pengirim', 'dari bank'])
         
-        # Strategy 1: Look for e-wallet sender (DANA, OVO, GoPay)
+        # Tambahan: Deteksi E-Wallet berdasarkan label eksplisit
         ewallet_patterns = [
-            r'(DANA|OVO|GOPAY|SHOPEEPAY|LINKAJA)\s+ID',  # "DANA ID"
-            r'Metode\s+Pembayaran[:\s]+(Saldo\s+)?(DANA|OVO|GOPAY)',  # "Metode Pembayaran Saldo DANA"
-            r'^(DANA|OVO|GOPAY)',  # First line
+            r'(DANA|OVO|GOPAY|SHOPEEPAY|LINKAJA)\s+ID',
+            r'Metode\s+Pembayaran[:\s]+(Saldo\s+)?(DANA|OVO|GOPAY)',
         ]
         
-        for pattern in ewallet_patterns:
-            match = re.search(pattern, text_upper, re.MULTILINE)
-            if match:
-                # Get the e-wallet name
-                ewallet_name = None
-                if 'DANA' in match.group(0):
-                    ewallet_name = 'DANA'
-                elif 'OVO' in match.group(0):
-                    ewallet_name = 'OVO'
-                elif 'GOPAY' in match.group(0):
-                    ewallet_name = 'GoPay'
-                elif 'SHOPEE' in match.group(0):
-                    ewallet_name = 'ShopeePay'
-                elif 'LINKAJA' in match.group(0):
-                    ewallet_name = 'LinkAja'
-                
-                if ewallet_name:
-                    sender_bank = ewallet_name
-                    logger.debug(f"Sender bank (e-wallet): {sender_bank}")
-                    break
-        
-        # Strategy 2: Look for ATM/top bank (usually sender)
         if not sender_bank:
-            atm_patterns = [
-                r'ATM\s+BANK\s+([A-Z\s]+)',
-                r'BANK\s+([A-Z\s]+)\s+ATM',
-                r'^([A-Z\s]+)\s+BANK',  # First line bank
-            ]
-            
-            for pattern in atm_patterns:
-                match = re.search(pattern, text_upper)
+            for pattern in ewallet_patterns:
+                match = re.search(pattern, text_upper, re.MULTILINE)
                 if match:
-                    bank_text = match.group(1).strip()
-                    sender_bank = self._normalize_bank_name(bank_text)
-                    if sender_bank:
-                        logger.debug(f"Sender bank (ATM): {sender_bank}")
-                        break
-        
-        # Strategy 3: Look for transfer patterns
-        if not sender_bank:
-            transfer_patterns = [
-                r'DARI\s+(?:BANK\s+)?([A-Z\s]+)\s+KE',
-                r'FROM\s+(?:BANK\s+)?([A-Z\s]+)\s+TO',
-            ]
-            
-            for pattern in transfer_patterns:
-                match = re.search(pattern, text_upper)
-                if match:
-                    bank_text = match.group(1).strip()
-                    sender_bank = self._normalize_bank_name(bank_text)
-                    if sender_bank:
-                        logger.debug(f"Sender bank (transfer): {sender_bank}")
-                        break
-        
-        # Strategy 4: Look for recipient bank (especially in e-wallet transfers)
-        recipient_patterns = [
-            # E-wallet format: "ke NAMA - BANK ••••1234"
-            r'ke\s+[A-Z][A-Z\s]+-\s+([A-Z]+)\s+[•\d]+',  # "ke AHMAD HILMI FAUZAN - BCA ••••2811"
-            r'Akun\s+Bank[:\s]+([A-Z]+)',  # "Akun Bank BCA ••••2811"
-            r'\b([A-Z]{2,})\s*[.•]{2,}\d+',  # "BCA....2811" (OCR dots instead of bullets)
-            r'Bank\s+Tujuan[:\s]+([A-Z\s]+)',  # "Bank Tujuan BCA"
-            
-            # Traditional patterns
-            r'KE\s+(?:BANK\s+)?([A-Z\s]+)',
-            r'TO\s+(?:BANK\s+)?([A-Z\s]+)',
-            r'TUJUAN\s+(?:BANK\s+)?([A-Z\s]+)',
-        ]
-        
-        for pattern in recipient_patterns:
-            match = re.search(pattern, text_upper)
-            if match:
-                bank_text = match.group(1).strip()
-                recipient_bank = self._normalize_bank_name(bank_text)
-                if recipient_bank:
-                    logger.debug(f"Recipient bank: {recipient_bank}")
+                    ewallet_name = match.group(0)
+                    if 'DANA' in ewallet_name: sender_bank = 'DANA'
+                    elif 'OVO' in ewallet_name: sender_bank = 'OVO'
+                    elif 'GOPAY' in ewallet_name: sender_bank = 'GoPay'
+                    elif 'SHOPEE' in ewallet_name: sender_bank = 'ShopeePay'
+                    elif 'LINKAJA' in ewallet_name: sender_bank = 'LinkAja'
                     break
         
-        # Strategy 4: Use spatial analysis if detections available
-        if detections and not sender_bank:
-            # Find bank names in first 3 detections (usually header)
-            for i, det in enumerate(detections[:5]):
-                det_text = det.get('text', '').upper()
-                for bank in self.BANK_NAMES:
-                    if bank in det_text:
-                        sender_bank = self._normalize_bank_name(bank)
-                        logger.debug(f"Sender bank (spatial, pos {i}): {sender_bank}")
-                        break
-                if sender_bank:
-                    break
+        # ATURAN: Semua regex sapuan global dan tebakan First-Match dihapus.
         
         return sender_bank, recipient_bank
     
@@ -869,8 +973,6 @@ class FieldExtractor:
             rf'(?:nama\s+tujuan|tujuan\s+nama|(?:{keyword_pattern}))[:\s]+([A-Z][A-Z\s]+?)(?:\s*\n|$)',
             rf'(?:(?:{keyword_pattern})\s*(?:rekening|penerima|tujuan|nama)?)[:\s]+([A-Z][A-Z\s]+?)(?:\s*\n|$)',
             
-            # Receipt patterns (BANK diikuti NAMA)
-            r'(?:BANK|BCA|MANDIRI|BRI|BNI|CIMB|NIAGA)[\s\S]{0,50}?([A-Z][A-Z\s]{5,50}?)(?:\s*\d|$)',
             
             # Nama/Name field
             r'(?:nama|name)[:\s]+([A-Z][A-Z\s]+)',
@@ -904,7 +1006,7 @@ class FieldExtractor:
             'TANGGAL', 'DATE', 'WAKTU', 'TIME', 'JAM', 'PUKUL', 'KETERANGAN',
             'DESCRIPTION', 'DETAIL', 'INFORMASI', 'INFORMATION', 'REKENING', 'ACCOUNT',
             'TERIMA KASIH', 'THANK YOU', 'THANKS', 'STRUK', 'RECEIPT', 'BUKTI', 'PROOF',
-            'REFERENSI', 'REFERENCE', 'BIAYA', 'FEE', 'ADMIN', 'ADMINISTRASI',
+            'REFERENSI', 'REFERENCE', 'REF', 'NO', 'NOMOR', 'BIAYA', 'FEE', 'ADMIN', 'ADMINISTRASI',
             'TAGIHAN', 'BILL', 'INVOICE', 'FAKTUR', 'NOTA', 'KWITANSI',
             
             # Transaction Types
@@ -919,6 +1021,10 @@ class FieldExtractor:
             'HELP', 'CUSTOMER', 'SERVICE', 'LAYANAN', 'PELANGGAN', 'HUBUNGI',
             'CONTACT', 'BAGIKAN', 'SHARE', 'SIMPAN', 'SAVE'
         ]
+        
+        # Compile blacklist into a regex for fast multi-word and exact-word matching
+        blacklist_pattern = re.compile(r'\b(?:' + '|'.join(re.escape(w) for w in blacklist) + r')\b', re.IGNORECASE)
+        
         # First approach: look for label lines containing recipient keywords then take following non-empty line
         # prepare keyword regex ordered by length (prefer multi-word keywords like 'atas nama')
         sorted_keywords = sorted(self.recipient_name_keywords, key=lambda s: -len(s))
@@ -931,8 +1037,7 @@ class FieldExtractor:
             if inline_mbca:
                 cand = inline_mbca.group(1).strip()
                 if not re.search(r'\d{3,}', cand):
-                    words = cand.upper().split()
-                    if not any(w in blacklist for w in words):
+                    if not blacklist_pattern.search(cand):
                         logger.debug(f"Recipient name found (m-BCA inline): {cand}")
                         return cand.title()
                         
@@ -942,8 +1047,7 @@ class FieldExtractor:
                 for j in range(i+1, min(i+3, len(norm_lines))):
                     cand = norm_lines[j].strip()
                     if cand and not re.search(r'\d{3,}', cand):
-                        words = cand.upper().split()
-                        if not any(w in blacklist for w in words):
+                        if not blacklist_pattern.search(cand):
                             logger.debug(f"Recipient name found (m-BCA style): {cand}")
                             return cand.title()
 
@@ -975,8 +1079,7 @@ class FieldExtractor:
                         else:
                             cand_low = candidate.lower()
                             if not any(kw in cand_low for kw in self.recipient_footer_blacklist):
-                                words = re.sub(r'\s+', ' ', candidate).upper().split()
-                                if not any(w in blacklist for w in words):
+                                if not blacklist_pattern.search(candidate):
                                     logger.debug(f"Recipient name candidate (inline): {candidate}")
                                     return candidate.title()
 
@@ -996,8 +1099,7 @@ class FieldExtractor:
                             c2 = inline_match2.group(1).strip()
                             c2 = re.sub(rf'^(?:{keyword_pattern_ordered})\s*[:\-]?\s*', '', c2, flags=re.IGNORECASE).strip()
                             if re.search(r'[A-Za-z]', c2):
-                                words = re.sub(r'\s+', ' ', c2).upper().split()
-                                if not any(w in blacklist for w in words):
+                                if not blacklist_pattern.search(c2):
                                     logger.debug(f"Recipient name candidate (inline next-line): {c2}")
                                     return c2.title()
                     # Strip leading label words (like 'Nama', 'Tujuan', 'Nama Tujuan')
@@ -1008,8 +1110,7 @@ class FieldExtractor:
                     if not is_candidate_name(stripped_candidate):
                         continue
                     # reject if candidate contains blacklist word
-                    words = re.sub(r'\s+', ' ', stripped_candidate).upper().split()
-                    if any(w in blacklist for w in words):
+                    if blacklist_pattern.search(stripped_candidate):
                         continue
                     # accept candidate
                     logger.debug(f"Recipient name candidate from labeled line: {stripped_candidate}")
@@ -1023,9 +1124,10 @@ class FieldExtractor:
                     cand_low = candidate.lower()
                     if any(kw in cand_low for kw in self.recipient_footer_blacklist):
                         continue
-                    words = re.sub(r'\s+', ' ', candidate).upper().split()
-                    if any(w in blacklist for w in words):
+                    if blacklist_pattern.search(candidate):
                         continue
+                    # simple length check
+                    words = candidate.split()
                     if len(words) >= 2 and all(len(w) >= 2 for w in words):
                         if not is_candidate_name(candidate):
                             continue
@@ -1046,8 +1148,7 @@ class FieldExtractor:
                     logger.debug(f"Rejected regex match '{name_norm}': footer keyword present")
                     continue
                 # Filter out blacklisted words (strict check - whole word match)
-                words = name_norm.upper().split()
-                if any(word in blacklist for word in words):
+                if blacklist_pattern.search(name_norm):
                     logger.debug(f"Rejected '{name_norm}': contains blacklisted word")
                     continue
                 # skip digit-heavy matches
@@ -1066,15 +1167,8 @@ class FieldExtractor:
                 seq = seq.strip().upper()
                 
                 # Strict blacklist check - whole word match only
-                words_in_seq = seq.split()
-                has_blacklisted = False
-                for word in words_in_seq:
-                    if word in blacklist:
-                        logger.debug(f"Fallback rejected '{seq}': contains blacklisted word '{word}'")
-                        has_blacklisted = True
-                        break
-                
-                if has_blacklisted:
+                if blacklist_pattern.search(seq):
+                    logger.debug(f"Fallback rejected '{seq}': contains blacklisted word")
                     continue
                     
                 # Must have 2-4 words (real names typically have this range)
@@ -1121,12 +1215,12 @@ class FieldExtractor:
             r'(?:Referensi|Reference)[:\s]+([A-Za-z0-9\-•]+)',
             
             # Bank patterns
-            r'(?:no\.?\s*ref|referensi|reference|no\.?\s*transaksi|transaction)[:\s]+([A-Za-z0-9\-]+)',
+            r'(?:\bid\s*transaksi\b|\bno\.?\s*ref\b|\breferensi\b|\breference\b|\bno\.?\s*transaksi\b|\btransaction\b)[ \t:]+([A-Za-z0-9\-]+)',
             r'\b(TRF-[A-Za-z0-9]{10,})\b',  # OVO modern format
-            r'\b(TRF\d{10,})\b',
-            r'\b([A-Z]{3}\d{8,})\b',
-            r'\b(\d{12,20})\b', # Pure long digits as fallback for ref
+            # ATURAN: Hapus regex global \b(\d{12,20})\b
         ]
+        
+        blacklist_ref = ['REKENING', 'REK', 'NAMA', 'JUMLAH', 'TOTAL', 'BANK', 'DARI', 'KEPADA', 'PENGIRIM', 'PENERIMA']
         
         for pattern in patterns:
             match = re.search(pattern, text, re.IGNORECASE)
@@ -1134,6 +1228,11 @@ class FieldExtractor:
                 ref = match.group(1).strip()
                 # Remove bullet points
                 ref = ref.replace('•', '').replace('.', '')
+                
+                # Check against blacklist
+                if ref.upper() in blacklist_ref:
+                    continue
+                    
                 # Valid length: at least 3 chars (e.g. "3019" is 4 chars)
                 if 3 <= len(ref) <= 50:
                     logger.debug(f"Reference number found: {ref}")

@@ -69,13 +69,15 @@ class OcrFieldMapperService
         $mappedData = [];
         
         // Convert to array of lines for easier processing
-        $lines = array_map('trim', explode("\n", str_replace(["\r\n", "\r"], "\n", $rawOcrText)));
+        $linesRaw = array_map('trim', explode("\n", str_replace(["\r\n", "\r"], "\n", $rawOcrText)));
+        // Filter empty lines and re-index
+        $lines = array_values(array_filter($linesRaw, function($line) { return !empty($line); }));
         
         $unmatchedLines = [];
         $currentSection = null;
 
-        foreach ($lines as $line) {
-            if (empty($line)) continue;
+        for ($i = 0; $i < count($lines); $i++) {
+            $line = $lines[$i];
             
             // Contextual Block Parsing for Mandiri and similar receipts (Robust against OCR noise)
             $alphaOnly = strtolower(trim(preg_replace('/[^a-z]/i', '', $line)));
@@ -88,12 +90,45 @@ class OcrFieldMapperService
                 continue;
             }
 
-            $extracted = $this->extractLine($line, $currentSection);
+            $nextLine = isset($lines[$i+1]) ? $lines[$i+1] : null;
+            $extracted = $this->extractLine($line, $currentSection, $nextLine);
+            
+            // Section-based raw extraction for Unlabeled Bank/Account lines
+            if ($currentSection) {
+                // 1. Coba tangkap Nomor Rekening di dalam section
+                if (preg_match('/\b(\d{10,16})\b/', $line, $m) || preg_match('/\b(\d{3,4}[\-\s]*\d{3,4}[\-\s]*\d{3,6})\b/', $line, $m)) {
+                    $rekRaw = preg_replace('/\D/', '', $m[1]);
+                    if (strlen($rekRaw) >= 10 && strlen($rekRaw) <= 16) {
+                        if ($currentSection === 'pengirim' && empty($mappedData['rekening_pengirim'])) {
+                            $mappedData['rekening_pengirim'] = $rekRaw;
+                            Log::debug("OcrFieldMapper: Section-based match Rekening Pengirim: $rekRaw");
+                        } elseif ($currentSection === 'penerima' && empty($mappedData['rekening_tujuan'])) {
+                            $mappedData['rekening_tujuan'] = $rekRaw;
+                            Log::debug("OcrFieldMapper: Section-based match Rekening Tujuan: $rekRaw");
+                        }
+                    }
+                }
+                
+                // 2. Coba tangkap Bank di dalam section
+                $banks = ['BCA', 'MANDIRI', 'BRI', 'BNI', 'BSI', 'PERMATA', 'DANAMON', 'MEGA', 'BNC', 'JAGO', 'SEABANK', 'OVO', 'DANA', 'GOPAY', 'SHOPEEPAY'];
+                foreach ($banks as $bank) {
+                    if (preg_match('/\b' . $bank . '\b/i', $line)) {
+                        if ($currentSection === 'pengirim' && empty($mappedData['bank_pengirim'])) {
+                            $mappedData['bank_pengirim'] = $bank;
+                        } elseif ($currentSection === 'penerima' && empty($mappedData['bank_tujuan'])) {
+                            $mappedData['bank_tujuan'] = $bank;
+                        }
+                    }
+                }
+            }
             
             if ($extracted) {
                 // If the field isn't set yet, or we're replacing an empty/null value
                 if (!isset($mappedData[$extracted['field']]) || empty($mappedData[$extracted['field']])) {
                     $mappedData[$extracted['field']] = $extracted['value'];
+                }
+                if (isset($extracted['used_next_line']) && $extracted['used_next_line']) {
+                    $i++; // Skip next line as it was consumed
                 }
             } else {
                 $unmatchedLines[] = $line;
@@ -112,8 +147,10 @@ class OcrFieldMapperService
     /**
      * Tries to match a line to a known alias.
      */
-    protected function extractLine(string $line, ?string $currentSection = null): ?array
+    protected function extractLine(string $line, ?string $currentSection = null, ?string $nextLine = null): ?array
     {
+        $usedNextLine = false;
+
         // Many OCR results are in format "LABEL : VALUE" or "LABEL VALUE"
         // Let's try to split by common separators (removed '-' because it's often used in values or without spaces)
         $parts = preg_split('/[:;]/', $line, 2);
@@ -150,6 +187,22 @@ class OcrFieldMapperService
             }
         }    
 
+        if (empty($valueCandidate) && !empty($labelCandidate) && $nextLine !== null) {
+            // Check if labelCandidate matches exactly a known alias
+            $normalizedLabelCand = strtolower(trim($labelCandidate));
+            $isLabelOnly = false;
+            foreach ($this->aliasDictionary as $aliases) {
+                if (in_array($normalizedLabelCand, $aliases, true)) {
+                    $isLabelOnly = true;
+                    break;
+                }
+            }
+            if ($isLabelOnly) {
+                $valueCandidate = trim($nextLine);
+                $usedNextLine = true;
+            }
+        }
+
         if (empty($labelCandidate) || empty($valueCandidate)) {
             return null;
         }
@@ -176,7 +229,8 @@ class OcrFieldMapperService
                 }
                 return [
                     'field' => $standardField,
-                    'value' => $cleanedValue
+                    'value' => $cleanedValue,
+                    'used_next_line' => $usedNextLine
                 ];
             }
         }
@@ -188,15 +242,29 @@ class OcrFieldMapperService
                 $distance = levenshtein($normalizedLabel, $alias);
                 $maxTolerance = strlen($alias) <= 5 ? 1 : (strlen($alias) <= 10 ? 2 : 3);
                 
+                // Do not fuzzy match if alias is short and distance is > 0 to avoid noise
+                if (strlen($alias) <= 4 && $distance > 0) {
+                    continue;
+                }
+                
                 if ($distance <= $maxTolerance) {
                     Log::debug("OcrFieldMapper: Fuzzy matched '$normalizedLabel' to alias '$alias' (Distance: $distance)");
                     $cleanedValue = $this->cleanValue($standardField, $valueCandidate);
                     if (empty($cleanedValue) && in_array($standardField, ['nominal', 'rekening_tujuan', 'rekening_pengirim'])) {
                         return null; // Value is empty after cleaning
                     }
+                    
+                    // Prevent text noise going to numeric fields during fuzzy match
+                    if (in_array($standardField, ['nominal', 'rekening_tujuan', 'rekening_pengirim'])) {
+                        if (!preg_match('/\d/', $valueCandidate)) {
+                            return null;
+                        }
+                    }
+                    
                     return [
                         'field' => $standardField,
-                        'value' => $cleanedValue
+                        'value' => $cleanedValue,
+                        'used_next_line' => $usedNextLine
                     ];
                 }
             }
@@ -218,7 +286,7 @@ class OcrFieldMapperService
         
         // --- NEW FALLBACK FOR DANA / SEABANK / E-WALLET FORMAT ---
         // Format Sender: "Dari Ria Suprihatin Dana: **********4071"
-        if (preg_match('/(?:dari|pengirim)\s+([A-Za-z\s\.:\-]+?)\s+(DANA|OVO|GOPAY|SHOPEEPAY|LINKAJA|SEABANK|JAGO|NEOBANK|BCA|MANDIRI|BRI|BNI|BSI|PERMATA|DANAMON|MEGA)[\s:]+([\*\.\dxX]{8,20})/i', $fullTextStr, $matches)) {
+        if (preg_match('/(?:dari|pengirim)\s+([A-Za-z\s\.:\-]{3,80}?)\s+(DANA|OVO|GOPAY|SHOPEEPAY|LINKAJA|SEABANK|JAGO|NEOBANK|BCA|MANDIRI|BRI|BNI|BSI|PERMATA|DANAMON|MEGA|BNC)[\s:]+([\*\.\dxX]{8,20})/i', $fullTextStr, $matches)) {
             // Kita bisa override karena match ini sangat spesifik dan akurat
             $mappedData['nama_pengirim'] = trim(trim($matches[1], ':-. '));
             $mappedData['bank_pengirim'] = strtoupper($matches[2]);
@@ -226,8 +294,19 @@ class OcrFieldMapperService
             Log::debug("OcrFieldMapper: Regex fallback found Pengirim (E-Wallet): {$mappedData['nama_pengirim']} - {$mappedData['bank_pengirim']} {$mappedData['rekening_pengirim']}");
         }
 
+        // Fallback untuk Pengirim reguler jika tidak terdeteksi e-wallet dan masih kosong
+        if (empty($mappedData['nama_pengirim'])) {
+            if (preg_match('/(?:dari|pengirim|nama\s*pengirim|nama\s*rekening\s*pengirim)[\s:]+((?:(?!\brekening\b|\bnominal\b|\bbank\b|\bjumlah\b|\bno\.?\b|\bke\b|\bkepada\b|\btujuan\b|Rp).){3,80})/i', $fullTextStr, $matches)) {
+                $namaRaw = trim($matches[1]);
+                if (!preg_match('/(?:PENERIMA|KE|TUJUAN)/i', $namaRaw)) {
+                    $mappedData['nama_pengirim'] = $this->cleanValue('nama_pengirim', $namaRaw);
+                    Log::debug("OcrFieldMapper: Regex fallback found Nama Pengirim: " . $mappedData['nama_pengirim']);
+                }
+            }
+        }
+
         // Format Recipient: "Ke Daniel Setya Dharma SeaBank: ********4360"
-        if (preg_match('/(?:ke|kepada|tujuan)\s+([A-Za-z\s\.:\-]+?)\s+(DANA|OVO|GOPAY|SHOPEEPAY|LINKAJA|SEABANK|JAGO|NEOBANK|BCA|MANDIRI|BRI|BNI|BSI|PERMATA|DANAMON|MEGA)[\s:]+([\*\.\dxX]{8,20})/i', $fullTextStr, $matches)) {
+        if (preg_match('/(?:ke|kepada|tujuan|penerima)\s+([A-Za-z\s\.:\-]{3,80}?)\s+(DANA|OVO|GOPAY|SHOPEEPAY|LINKAJA|SEABANK|JAGO|NEOBANK|BCA|MANDIRI|BRI|BNI|BSI|PERMATA|DANAMON|MEGA|BNC)[\s:]+([\*\.\dxX]{8,20})/i', $fullTextStr, $matches)) {
             $mappedData['nama_penerima'] = trim(trim($matches[1], ':-. '));
             $mappedData['bank_tujuan'] = strtoupper($matches[2]);
             $mappedData['rekening_tujuan'] = preg_replace('/[^\d]/', '', $matches[3]);
@@ -240,10 +319,10 @@ class OcrFieldMapperService
         if (empty($mappedData['nominal'])) {
             // Prioritaskan mencari Total dulu (karena Nominal kadang kepotong OCR)
             if (preg_match('/(?:total|jumlah\s*bayar)[\s:]*(?:rp|idr|rp\.|rp\s)?\s*([\d\.,\soO]+)/i', $rawText, $matches)) {
-                $nomRaw = str_ireplace('o', '0', $matches[1]);
+                $nomRaw = str_ireplace(['o', 'O'], '0', $matches[1]);
                 $nomRaw = preg_replace('/[,.]00$/', '', trim($nomRaw));
                 $nomRaw = preg_replace('/\D/', '', $nomRaw);
-                if (!empty($nomRaw) && (int)$nomRaw > 1000) {
+                if (!empty($nomRaw) && (int)$nomRaw >= 1000) {
                     $mappedData['nominal'] = $nomRaw;
                     Log::debug("OcrFieldMapper: Regex fallback found Nominal (from Total): " . $mappedData['nominal']);
                 }
@@ -252,24 +331,10 @@ class OcrFieldMapperService
             // Jika gagal, cari Nominal biasa
             if (empty($mappedData['nominal'])) {
                 if (preg_match('/(?:rp|idr|rp\.|rp\s)\s*([\d\.,\soO]+)/i', $rawText, $matches)) {
-                    $nomRaw = str_ireplace('o', '0', $matches[1]);
-                    // Simpan versi tanpa strip .00
-                    $rawNoStrip = preg_replace('/\D/', '', trim($nomRaw));
+                    $nomRaw = str_ireplace(['o', 'O'], '0', $matches[1]);
                     
-                    // Coba versi di-strip .00
                     $nomRaw = preg_replace('/[,.]00$/', '', trim($nomRaw));
                     $nomRaw = preg_replace('/\D/', '', $nomRaw);
-                    
-                    // Jika terlalu kecil, asumsikan .00 tadi adalah ribuan yang kehilangan angka 0
-                    if (!empty($nomRaw) && (int)$nomRaw < 1000) {
-                        if ((int)$rawNoStrip >= 1000) {
-                            $nomRaw = $rawNoStrip; // gunakan yg belum di strip
-                        }
-                        // Jika masih di bawah 1000, asumsikan ribuannya ilang total
-                        if ((int)$nomRaw < 1000) {
-                            $nomRaw = $nomRaw . '000';
-                        }
-                    }
                     
                     if (!empty($nomRaw)) {
                         $mappedData['nominal'] = $nomRaw;
@@ -282,8 +347,8 @@ class OcrFieldMapperService
         // Fallback Rekening Tujuan (10-16 digits)
         if (empty($mappedData['rekening_tujuan'])) {
             // Check for contextual rekening
-            if (preg_match('/(?:rekening\s*tujuan|rekening\s*penerima|ke\s*rek|ke\s*rekening|nomor\s*tujuan)[\s:]*([\d\-\s\.]{10,25})/i', $rawText, $matches)) {
-                $rekRaw = preg_replace('/\D/', '', $matches[1]);
+            if (preg_match('/(?:rekening\s*tujuan|rekening\s*penerima|ke\s*rek|ke\s*rekening|nomor\s*tujuan)[\s:]*([\d\-\s\.OoSslI]{10,25})/i', $rawText, $matches)) {
+                $rekRaw = $this->cleanValue('rekening_tujuan', $matches[1]);
                 if (strlen($rekRaw) >= 10) {
                     $mappedData['rekening_tujuan'] = $rekRaw;
                     Log::debug("OcrFieldMapper: Regex fallback (context) found Rekening Tujuan: " . $mappedData['rekening_tujuan']);
@@ -292,15 +357,25 @@ class OcrFieldMapperService
             
             if (empty($mappedData['rekening_tujuan'])) {
                 // Try to find a contiguous block of digits (or digits with dashes that total 10+ digits)
-                if (preg_match('/\b(\d{3,4}[\-\s]*\d{3,4}[\-\s]*\d{3,6})\b/', $rawText, $matches)) {
-                    $rekRaw = preg_replace('/\D/', '', $matches[1]);
-                    if (strlen($rekRaw) >= 10) {
-                        $mappedData['rekening_tujuan'] = $rekRaw;
-                        Log::debug("OcrFieldMapper: Regex fallback found Rekening Tujuan: " . $mappedData['rekening_tujuan']);
+                if (preg_match_all('/\b(\d{3,4}[\-\s]*\d{3,4}[\-\s]*\d{3,6})\b/', $rawText, $matches)) {
+                    foreach ($matches[1] as $match) {
+                        $rekRaw = preg_replace('/\D/', '', $match);
+                        if (strlen($rekRaw) >= 10 && $rekRaw !== ($mappedData['rekening_pengirim'] ?? '')) {
+                            $mappedData['rekening_tujuan'] = $rekRaw;
+                            Log::debug("OcrFieldMapper: Regex fallback found Rekening Tujuan: " . $mappedData['rekening_tujuan']);
+                            break;
+                        }
                     }
-                } elseif (preg_match('/\b(\d{10,16})\b/', $rawText, $matches)) {
-                    $mappedData['rekening_tujuan'] = $matches[1];
-                    Log::debug("OcrFieldMapper: Regex fallback found Rekening Tujuan: " . $mappedData['rekening_tujuan']);
+                }
+                
+                if (empty($mappedData['rekening_tujuan']) && preg_match_all('/\b(\d{10,16})\b/', $rawText, $matches)) {
+                    foreach ($matches[1] as $match) {
+                        if ($match !== ($mappedData['rekening_pengirim'] ?? '')) {
+                            $mappedData['rekening_tujuan'] = $match;
+                            Log::debug("OcrFieldMapper: Regex fallback found Rekening Tujuan: " . $mappedData['rekening_tujuan']);
+                            break;
+                        }
+                    }
                 }
             }
         }
@@ -308,13 +383,13 @@ class OcrFieldMapperService
         // Fallback Bank Tujuan
         if (empty($mappedData['bank_tujuan'])) {
             // Prioritaskan mencari dengan keyword "KE BANK" atau "BANK TUJUAN" diikuti nama bank
-            if (preg_match('/(?:ke\s*bank|bank\s*tujuan|bank\s*penerima).*?(BCA|MANDIRI|BRI|BNI|BSI|PERMATA|DANAMON|MEGA)/i', $rawText, $matches)) {
+            if (preg_match('/(?:ke\s*bank|bank\s*tujuan|bank\s*penerima|bank)[\s:]*.*?\b(BCA|MANDIRI|BRI|BNI|BSI|PERMATA|DANAMON|MEGA|BNC|JAGO|SEABANK)\b/i', $rawText, $matches)) {
                 $mappedData['bank_tujuan'] = strtoupper($matches[1]);
                 Log::debug("OcrFieldMapper: Regex fallback (context) found Bank Tujuan: " . $mappedData['bank_tujuan']);
             } else {
-                $banks = ['BCA', 'MANDIRI', 'BRI', 'BNI', 'BSI', 'PERMATA', 'DANAMON', 'MEGA'];
+                $banks = ['BCA', 'MANDIRI', 'BRI', 'BNI', 'BSI', 'PERMATA', 'DANAMON', 'MEGA', 'BNC', 'JAGO', 'SEABANK'];
                 foreach ($banks as $bank) {
-                    if (stripos($rawText, $bank) !== false) {
+                    if (preg_match('/\b' . $bank . '\b/i', $rawText)) {
                         $mappedData['bank_tujuan'] = $bank;
                         Log::debug("OcrFieldMapper: Regex fallback found Bank Tujuan: " . $bank);
                         break;
@@ -326,7 +401,7 @@ class OcrFieldMapperService
         // Fallback Nama Penerima
         if (empty($mappedData['nama_penerima'])) {
             // Cari kata NAMA diikuti huruf besar, berhenti jika ketemu label lain
-            if (preg_match('/(?:nama\s*penerima|nama\s*tujuan|kepada|nama)[\s:]+((?:(?!\brekening\b|\bnominal\b|\bbank\b|\bjumlah\b|\bno\.?\b|\bdari\b|\balias\b|\bcatatan\b|\bbiaya\b|\btotal\b).){3,40})/i', $rawText, $matches)) {
+            if (preg_match('/(?:nama\s*penerima|nama\s*tujuan|kepada|ke|nama)[\s:]+((?:(?!\brekening\b|\bnominal\b|\bbank\b|\bjumlah\b|\bno\.?\b|\bdari\b|\balias\b|\bcatatan\b|\bbiaya\b|\btotal\b|Rp).){3,80})/i', $rawText, $matches)) {
                 $namaRaw = trim($matches[1]);
                 if (!preg_match('/(?:PENGIRIM|DARI)/i', $namaRaw)) { // Pastikan bukan label pengirim
                     $mappedData['nama_penerima'] = $this->cleanValue('nama_penerima', $namaRaw);
@@ -337,7 +412,7 @@ class OcrFieldMapperService
         
         // Fallback Nomor Referensi
         if (empty($mappedData['nomor_referensi'])) {
-            if (preg_match('/(?:nomor\s*referensi|no\.?\s*ref|ref\s*no|referensi)[\s:]*([A-Za-z0-9]{6,20})/i', $rawText, $matches)) {
+            if (preg_match('/(?:nomor\s*referensi|no\.?\s*ref|ref\s*no|referensi|id\s*transaksi)[\s:]*([A-Za-z0-9\-\/]{6,25})/i', $rawText, $matches)) {
                 $mappedData['nomor_referensi'] = strtoupper($matches[1]);
                 Log::debug("OcrFieldMapper: Regex fallback found Nomor Referensi: " . $mappedData['nomor_referensi']);
             }
@@ -395,10 +470,11 @@ class OcrFieldMapperService
             case 'biaya_admin':
             case 'total_pembayaran':
                 // Kadang OCR membaca angka 0 sebagai huruf O
-                $value = str_ireplace('o', '0', $value);
-                
-                $rawNoStrip = preg_replace('/[Rp\s\.,]/i', '', $value);
-                $rawNoStrip = preg_replace('/\D/', '', $rawNoStrip);
+                $value = str_ireplace(['o', 'O'], '0', $value);
+
+                if (preg_match('/^(?:Rp\.?\s*)?(\d{1,3})[,.]00$/i', trim($value), $amountTypo)) {
+                    return (string) ((int) $amountTypo[1] * 1000);
+                }
                 
                 // Strip trailing ,00 or .00 first to avoid multiplying by 100
                 $value = preg_replace('/[,.]00$/', '', trim($value));
@@ -406,20 +482,14 @@ class OcrFieldMapperService
                 $clean = preg_replace('/[Rp\s\.,]/i', '', $value);
                 $clean = preg_replace('/\D/', '', $clean);
                 
-                if (!empty($clean) && (int)$clean < 1000) {
-                    if ((int)$rawNoStrip >= 1000) {
-                        $clean = $rawNoStrip;
-                    }
-                    if ((int)$clean < 1000) {
-                        $clean = $clean . '000';
-                    }
-                }
                 return $clean;
                 
             case 'rekening_tujuan':
             case 'rekening_pengirim':
-                // Keep only digits, asterisks, dots, and 'X'
-                return preg_replace('/[^0-9\*\.Xx]/', '', $value);
+                // Translasi salah baca OCR
+                $value = str_ireplace(['O', 'S', 'l', 'I', 'B'], ['0', '5', '1', '1', '8'], $value);
+                // Keep only digits
+                return preg_replace('/[^0-9]/', '', $value);
                 
             case 'bank_tujuan':
             case 'bank_pengirim':
@@ -428,7 +498,12 @@ class OcrFieldMapperService
             case 'tanggal_transaksi':
                 $monthsId = ['januari', 'februari', 'maret', 'april', 'mei', 'juni', 'juli', 'agustus', 'september', 'oktober', 'november', 'desember', 'jan', 'peb', 'feb', 'mar', 'apr', 'jun', 'jul', 'agu', 'sep', 'okt', 'nov', 'des'];
                 $monthsEn = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december', 'jan', 'feb', 'feb', 'mar', 'apr', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
-                return str_ireplace($monthsId, $monthsEn, $value);
+                $cleanDate = str_ireplace($monthsId, $monthsEn, $value);
+                // PRE-CLEAN TIME: Ubah titik menjadi titik dua HANYA JIKA itu adalah waktu di akhir string
+                // Contoh: "4 april 2020, 20.32" -> "4 april 2020, 20:32"
+                $cleanDate = preg_replace('/(\s\d{1,2})\.(\d{2})\.(\d{2})\b/', '$1:$2:$3', $cleanDate); // Format HH.MM.SS
+                $cleanDate = preg_replace('/(\s\d{1,2})\.(\d{2})\b/', '$1:$2', $cleanDate); // Format HH.MM
+                return rtrim($cleanDate, ':');
                 
             default:
                 return $value;
@@ -498,7 +573,7 @@ class OcrFieldMapperService
 
         // 2. Nomor rekening tujuan sesuai dengan: 218001000867569
         $rekTujuan = preg_replace('/\D/', '', $mappedData['rekening_tujuan'] ?? '');
-        if (strpos($rekTujuan, '218001000867569') !== false || $rekTujuan === '218001000867569') {
+        if (strpos($rekTujuan, '218001000867569') !== false || $rekTujuan === '218001000867569' || $this->isNearExpectedSchoolAccount($rekTujuan)) {
             $checks['rekening_tujuan'] = true;
         } elseif (!empty($rekTujuan)) {
             $errors[] = "Nomor rekening tujuan tidak sesuai (Dibutuhkan: 218001000867569). Terbaca: " . $rekTujuan;
@@ -529,44 +604,68 @@ class OcrFieldMapperService
         } elseif ($expectedDate) {
             $ocrDate = null;
             // Bersihkan tanggal dari karakter selain angka, huruf, dan separator
-            $tanggalBersih = trim(preg_replace('/[^0-9a-zA-Z\/\-\s\.,]/', '', $tanggalTransaksi));
-            $parsedDateStr = str_replace(['\\', '.', ' '], '-', $tanggalBersih);
-            $parsedDateStr = str_replace('/', '-', $parsedDateStr);
+            $tanggalBersih = trim(preg_replace('/[^0-9a-zA-Z\/\-\s\.,:]/', '', $tanggalTransaksi));
             
-            // Coba parsing spesifik format DD-MM-YY (2 digit tahun)
-            if (preg_match('/^\d{1,2}-\d{1,2}-\d{2}$/', $parsedDateStr)) {
-                try {
-                    $ocrDate = \Carbon\Carbon::createFromFormat('d-m-y', $parsedDateStr);
-                } catch (\Exception $e) {}
-            }
+            // PRE-CLEAN TIME: Ubah titik menjadi titik dua HANYA JIKA itu adalah waktu di akhir string
+            // Contoh: "4 april 2020, 20.32" -> "4 april 2020, 20:32"
+            $preClean = preg_replace('/(\s\d{1,2})\.(\d{2})\.(\d{2})\b/', '$1:$2:$3', $tanggalBersih); // Format HH.MM.SS
+            $preClean = preg_replace('/(\s\d{1,2})\.(\d{2})\b/', '$1:$2', $preClean); // Format HH.MM
+            $preClean = rtrim($preClean, ':');
             
-            // Jika gagal, coba format DD-MM-YYYY (4 digit tahun)
-            if (!$ocrDate && preg_match('/^\d{1,2}-\d{1,2}-\d{4}$/', $parsedDateStr)) {
-                try {
-                    $ocrDate = \Carbon\Carbon::createFromFormat('d-m-Y', $parsedDateStr);
-                } catch (\Exception $e) {}
-            }
+            try {
+                // Coba serahkan string yang relatif bersih ke Carbon terlebih dahulu
+                $ocrDate = \Carbon\Carbon::parse(str_replace(',', '', $preClean));
+            } catch (\Exception $e) {}
             
-            // Jika masih gagal, serahkan ke parser default Carbon
-            if (!$ocrDate) {
-                try {
-                    $ocrDate = \Carbon\Carbon::parse($parsedDateStr);
-                } catch (\Exception $e) {}
+            if (!$ocrDate || $ocrDate->year < 2000) {
+                $ocrDate = null; // Reset if parsing produced garbage like year 1970
+                $parsedDateStr = str_replace(['\\', '.', ' '], '-', $tanggalBersih);
+                $parsedDateStr = str_replace('/', '-', $parsedDateStr);
+                
+                // Coba parsing spesifik format DD-MM-YY (2 digit tahun)
+                if (preg_match('/^\d{1,2}-\d{1,2}-\d{2}(?:-\d{2}-\d{2}-\d{2})?$/', $parsedDateStr)) {
+                    try {
+                        $ocrDate = \Carbon\Carbon::createFromFormat('d-m-y', preg_replace('/-\d{2}-\d{2}-\d{2}$/', '', $parsedDateStr));
+                    } catch (\Exception $e) {}
+                }
+                
+                // Jika gagal, coba format DD-MM-YYYY (4 digit tahun)
+                if (!$ocrDate && preg_match('/^\d{1,2}-\d{1,2}-\d{4}$/', $parsedDateStr)) {
+                    try {
+                        $ocrDate = \Carbon\Carbon::createFromFormat('d-m-Y', $parsedDateStr);
+                    } catch (\Exception $e) {}
+                }
+                
+                // Jika masih gagal, serahkan ke parser default Carbon
+                if (!$ocrDate) {
+                    try {
+                        $ocrDate = \Carbon\Carbon::parse($parsedDateStr);
+                    } catch (\Exception $e) {}
+                }
             }
             
             if ($ocrDate) {
                 // Standarkan format agar Frontend JS new Date() tidak error "Invalid Date"
-                $mappedData['tanggal_transaksi'] = $ocrDate->format('Y-m-d');
-                try {
-                    $formDate = \Carbon\Carbon::parse($expectedDate);
-                    
-                    if (abs($ocrDate->diffInDays($formDate)) <= 7) {
-                        $checks['tanggal_transaksi'] = true;
-                    } else {
-                        $errors[] = "Tanggal transaksi ({$ocrDate->format('d/m/Y')}) berbeda lebih dari 7 hari dari form ({$formDate->format('d/m/Y')}).";
+                // Menggunakan format Y-m-d H:i:s agar waktu (jam) tidak hilang!
+                $mappedData['tanggal_transaksi'] = $ocrDate->format('Y-m-d H:i:s');
+                
+                // Cek apakah string aslinya mengandung waktu
+                if (!preg_match('/\d{2}[:\.]\d{2}(?:[:\.]\d{2})?/', $preClean)) {
+                    $isValid = false;
+                    $errors[] = "Jam gagal diekstrak dari tanggal (tidak boleh fallback ke 00:00:00).";
+                    $checks['tanggal_transaksi'] = false;
+                } else {
+                    try {
+                        $formDate = \Carbon\Carbon::parse($expectedDate);
+                        
+                        if (abs($ocrDate->diffInDays($formDate)) <= 7) {
+                            $checks['tanggal_transaksi'] = true;
+                        } else {
+                            $errors[] = "Tanggal transaksi ({$ocrDate->format('d/m/Y')}) berbeda lebih dari 7 hari dari form ({$formDate->format('d/m/Y')}).";
+                        }
+                    } catch (\Exception $e) {
+                        $errors[] = "Format tanggal form tidak valid: " . $expectedDate;
                     }
-                } catch (\Exception $e) {
-                    $errors[] = "Format tanggal form tidak valid: " . $expectedDate;
                 }
             } else {
                 $errors[] = "Format tanggal transaksi OCR tidak valid: " . $tanggalTransaksi;
@@ -674,5 +773,25 @@ class OcrFieldMapperService
             'errors' => $errors,
             'checks' => $checks
         ];
+    }
+
+    protected function isNearExpectedSchoolAccount(string $candidate): bool
+    {
+        $expected = '218001000867569';
+        $candidate = preg_replace('/\D/', '', $candidate);
+
+        if ($candidate === '' || strlen($candidate) < strlen($expected) - 1) {
+            return false;
+        }
+
+        if (abs(strlen($candidate) - strlen($expected)) > 1) {
+            return false;
+        }
+
+        if (substr($candidate, 0, min(8, strlen($candidate))) !== substr($expected, 0, min(8, strlen($candidate)))) {
+            return false;
+        }
+
+        return levenshtein($candidate, $expected) <= 1;
     }
 }

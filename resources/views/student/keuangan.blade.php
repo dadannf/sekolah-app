@@ -1901,12 +1901,12 @@ document.addEventListener('DOMContentLoaded', function() {
         // Pengirim
         document.getElementById('ocrSenderName').textContent = fields.sender_name || '-';
         document.getElementById('ocrSenderBank').textContent = fields.sender_bank || '-';
-        document.getElementById('ocrSenderAccount').textContent = fields.sender_account || '-';
+        document.getElementById('ocrSenderAccount').textContent = fields.sender_account_no || fields.sender_account || '-';
 
         // Penerima
         document.getElementById('ocrRecipientName').textContent = fields.recipient_name || '-';
-        document.getElementById('ocrRecipientBank').textContent = fields.bank_name || '-';
-        document.getElementById('ocrRecipientAccount').textContent = fields.recipient_account || '-';
+        document.getElementById('ocrRecipientBank').textContent = fields.recipient_bank || fields.bank_name || '-';
+        document.getElementById('ocrRecipientAccount').textContent = fields.recipient_account_no || fields.recipient_account || '-';
         
         document.getElementById('ocrReference').textContent = fields.reference_no || '-';
         

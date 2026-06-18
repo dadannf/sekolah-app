@@ -1,5 +1,5 @@
 Global:
-  model_name: en_PP-OCRv4_mobile_rec
+  model_name: PP-OCRv4_mobile_rec
 Hpi:
   backend_configs:
     paddle_infer:
